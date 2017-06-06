@@ -45,6 +45,8 @@ namespace ZG.Store.Services.Models
         [Required(ErrorMessage = ValidationErrorMessage.Required)]
         public bool Active { get; set; }
 
+        public List<ProductImage> Images { get; set; }
+
 
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 using ZG.Store.Services.Models;
 using Microsoft.EntityFrameworkCore;
+using ZG.Store.Services.Services;
 
 namespace ZG.Store.Admin
 {
@@ -36,6 +37,9 @@ namespace ZG.Store.Admin
             //    options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
 
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
+            services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
+
+            services.AddTransient<IProductCatetoryService, ProductCatetoryService>();
 
             // Add framework services.
             services.AddMvc();

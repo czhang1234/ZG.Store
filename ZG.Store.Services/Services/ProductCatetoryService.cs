@@ -52,7 +52,7 @@ namespace ZG.Store.Services.Services
             }
 
             category.CategoryName = prodCategory.CategoryName;
-            category.ParentID = prodCategory.ParentID;
+            category.ParentId = prodCategory.ParentId;
             category.Active = prodCategory.Active;
             category.Products = prodCategory.Products;
 

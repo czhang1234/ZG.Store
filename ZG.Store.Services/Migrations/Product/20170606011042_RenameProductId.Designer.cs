@@ -8,9 +8,10 @@ using ZG.Store.Services.Models;
 namespace ZG.Store.Services.Migrations.Product
 {
     [DbContext(typeof(ProductContext))]
-    partial class ProductContextModelSnapshot : ModelSnapshot
+    [Migration("20170606011042_RenameProductId")]
+    partial class RenameProductId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

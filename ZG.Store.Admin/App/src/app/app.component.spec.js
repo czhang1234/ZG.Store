@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var testing_1 = require("@angular/core/testing");
 var app_component_1 = require("./app.component");
 describe('App', function () {

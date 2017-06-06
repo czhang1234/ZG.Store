@@ -11,7 +11,7 @@ namespace ZG.Store.Services.Models
 
         public List<Product> Products { get; set; }
 
-        public int? ParentID { get; set; }
+        public int? ParentId { get; set; }
         [Required]
         [MaxLength(50)]
         public string CategoryName { get; set; }

@@ -10,6 +10,7 @@ var core_1 = require("@angular/core");
 require("../assets/css/styles.css");
 var AppComponent = (function () {
     function AppComponent() {
+        this.title = "ZG Store Administration";
     }
     return AppComponent;
 }());

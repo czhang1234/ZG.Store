@@ -1,5 +1,5 @@
 export class ProductCategory{
-    constructor(public productCategoryId: number, public parentId: number, public categoryName: string,
-        public active: boolean){}
+    constructor(public categoryName: string,
+        public active: boolean, public productCategoryId?: number, public parentId?: number){}
 
 }

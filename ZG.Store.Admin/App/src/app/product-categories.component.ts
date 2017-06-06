@@ -6,8 +6,8 @@ import {ProductCategory} from './product-category';
 
 @Component({
     selector: 'product-categories',
-    templateUrl: '',
-    styleUrls: ['']
+    templateUrl: './product-categories.component.html',
+    styleUrls: ['./product-categories.component.css']
 })
 export class ProductCategoriesComponent implements OnInit{
     productCategories: ProductCategory[];
@@ -19,17 +19,13 @@ export class ProductCategoriesComponent implements OnInit{
     };
 
     goToDetail(productCategory: ProductCategory): void{
-        this.router.navigate(['/prodcat', productCategory.productCategoryId]);
+        this.router.navigate(['/prodcatdetails', productCategory.productCategoryId]);
     };
 
-    add(parentId: number, categoryName: string, active: boolean): void{
-        categoryName = categoryName.trim();
-
-        if(!categoryName)        {
-            return;
-        }
-
-        this.productService.create()
-            .then(prodCat => this.productCategories.push(prodCat));
+    delete(productCategory: ProductCategory): void{
+        this.productService.delete(productCategory.productCategoryId)
+            .then(() => {
+                this.productCategories.filter(prodCat => prodCat !== productCategory);
+            });
     }
 }

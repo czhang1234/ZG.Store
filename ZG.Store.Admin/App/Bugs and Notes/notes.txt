@@ -9,3 +9,5 @@
 
 * problem: reload cause 404 because server could not found index.html in another dir, e.g. http://localhost:50105/productcategories
   solution: put { useHash: true } in app-routing.module.ts
+
+* changed outDir from "dist" to "../wwwroot" as "outDir": "../wwwroot" in .angular-cli.json

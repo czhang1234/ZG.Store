@@ -1,0 +1,7 @@
+﻿ 
+* a property need to be initialized if it is bound to html elements, 
+  otherwise error happens because the property is undefined even if you try to set it in ngOnInit.
+
+* element attribute can be bound like this [attributename]
+
+* sometimes the url in addressbar won't change to the new url if the component handles it has error.

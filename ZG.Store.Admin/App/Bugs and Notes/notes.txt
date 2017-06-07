@@ -1,0 +1,8 @@
+﻿* asp.net core web api by default don't serve static files.
+  have to add package Microsoft.AspNetCore.StaticFiles and add app.UseStaticFiles();
+
+* have to enable CORS for the angular app because angular 2+'s default working environment runs a development 
+  server off a seperate port which is effectively a seperate domain and all calls back to the main ASP.NET site 
+  for the API calls effectively are cross domain calls
+
+* use Angular CLI

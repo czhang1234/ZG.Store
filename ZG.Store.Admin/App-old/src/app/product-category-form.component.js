@@ -20,13 +20,18 @@ var ProductCategoryFormComponent = (function () {
         this.productService = productService;
         this.route = route;
         this.location = location;
+        this.prodCat = new product_category_1.ProductCategory("", true, 0, null);
     }
     ProductCategoryFormComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.switchMap(function (params) { return _this.productService.getProductCategory(+params['id']); })
-            .subscribe(function (prodCat) { return _this.prodCat = prodCat; });
+            .subscribe(function (prodCat) {
+            _this.prodCat = prodCat;
+        });
         this.productService.getProductCategories()
-            .then(function (prodCats) { return _this.prodCats = prodCats; });
+            .then(function (prodCats) {
+            _this.prodCats = prodCats;
+        });
     };
     ProductCategoryFormComponent.prototype.save = function () {
         var _this = this;
@@ -39,7 +44,7 @@ var ProductCategoryFormComponent = (function () {
                 .then(function () { return _this.goBack(); });
         }
         else {
-            this.productService.create(this.prodCat.categoryName, this.prodCat.active, this.prodCat.parentId)
+            this.productService.create(this.prodCat)
                 .then(function () { return _this.goBack(); });
         }
     };

@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import { environment } from '../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -8,7 +7,7 @@ import {ProductCategory} from './product-category';
 
 @Injectable()
 export class ProductService{
-    private prodCatUrl = (!environment.production) ? 'http://localhost:50105/api/ProductCategory' : 'api/ProductCategory';
+    private prodCatUrl = (process.env.ENV !== 'production') ? 'http://localhost:50105/api/ProductCategory' : 'api/ProductCategory';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http){}

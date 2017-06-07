@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="App\" />
     <Folder Include="App\Bugs\" />
-    <Folder Include="AdminApp\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />

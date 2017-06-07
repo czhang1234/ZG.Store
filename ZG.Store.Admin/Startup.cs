@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using ZG.Store.Services.Models;
 using Microsoft.EntityFrameworkCore;
 using ZG.Store.Services.Services;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace ZG.Store.Admin
 {
@@ -40,7 +41,7 @@ namespace ZG.Store.Admin
             services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
 
             services.AddTransient<IProductCatetoryService, ProductCatetoryService>();
-            
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -65,6 +66,7 @@ namespace ZG.Store.Admin
             app.UseCors("CorsPolicy");
 
             app.UseMvc();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
         }
     }

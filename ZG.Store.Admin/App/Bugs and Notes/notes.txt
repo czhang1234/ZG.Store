@@ -6,3 +6,6 @@
   for the API calls effectively are cross domain calls
 
 * use Angular CLI
+
+* problem: reload cause 404 because server could not found index.html in another dir, e.g. http://localhost:50105/productcategories
+  solution: put { useHash: true } in app-routing.module.ts

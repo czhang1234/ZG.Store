@@ -29,15 +29,15 @@ var ProductService = (function () {
     ProductService.prototype.getProductCategory = function (id) {
         var url = this.prodCatUrl + "/" + id;
         if (id === 0) {
-            return Promise.resolve(new product_category_1.ProductCategory("test", true));
+            return Promise.resolve(new product_category_1.ProductCategory("", true, 0, null));
         }
         return this.http.get(url)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    ProductService.prototype.create = function (categoryName, active, parentId) {
-        return this.http.post(this.prodCatUrl, JSON.stringify({ parentId: parentId, categoryName: categoryName, active: active }), { headers: this.headers })
+    ProductService.prototype.create = function (prodCat) {
+        return this.http.post(this.prodCatUrl, JSON.stringify(prodCat), { headers: this.headers })
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);

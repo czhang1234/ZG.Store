@@ -39,8 +39,10 @@ namespace ZG.Store.Admin
 
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
             services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
+            services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
 
             services.AddTransient<IProductCatetoryService, ProductCatetoryService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddCors(options =>
             {

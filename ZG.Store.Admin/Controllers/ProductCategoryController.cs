@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using ZG.Store.Services.Models;
 using ZG.Store.Services.Services;
 using ZG.Store.Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZG.Store.Admin.Controllers
 {
+    //[Authorize("Bearer")]
     [Route("api/[controller]")]
     public class ProductCategoryController : Controller
     {

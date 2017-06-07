@@ -7,7 +7,7 @@ import {ProductCategory} from './product-category';
 
 @Injectable()
 export class ProductService{
-    private prodCatUrl = 'http://localhost:50105/api/ProductCategory';
+    private prodCatUrl = (process.env.ENV !== 'production') ? 'http://localhost:50105/api/ProductCategory' : 'api/ProductCategory';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http){}
@@ -15,7 +15,7 @@ export class ProductService{
     getProductCategories(): Promise<ProductCategory[]>{
         return this.http.get(this.prodCatUrl)
             .toPromise()
-            .then(response => response.json().data as ProductCategory[])
+            .then(response => response.json() as ProductCategory[])
             .catch(this.handleError);
     };
 
@@ -23,19 +23,19 @@ export class ProductService{
         const url = `${this.prodCatUrl}/${id}`;
 
         if(id === 0){
-            return Promise.resolve(new ProductCategory("", true));
+            return Promise.resolve(new ProductCategory("", true, 0, null));
         }
 
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json().data as ProductCategory)
+            .then(response => response.json() as ProductCategory)
             .catch(this.handleError);
     }
 
-    create(categoryName: string, active: boolean, parentId?: number): Promise<ProductCategory>{
-        return this.http.post(this.prodCatUrl, JSON.stringify({parentId, categoryName, active}), {headers: this.headers})
+    create(prodCat: ProductCategory): Promise<ProductCategory>{
+        return this.http.post(this.prodCatUrl, JSON.stringify(prodCat), {headers: this.headers})
         .toPromise()
-        .then(response => response.json().data as ProductCategory)
+        .then(response => response.json() as ProductCategory)
         .catch(this.handleError);
     }
 

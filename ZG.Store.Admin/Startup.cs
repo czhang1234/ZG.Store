@@ -40,6 +40,15 @@ namespace ZG.Store.Admin
             services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
 
             services.AddTransient<IProductCatetoryService, ProductCatetoryService>();
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
             // Add framework services.
             services.AddMvc();
@@ -51,7 +60,12 @@ namespace ZG.Store.Admin
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            // global policy - assign here or on each controller, like this [EnableCors("CorsPolicy")]
+            //UseCors() has to be called before UseMvc()
+            app.UseCors("CorsPolicy");
+
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }

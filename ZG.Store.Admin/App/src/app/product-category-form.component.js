@@ -28,18 +28,18 @@ var ProductCategoryFormComponent = (function () {
         this.productService.getProductCategories()
             .then(function (prodCats) { return _this.prodCats = prodCats; });
     };
-    ProductCategoryFormComponent.prototype.save = function (categoryName, active, productCategoryId, parentId) {
+    ProductCategoryFormComponent.prototype.save = function () {
         var _this = this;
-        categoryName = categoryName.trim();
-        if (!categoryName) {
+        this.prodCat.categoryName = this.prodCat.categoryName.trim();
+        if (!this.prodCat.categoryName) {
             return;
         }
-        if (productCategoryId) {
-            this.productService.update(new product_category_1.ProductCategory(categoryName, active, productCategoryId, parentId))
+        if (this.prodCat.productCategoryId) {
+            this.productService.update(this.prodCat)
                 .then(function () { return _this.goBack(); });
         }
         else {
-            this.productService.create(categoryName, active, parentId)
+            this.productService.create(this.prodCat.categoryName, this.prodCat.active, this.prodCat.parentId)
                 .then(function () { return _this.goBack(); });
         }
     };
@@ -51,6 +51,11 @@ var ProductCategoryFormComponent = (function () {
     };
     Object.defineProperty(ProductCategoryFormComponent.prototype, "diagnostic", {
         get: function () { return JSON.stringify(this.prodCat); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProductCategoryFormComponent.prototype, "diagnostic2", {
+        get: function () { return JSON.stringify(this.prodCats); },
         enumerable: true,
         configurable: true
     });

@@ -16,30 +16,30 @@ var product_category_1 = require("./product-category");
 var ProductService = (function () {
     function ProductService(http) {
         this.http = http;
-        this.prodCatUrl = 'http://localhost:50105/api/ProductCategory';
+        this.prodCatUrl = (process.env.ENV !== 'production') ? 'http://localhost:50105/api/ProductCategory' : 'api/ProductCategory';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     ProductService.prototype.getProductCategories = function () {
         return this.http.get(this.prodCatUrl)
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ;
     ProductService.prototype.getProductCategory = function (id) {
         var url = this.prodCatUrl + "/" + id;
         if (id === 0) {
-            return Promise.resolve(new product_category_1.ProductCategory("", true));
+            return Promise.resolve(new product_category_1.ProductCategory("test", true));
         }
         return this.http.get(url)
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ProductService.prototype.create = function (categoryName, active, parentId) {
         return this.http.post(this.prodCatUrl, JSON.stringify({ parentId: parentId, categoryName: categoryName, active: active }), { headers: this.headers })
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ProductService.prototype.update = function (productCategory) {

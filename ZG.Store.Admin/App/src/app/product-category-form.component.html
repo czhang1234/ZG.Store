@@ -1,6 +1,6 @@
 <div class="">
     <form #prodCatForm="ngForm" (ngSubmit)="save()">
-        {{diagnostic}}
+  
         <div class="form-group">
             <label for="name">Category Name:</label>
             <input type="text" id="name" name="name" class="form-control" required [(ngModel)]="prodCat.categoryName" #name="ngModel" />
@@ -9,7 +9,7 @@
         <div class="form-group">
             <label for="parent">Parent Category:</label>
             <select class="form-control" id="parent" name="parent" required [(ngModel)]="prodCat.parentId">
-                <option *ngFor="let cat of prodCats" value="cat.parentId">{{cat.categoryName}}</option>
+                <option *ngFor="let cat of prodCats" [value]="cat.productCategoryId">{{cat.categoryName}}</option>
             </select>
         </div>
         <div class="form-group">

@@ -33,6 +33,12 @@ var ProductCategoriesComponent = (function () {
             _this.productCategories.filter(function (prodCat) { return prodCat !== productCategory; });
         });
     };
+    ;
+    Object.defineProperty(ProductCategoriesComponent.prototype, "diagnostic", {
+        get: function () { return JSON.stringify(this.productCategories); },
+        enumerable: true,
+        configurable: true
+    });
     return ProductCategoriesComponent;
 }());
 ProductCategoriesComponent = __decorate([

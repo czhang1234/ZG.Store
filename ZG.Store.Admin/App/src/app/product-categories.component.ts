@@ -27,5 +27,7 @@ export class ProductCategoriesComponent implements OnInit{
             .then(() => {
                 this.productCategories.filter(prodCat => prodCat !== productCategory);
             });
-    }
+    };
+
+    get diagnostic() { return JSON.stringify(this.productCategories) }
 }

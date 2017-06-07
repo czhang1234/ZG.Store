@@ -14,32 +14,36 @@ import { ProductCategory } from './product-category';
 })
 export class ProductCategoryFormComponent {
     prodCats: ProductCategory[];
-    prodCat: ProductCategory;
+    prodCat = new ProductCategory("", true, 0, null);
 
     constructor(private productService: ProductService, private route: ActivatedRoute,
         private location: Location) { }
 
     ngOnInit() {
         this.route.params.switchMap((params: Params) => this.productService.getProductCategory(+params['id']))
-            .subscribe(prodCat => this.prodCat = prodCat);
+            .subscribe(prodCat => {
+                this.prodCat = prodCat;
+            });
 
         this.productService.getProductCategories()
-            .then(prodCats =>this.prodCats = prodCats);
+            .then(prodCats => {
+                this.prodCats = prodCats;
+            });
     }
 
-    save(categoryName: string, active: boolean, productCategoryId?: number, parentId?: number): void {
-        categoryName = categoryName.trim();
+    save(): void {
+        this.prodCat.categoryName = this.prodCat.categoryName.trim();
 
-        if (!categoryName) {
+        if (!this.prodCat.categoryName) {
             return;
         }
 
-        if (productCategoryId) {
-            this.productService.update(new ProductCategory(categoryName, active, productCategoryId, parentId))
+        if (this.prodCat.productCategoryId) {
+            this.productService.update(this.prodCat)
                 .then(() => this.goBack());
         }
         else {
-            this.productService.create(categoryName, active, parentId)
+            this.productService.create(this.prodCat)
                 .then(() => this.goBack());
         }
     }
@@ -53,4 +57,5 @@ export class ProductCategoryFormComponent {
     }
 
     get diagnostic() { return JSON.stringify(this.prodCat) }
+    get diagnostic2() { return JSON.stringify(this.prodCats) }
 }

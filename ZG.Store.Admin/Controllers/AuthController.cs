@@ -79,7 +79,8 @@ namespace ZG.Store.Admin.Controllers
             var identity = new ClaimsIdentity(
                 new GenericIdentity(user.UserName, "TokenAuth"),
                 new[] {
-                    new Claim("ID", user.ID.ToString())
+                    new Claim("Id", user.ID.ToString()),
+                    new Claim("UserName", user.UserName)
                 }
             );
 

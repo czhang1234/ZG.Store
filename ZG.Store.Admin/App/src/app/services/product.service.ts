@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
 
-import {AuthService} from '../auth/auth.service';
-import {ProductCategory} from '../../model/product-category/product-category';
+import {AuthService} from './auth.service';
+import {ProductCategory} from '../model/product-category';
 
 @Injectable()
 export class ProductService{
@@ -22,7 +22,7 @@ export class ProductService{
             .catch(this.handleError);
     };
 
-    getProductCategory(id: number): Promise<ProductCategory>{
+    getProductCategory(id: number): Promise<ProductCategory>{ 
         const url = `${this.prodCatUrl}/${id}`;
 
         if(id === 0){

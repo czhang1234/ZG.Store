@@ -5,9 +5,9 @@ import {Router} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
-import {AuthService} from '../../services/auth/auth.service';
-import { ProductService } from '../../services/product/product.service';
-import { ProductCategory } from '../../model/product-category/product-category';
+import {AuthService} from '../../services/auth.service';
+import { ProductService } from '../../services/product.service';
+import { ProductCategory } from '../../model/product-category';
 
 @Component({
     selector: 'product-category-form',

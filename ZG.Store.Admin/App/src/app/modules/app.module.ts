@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {AppRoutingModule} from './app-routing/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 import {HttpModule} from '@angular/http';
 
-import {ProductService} from '../services/product/product.service';
-import {AuthService} from '../services/auth/auth.service';
-import {AuthGuard} from '../services/auth-guard/auth-guard.service';
+import {ProductService} from '../services/product.service';
+import {AuthService} from '../services/auth.service';
+import {AuthGuard} from '../services/auth-guard.service';
+import {LoginStatusService} from '../services/login-status.service';
 
 import { AppComponent } from '../components/app/app.component';
 import { ProductCategoriesComponent } from '../components/product-categories/product-categories.component';
@@ -32,6 +33,7 @@ import {LoginComponent} from '../components/login/login.component';
     ProductService, 
     AuthService,
     AuthGuard,
+    LoginStatusService,
   ],
   bootstrap: [ AppComponent ]
 })

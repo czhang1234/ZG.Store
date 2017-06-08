@@ -3,10 +3,10 @@ import {Headers, Http} from '@angular/http';
 
 import {tokenNotExpired} from 'angular2-jwt';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
-import {RequestResult} from '../../model/request-result/request-result';
+import {RequestResult} from '../model/request-result';
 
 @Injectable()
 export class AuthService{
@@ -33,7 +33,9 @@ export class AuthService{
             .catch(this.handleError);
     }
 
-    logout(){}
+    logout(){
+        localStorage.removeItem(this.tokenKey);
+    }
 
     checkLogin(): boolean{
         return tokenNotExpired();

@@ -16,4 +16,4 @@
 
 * Any application that uses JWT authentication should always be served over HTTPS to prevent malicious interception of the token.
 
-* NEED to have a secret key for auth instead of random key which cause auth to fail when server side restart
+* TODO: need to have a secret key for auth instead of random key which cause auth to fail when server side restart

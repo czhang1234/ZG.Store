@@ -12,6 +12,14 @@ using ZG.Store.Services.Models;
 using Microsoft.EntityFrameworkCore;
 using ZG.Store.Services.Services;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using ZG.Store.Common.Auth;
+using Microsoft.AspNetCore.Diagnostics;
+using Newtonsoft.Json;
+using ZG.Store.Admin.Model;
+using System.Text;
 
 namespace ZG.Store.Admin
 {
@@ -53,6 +61,14 @@ namespace ZG.Store.Admin
                     .AllowCredentials());
             });
 
+            // Enable the use of an [Authorize("Bearer")] attribute on methods and classes to protect.
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+                    .RequireAuthenticatedUser().Build());
+            });
+
             // Add framework services.
             services.AddMvc();
         }
@@ -66,10 +82,81 @@ namespace ZG.Store.Admin
             // global policy - assign here or on each controller, like this [EnableCors("CorsPolicy")]
             //UseCors() has to be called before UseMvc()
             app.UseCors("CorsPolicy");
-
-            app.UseMvc();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            #region Handle Exception
+            app.UseExceptionHandler(appBuilder =>
+            {
+                appBuilder.Use(async (context, next) =>
+                {
+                    var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
+
+                    //when authorization has failed, should retrun a json message to client
+                    if (error != null && error.Error is SecurityTokenExpiredException)
+                    {
+                        context.Response.StatusCode = 401;
+                        context.Response.ContentType = "application/json";
+
+                        var msg = GetMsg(RequestState.NotAuth, "token expired");
+                        await context.Response.Body.WriteAsync(msg, 0, msg.Length);
+                    }
+                    //when orther error, retrun a error message json to client
+                    else if (error != null && error.Error != null)
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.ContentType = "application/json";
+
+                        var msg = GetMsg(RequestState.Failed, error.Error.Message);
+                        await context.Response.Body.WriteAsync(msg, 0, msg.Length);
+                    }
+                    //when no error, do next.
+                    else await next();
+                });
+            });
+            #endregion
+
+            #region UseJwtBearerAuthentication
+            app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            {
+                TokenValidationParameters = new TokenValidationParameters()
+                {
+                    IssuerSigningKey = TokenAuthOption.Key,
+                    ValidAudience = TokenAuthOption.Audience,
+                    ValidIssuer = TokenAuthOption.Issuer,
+                    // When receiving a token, check that we've signed it.
+                    ValidateIssuerSigningKey = true,
+                    // When receiving a token, check that it is still valid.
+                    ValidateLifetime = true,
+                    // This defines the maximum allowable clock skew - i.e. provides a tolerance on the token expiry time 
+                    // when validating the lifetime. As we're creating the tokens locally and validating them on the same 
+                    // machines which should have synchronised time, this can be set to zero. Where external tokens are
+                    // used, some leeway here could be useful.
+                    ClockSkew = TimeSpan.FromMinutes(0)
+                }
+            });
+            #endregion
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}");
+
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
+            });
+        }
+
+        private byte[] GetMsg(RequestState state, string msg)
+        {
+            var uniencoding = new UnicodeEncoding();
+            byte[] bytes = uniencoding.GetBytes(JsonConvert.SerializeObject(new RequestResult
+            {
+                State = state,
+                Msg = msg
+            }));
+
+            return bytes;
         }
     }
 }

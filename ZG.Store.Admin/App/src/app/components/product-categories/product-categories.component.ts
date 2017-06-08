@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
-import {ProductService} from './product.service';
-import {ProductCategory} from './product-category';
+import {ProductService} from '../../services/product/product.service';
+import {ProductCategory} from '../../model/product-category/product-category';
 
 @Component({
     selector: 'product-categories',

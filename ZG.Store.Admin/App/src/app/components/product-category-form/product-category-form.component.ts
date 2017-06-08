@@ -4,8 +4,8 @@ import { Location } from '@angular/common';
 
 import 'rxjs/add/operator/switchMap';
 
-import { ProductService } from './product.service';
-import { ProductCategory } from './product-category';
+import { ProductService } from '../../services/product/product.service';
+import { ProductCategory } from '../../model/product-category/product-category';
 
 @Component({
     selector: 'product-category-form',

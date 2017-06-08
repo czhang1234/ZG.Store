@@ -28,7 +28,7 @@ namespace ZG.Store.Admin.Controllers
         public string GetAuthToken([FromBody]User user)
         {
             var existingUser = _userService.Get(user.UserName, user.Password);
-            if(existingUser != null)
+            if (existingUser != null)
             {
                 var requestAt = DateTime.Now;
                 var expiresIn = requestAt + TokenAuthOption.ExpiresSpan;

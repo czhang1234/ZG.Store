@@ -7,6 +7,8 @@ import {HttpModule} from '@angular/http';
 
 import {ProductService} from '../services/product/product.service';
 import {AuthService} from '../services/auth/auth.service';
+import {AuthGuard} from '../services/auth-guard/auth-guard.service';
+
 import { AppComponent } from '../components/app/app.component';
 import { ProductCategoriesComponent } from '../components/product-categories/product-categories.component';
 import { ProductCategoryFormComponent } from '../components/product-category-form/product-category-form.component';
@@ -29,6 +31,7 @@ import {LoginComponent} from '../components/login/login.component';
   providers: [
     ProductService, 
     AuthService,
+    AuthGuard,
   ],
   bootstrap: [ AppComponent ]
 })

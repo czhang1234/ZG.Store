@@ -23,13 +23,6 @@ export class ProductCategoryFormComponent {
         private location: Location, private authService: AuthService, private router: Router) { }
 
     ngOnInit() {
-        this.loggedIn = this.authService.checkLogin();
-
-        if(!this.loggedIn){
-             this.router.navigate(['/login']);
-             return;
-        }
-
         this.route.params.switchMap((params: Params) => this.productService.getProductCategory(+params['id']))
             .subscribe(prodCat => {
                 this.prodCat = prodCat;

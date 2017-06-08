@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
 
+import {tokenNotExpired} from 'angular2-jwt';
+
 import { environment } from '../../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
@@ -23,7 +25,7 @@ export class AuthService{
                 if(result.State === 1){
                     let data = result.Data as any;
 
-                    sessionStorage.setItem(this.tokenKey, data.accessToken);
+                    localStorage.setItem(this.tokenKey, data.accessToken);
                 }
 
                 return result;
@@ -34,8 +36,7 @@ export class AuthService{
     logout(){}
 
     checkLogin(): boolean{
-        var token = sessionStorage.getItem(this.tokenKey);
-        return token !== null;
+        return tokenNotExpired();
     }
 
     getUserInfo(): Promise<RequestResult>{

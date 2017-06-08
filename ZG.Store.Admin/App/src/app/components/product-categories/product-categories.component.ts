@@ -18,14 +18,7 @@ export class ProductCategoriesComponent implements OnInit{
     constructor(private productService: ProductService, private router: Router, 
         private authService: AuthService){}
 
-    ngOnInit() {
-        this.loggedIn = this.authService.checkLogin();
-
-        if(!this.loggedIn){
-             this.router.navigate(['/login']);
-             return;
-        }
-        
+    ngOnInit() {        
         this.authService.getUserInfo()
             .then(resp => this.userName = (resp.Data as any).UserName);     
 

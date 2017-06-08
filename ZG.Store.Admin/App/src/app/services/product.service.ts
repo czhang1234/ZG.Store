@@ -48,7 +48,7 @@ export class ProductService{
 
     update(productCategory: ProductCategory): Promise<void>{
         const url = `${this.prodCatUrl}/${productCategory.productCategoryId}`;
-        let headers = this.getHeaders(false);
+        let headers = this.getHeaders(true);
 
         return this.http.put(url, JSON.stringify(productCategory), {headers})  
             .toPromise()
@@ -58,7 +58,7 @@ export class ProductService{
 
     delete(id: number): Promise<void>{
         const url = `${this.prodCatUrl}/${id}`;
-        let headers = this.getHeaders(false);
+        let headers = this.getHeaders(true);
 
         return this.http.delete(url, {headers}) 
             .toPromise()

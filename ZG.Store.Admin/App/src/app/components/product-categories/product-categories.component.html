@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let cat of productCategories" (click)="goToDetails()">
+        <tr *ngFor="let cat of productCategories" (click)="goToDetails(cat)">
             <td>{{cat.productCategoryId}}</td>
             <td>{{cat.parentId}}</td>
             <td>{{cat.categoryName}}</td>

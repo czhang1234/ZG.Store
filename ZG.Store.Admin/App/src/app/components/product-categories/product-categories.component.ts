@@ -25,7 +25,7 @@ export class ProductCategoriesComponent implements OnInit{
         this.productService.getProductCategories().then(prodCats => this.productCategories = prodCats);
     };
 
-    goToDetail(productCategory: ProductCategory): void{
+    goToDetails(productCategory: ProductCategory): void{
         this.router.navigate(['/prodcatdetails', productCategory.productCategoryId]);
     };
 

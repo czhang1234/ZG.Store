@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\AuthController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="wwwroot/New Text Document.txt" />
   </ItemGroup>
   <ItemGroup>

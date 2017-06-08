@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ZG.Store.Admin.Controllers
 {
-    //[Authorize("Bearer")]
+    [Authorize("Bearer")]
     [Route("api/[controller]")]
     public class ProductCategoryController : Controller
     {

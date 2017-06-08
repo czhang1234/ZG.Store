@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
+import {AuthService} from '../../services/auth/auth.service';
 import {ProductService} from '../../services/product/product.service';
 import {ProductCategory} from '../../model/product-category/product-category';
 
@@ -11,10 +12,23 @@ import {ProductCategory} from '../../model/product-category/product-category';
 })
 export class ProductCategoriesComponent implements OnInit{
     productCategories: ProductCategory[];
+    loggedIn = false;
+    userName: string;
 
-    constructor(private productService: ProductService, private router: Router){}
+    constructor(private productService: ProductService, private router: Router, 
+        private authService: AuthService){}
 
     ngOnInit() {
+        this.loggedIn = this.authService.checkLogin();
+
+        if(!this.loggedIn){
+             this.router.navigate(['/login']);
+             return;
+        }
+        
+        this.authService.getUserInfo()
+            .then(resp => this.userName = (resp.Data as any).UserName);     
+
         this.productService.getProductCategories().then(prodCats => this.productCategories = prodCats);
     };
 

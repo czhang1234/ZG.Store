@@ -89,7 +89,8 @@ namespace ZG.Store.Admin.Controllers
                 Audience = TokenAuthOption.Audience,
                 SigningCredentials = TokenAuthOption.SigningCredentials,
                 Subject = identity,
-                Expires = expires
+                Expires = expires,
+                NotBefore = expires.AddMinutes(-1)
             });
             return handler.WriteToken(securityToken);
         }

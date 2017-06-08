@@ -11,6 +11,7 @@ namespace ZG.Store.Common.Auth
         {
             using (var key = RSA.Create())
             {
+                key.KeySize = 2048;
                 return key.ExportParameters(true);
             }
         }

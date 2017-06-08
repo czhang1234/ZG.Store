@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import {Router} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
+import {AuthService} from '../../services/auth/auth.service';
 import { ProductService } from '../../services/product/product.service';
 import { ProductCategory } from '../../model/product-category/product-category';
 
@@ -15,11 +17,19 @@ import { ProductCategory } from '../../model/product-category/product-category';
 export class ProductCategoryFormComponent {
     prodCats: ProductCategory[];
     prodCat = new ProductCategory("", true, 0, null);
+    loggedIn = false;
 
     constructor(private productService: ProductService, private route: ActivatedRoute,
-        private location: Location) { }
+        private location: Location, private authService: AuthService, private router: Router) { }
 
     ngOnInit() {
+        this.loggedIn = this.authService.checkLogin();
+
+        if(!this.loggedIn){
+             this.router.navigate(['/login']);
+             return;
+        }
+
         this.route.params.switchMap((params: Params) => this.productService.getProductCategory(+params['id']))
             .subscribe(prodCat => {
                 this.prodCat = prodCat;

@@ -30,7 +30,7 @@ namespace ZG.Store.Admin.Controllers
             var existingUser = _userService.Get(user.UserName, user.Password);
             if (existingUser != null)
             {
-                var requestAt = DateTime.Now;
+                var requestAt = DateTime.UtcNow;
                 var expiresIn = requestAt + TokenAuthOption.ExpiresSpan;
                 var token = GenerateToken(new User { ID = existingUser.UserId, UserName = existingUser.UserName, Password = existingUser.Password }, expiresIn);
 
@@ -89,8 +89,7 @@ namespace ZG.Store.Admin.Controllers
                 Audience = TokenAuthOption.Audience,
                 SigningCredentials = TokenAuthOption.SigningCredentials,
                 Subject = identity,
-                Expires = expires,
-                NotBefore = expires.AddMinutes(-1)
+                Expires = expires
             });
             return handler.WriteToken(securityToken);
         }

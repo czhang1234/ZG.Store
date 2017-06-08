@@ -119,6 +119,7 @@ namespace ZG.Store.Admin
             #region UseJwtBearerAuthentication
             app.UseJwtBearerAuthentication(new JwtBearerOptions()
             {
+                AutomaticAuthenticate = true,
                 TokenValidationParameters = new TokenValidationParameters()
                 {
                     IssuerSigningKey = TokenAuthOption.Key,

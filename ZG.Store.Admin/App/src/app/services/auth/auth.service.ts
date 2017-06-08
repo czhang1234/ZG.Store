@@ -71,7 +71,7 @@ export class AuthService{
 
     private getLocalToken(): string{
         if(!this.token){
-            this.token = sessionStorage.getItem(this.tokenKey);
+            this.token = localStorage.getItem(this.tokenKey);
         }
 
         return this.token;

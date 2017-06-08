@@ -10,12 +10,11 @@ import {ProductCategory} from '../../model/product-category/product-category';
 @Injectable()
 export class ProductService{
     private prodCatUrl = (!environment.production) ? 'http://localhost:50105/api/ProductCategory' : 'api/ProductCategory';
-    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(private http: Http, private authService: AuthService){}
 
     getProductCategories(): Promise<ProductCategory[]>{
-        let headers = this.authService.initAuthHeaders();
+        let headers = this.getHeaders(false);
 
         return this.http.get(this.prodCatUrl, {headers})
             .toPromise()
@@ -30,7 +29,7 @@ export class ProductService{
             return Promise.resolve(new ProductCategory("", true, 0, null));
         }
 
-        let headers = this.authService.initAuthHeaders();
+        let headers = this.getHeaders(false);
 
         return this.http.get(url, {headers})
             .toPromise()
@@ -39,9 +38,9 @@ export class ProductService{
     }
 
     create(prodCat: ProductCategory): Promise<ProductCategory>{
-        let headers = this.authService.initAuthHeaders();
+        let headers = this.getHeaders(true);
         
-        return this.http.post(this.prodCatUrl, JSON.stringify(prodCat), {headers}) //TODO: append this.headers
+        return this.http.post(this.prodCatUrl, JSON.stringify(prodCat), {headers})
             .toPromise()
             .then(response => response.json() as ProductCategory)
             .catch(this.handleError);
@@ -49,9 +48,9 @@ export class ProductService{
 
     update(productCategory: ProductCategory): Promise<void>{
         const url = `${this.prodCatUrl}/${productCategory.productCategoryId}`;
-        let headers = this.authService.initAuthHeaders();
+        let headers = this.getHeaders(false);
 
-        return this.http.put(url, JSON.stringify(productCategory), {headers})  //TODO: append this.headers
+        return this.http.put(url, JSON.stringify(productCategory), {headers})  
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
@@ -59,12 +58,22 @@ export class ProductService{
 
     delete(id: number): Promise<void>{
         const url = `${this.prodCatUrl}/${id}`;
-        let headers = this.authService.initAuthHeaders();
+        let headers = this.getHeaders(false);
 
-        return this.http.delete(url, {headers})  //TODO: append this.headers
+        return this.http.delete(url, {headers}) 
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
+    }
+
+    private getHeaders(appendContentTypeHeader: boolean): Headers{
+        let headers = this.authService.initAuthHeaders();
+
+        if(appendContentTypeHeader){
+            headers.append('Content-Type', 'application/json');
+        }
+
+        return headers;
     }
 
     private handleError(error: any): Promise<any>{

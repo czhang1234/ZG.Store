@@ -9,7 +9,7 @@ namespace ZG.Store.Services.Services
 {
     public interface IProductCatetoryService
     {
-        IEnumerable<ProductCategory> GetAll();
+        List<ProductCategory> GetAll();
         ProductCategory GetProductCategoryById(long id);
         ProductCategory CreateProductCategory(ProductCategory category);
         CRUDStatus UpdateProductCategory(long id, ProductCategory prodCategory);
@@ -25,7 +25,7 @@ namespace ZG.Store.Services.Services
             _context = context;
         }
 
-        public IEnumerable<ProductCategory> GetAll()
+        public List<ProductCategory> GetAll()
         {
             return _context.ProductCategories.ToList();
         }

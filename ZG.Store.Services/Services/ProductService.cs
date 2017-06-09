@@ -11,7 +11,7 @@ namespace ZG.Store.Services.Services
     {
         IEnumerable<Product> GetAll(int categoryId);
         Product GetById(long id);
-        Product Create(Product peoduct);
+        Product Create(Product product);
         CRUDStatus Update(long id, Product product);
         CRUDStatus Delete(long id);
     }
@@ -27,7 +27,7 @@ namespace ZG.Store.Services.Services
 
         public IEnumerable<Product> GetAll(int categoryId)
         {
-            return _context.Products.ToList();
+            return _context.Products.Where(p => p.ProductCategoryId == categoryId).ToList();
         }
 
         public Product GetById(long id)

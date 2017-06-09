@@ -22,7 +22,9 @@ export class ProductCategoriesComponent implements OnInit{
         this.authService.getUserInfo()
             .then(resp => this.userName = (resp.Data as any).UserName);     
 
-        this.prodCatService.getProductCategories().then(prodCats => this.productCategories = prodCats);
+        this.prodCatService.getProductCategories().then(prodCats => {
+            this.productCategories = prodCats;
+        });
     };
 
     goToDetails(productCategory: ProductCategory): void{

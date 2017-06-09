@@ -7,6 +7,8 @@ using ZG.Store.Services.Models;
 using ZG.Store.Services.Services;
 using ZG.Store.Common;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace ZG.Store.Admin.Controllers
 {
@@ -15,16 +17,14 @@ namespace ZG.Store.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _prodService;
+        private readonly IProductImageService _prodImgService;
+        private IHostingEnvironment _hostingEnv;
 
-        public ProductController(IProductService prodCatservice)
+        public ProductController(IProductService prodCatservice, IProductImageService prodImgService, IHostingEnvironment hostingEnv)
         {
             _prodService = prodCatservice;
-        }
-
-        [HttpGet]
-        public IEnumerable<Product> GetAll(int id)
-        {
-            return _prodService.GetAll(id);
+            _prodImgService = prodImgService;
+            _hostingEnv = hostingEnv;
         }
 
         [HttpGet("{id}", Name = "GetProduct")]
@@ -51,6 +51,34 @@ namespace ZG.Store.Admin.Controllers
             product = _prodService.Create(product);
 
             return CreatedAtRoute("GetProduct", new { id = product.ProductId }, product);
+        }
+
+        [HttpPost("{id}")]
+        public IActionResult UploadFiles(int id)
+        {
+            var product = _prodService.GetById(id);
+
+            for (int i = 0; i < Request.Form.Files.Count; i++)
+            {
+                var file= Request.Form.Files[i];
+                var dir = _hostingEnv.ContentRootPath + $@"\wwwroot\product-images\{id}";
+
+                if(!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                var fileName = dir + $@"\{file.FileName}";
+                using (var fs = System.IO.File.Create(fileName))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+
+                _prodImgService.Create(new ProductImage { FileName = file.FileName, ProductId = id });
+            }
+
+            return Ok();
         }
 
         [HttpPut("{id}")]

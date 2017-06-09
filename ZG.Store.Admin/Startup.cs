@@ -51,6 +51,7 @@ namespace ZG.Store.Admin
 
             services.AddTransient<IProductCatetoryService, ProductCatetoryService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProductImageService, ProductImageService>();
             services.AddTransient<IUserService, UserService>();
 
             services.AddCors(options =>

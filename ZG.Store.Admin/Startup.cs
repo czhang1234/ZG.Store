@@ -50,6 +50,7 @@ namespace ZG.Store.Admin
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
 
             services.AddTransient<IProductCatetoryService, ProductCatetoryService>();
+            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IUserService, UserService>();
 
             services.AddCors(options =>

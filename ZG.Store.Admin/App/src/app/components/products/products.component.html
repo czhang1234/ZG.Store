@@ -1,0 +1,25 @@
+<h2>Products</h2>
+
+<div>
+    <a [routerLink]="['/productdetails', 0]">Add New Product</a>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prod of products" (click)="goToDetails(prod)">
+            <td>{{prod.productId}}</td>
+            <td>{{prod.name}}</td>
+            <td>{{prod.description}}</td>
+            <td>{{prod.active}}</td>
+        </tr>
+    </tbody>
+</table>
+{{diagnostic}}

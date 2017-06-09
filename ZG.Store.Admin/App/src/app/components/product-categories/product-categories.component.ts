@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
-import {ProductService} from '../../services/product.service';
+import {ProductCategoryService} from '../../services/product-category.service';
 import {ProductCategory} from '../../model/product-category';
 
 @Component({
@@ -15,14 +15,14 @@ export class ProductCategoriesComponent implements OnInit{
     loggedIn = false;
     userName: string;
 
-    constructor(private productService: ProductService, private router: Router, 
+    constructor(private prodCatService: ProductCategoryService, private router: Router, 
         private authService: AuthService){}
 
     ngOnInit() {        
         this.authService.getUserInfo()
             .then(resp => this.userName = (resp.Data as any).UserName);     
 
-        this.productService.getProductCategories().then(prodCats => this.productCategories = prodCats);
+        this.prodCatService.getProductCategories().then(prodCats => this.productCategories = prodCats);
     };
 
     goToDetails(productCategory: ProductCategory): void{
@@ -30,7 +30,7 @@ export class ProductCategoriesComponent implements OnInit{
     };
 
     delete(productCategory: ProductCategory): void{
-        this.productService.delete(productCategory.productCategoryId)
+        this.prodCatService.delete(productCategory.productCategoryId)
             .then(() => {
                 this.productCategories.filter(prodCat => prodCat !== productCategory);
             });

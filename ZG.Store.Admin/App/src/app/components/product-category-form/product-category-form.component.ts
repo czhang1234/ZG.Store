@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
 import {AuthService} from '../../services/auth.service';
-import { ProductService } from '../../services/product.service';
+import { ProductCategoryService } from '../../services/product-category.service';
 import { ProductCategory } from '../../model/product-category';
 
 @Component({
@@ -19,16 +19,16 @@ export class ProductCategoryFormComponent {
     prodCat = new ProductCategory("", true, 0, null);
     loggedIn = false;
 
-    constructor(private productService: ProductService, private route: ActivatedRoute,
+    constructor(private productCategoryService: ProductCategoryService, private route: ActivatedRoute,
         private location: Location, private authService: AuthService, private router: Router) { }
 
     ngOnInit() {
-        this.route.params.switchMap((params: Params) => this.productService.getProductCategory(+params['id']))
+        this.route.params.switchMap((params: Params) => this.productCategoryService.getProductCategory(+params['id']))
             .subscribe(prodCat => {
                 this.prodCat = prodCat;
             });
 
-        this.productService.getProductCategories()
+        this.productCategoryService.getProductCategories()
             .then(prodCats => {
                 this.prodCats = prodCats;
             });
@@ -42,11 +42,11 @@ export class ProductCategoryFormComponent {
         }
 
         if (this.prodCat.productCategoryId) {
-            this.productService.update(this.prodCat)
+            this.productCategoryService.update(this.prodCat)
                 .then(() => this.goBack());
         }
         else {
-            this.productService.create(this.prodCat)
+            this.productCategoryService.create(this.prodCat)
                 .then(() => this.goBack());
         }
     }

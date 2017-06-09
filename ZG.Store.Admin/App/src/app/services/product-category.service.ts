@@ -5,60 +5,59 @@ import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 import {AuthService} from './auth.service';
-import {Product} from '../model/product';
+import {ProductCategory} from '../model/product-category';
 
 @Injectable()
-export class ProductService{
-    private prodUrl = (!environment.production) ? 'http://localhost:50105/api/Product' : 'api/Product';
+export class ProductCategoryService{
+    private prodCatUrl = (!environment.production) ? 'http://localhost:50105/api/ProductCategory' : 'api/ProductCategory';
 
     constructor(private http: Http, private authService: AuthService){}
 
-    getProducts(id: number): Promise<Product[]>{
+    getProductCategories(): Promise<ProductCategory[]>{
         let headers = this.getHeaders(false);
-        const url = `${this.prodUrl}/${id}`;
 
-        return this.http.get(url, {headers})
+        return this.http.get(this.prodCatUrl, {headers})
             .toPromise()
-            .then(response => response.json() as Product[])
+            .then(response => response.json() as ProductCategory[])
             .catch(this.handleError);
     };
 
-    getProduct(id: number): Promise<Product>{ 
-        const url = `${this.prodUrl}/${id}`;
+    getProductCategory(id: number): Promise<ProductCategory>{ 
+        const url = `${this.prodCatUrl}/${id}`;
 
         if(id === 0){
-            return Promise.resolve(new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []));
+            return Promise.resolve(new ProductCategory("", true, 0, null));
         }
 
         let headers = this.getHeaders(false);
 
         return this.http.get(url, {headers})
             .toPromise()
-            .then(response => response.json() as Product)
+            .then(response => response.json() as ProductCategory)
             .catch(this.handleError);
     }
 
-    create(prod: Product): Promise<Product>{
+    create(prodCat: ProductCategory): Promise<ProductCategory>{
         let headers = this.getHeaders(true);
         
-        return this.http.post(this.prodUrl, JSON.stringify(prod), {headers})
+        return this.http.post(this.prodCatUrl, JSON.stringify(prodCat), {headers})
             .toPromise()
-            .then(response => response.json() as Product)
+            .then(response => response.json() as ProductCategory)
             .catch(this.handleError);
     }
 
-    update(product: Product): Promise<void>{
-        const url = `${this.prodUrl}/${product.productId}`;
+    update(productCategory: ProductCategory): Promise<void>{
+        const url = `${this.prodCatUrl}/${productCategory.productCategoryId}`;
         let headers = this.getHeaders(true);
 
-        return this.http.put(url, JSON.stringify(product), {headers})  
+        return this.http.put(url, JSON.stringify(productCategory), {headers})  
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
     }
 
     delete(id: number): Promise<void>{
-        const url = `${this.prodUrl}/${id}`;
+        const url = `${this.prodCatUrl}/${id}`;
         let headers = this.getHeaders(true);
 
         return this.http.delete(url, {headers}) 

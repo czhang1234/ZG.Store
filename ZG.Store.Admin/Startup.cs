@@ -49,6 +49,7 @@ namespace ZG.Store.Admin
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductImageService, ProductImageService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAdminService, AdminService>();
 
             services.AddCors(options =>
             {

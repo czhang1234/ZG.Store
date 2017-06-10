@@ -41,11 +41,7 @@ namespace ZG.Store.Admin
         public void ConfigureServices(IServiceCollection services)
         {
             const string CONNECTION_STRING_NAME = "ZGStoreConnection";
-
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
-
-            services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
+         
             services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
 

@@ -19,12 +19,14 @@ export class FileUploadService {
         let headers = this.getHeaders(false);
 
         return this.http.post(url, formData, {headers})
-            .map(x => x.json())
+            .map(x => x.json());
+            /*
             .map((x: any[]) => x
           // add a new field url to be used in UI later
                 .map(item => Object
-                    .assign({}, item, { url: `${this.baseUrl}/${item.fileName}` }))
+                    .assign({}, item, { url: `${this.baseUrl}/${controller}/${id}/${item.fileName}` }))
             );
+            */
     }
 
     private getHeaders(appendContentTypeHeader: boolean): Headers{

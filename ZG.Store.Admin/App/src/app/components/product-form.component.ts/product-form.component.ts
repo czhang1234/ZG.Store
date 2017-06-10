@@ -11,6 +11,8 @@ import { ProductCategory } from '../../model/product-category';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
     selector: 'product-form',
     templateUrl: './product-form.component.html',
@@ -19,6 +21,7 @@ import { Product } from '../../model/product';
 export class ProductFormComponent {
     prodCats: ProductCategory[];
     product = new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
+    private prodImgUrlBase = (!environment.production) ? 'http://localhost:50105' : '';
 
     constructor(private productCategoryService: ProductCategoryService, private productService: ProductService, 
         private route: ActivatedRoute, private location: Location, private authService: AuthService, private router: Router) { }
@@ -50,6 +53,10 @@ export class ProductFormComponent {
             this.productService.create(this.product)
                 .then(() => this.goBack());
         }
+    }
+
+    onFileUploaded(fileNames: string[]){
+        fileNames.forEach(f => this.product.images.push(f));
     }
 
     goBack(): void {

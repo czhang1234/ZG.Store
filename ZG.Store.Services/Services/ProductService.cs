@@ -32,7 +32,10 @@ namespace ZG.Store.Services.Services
 
         public Product GetById(long id)
         {
-            return _context.Products.FirstOrDefault(b => b.ProductId == id);
+            var product = _context.Products.FirstOrDefault(b => b.ProductId == id);
+            _context.Entry(product).Collection(p => p.Images).Load();
+
+            return product;
         }
 
         public Product Create(Product product)

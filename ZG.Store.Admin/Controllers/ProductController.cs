@@ -37,7 +37,9 @@ namespace ZG.Store.Admin.Controllers
                 return NotFound();
             }
 
-            return new ObjectResult(product);
+            var productDto = ProductDto.Get(product);
+
+            return new ObjectResult(productDto);
         }
 
         [HttpPost]
@@ -79,7 +81,7 @@ namespace ZG.Store.Admin.Controllers
                     fs.Flush();
                 }
 
-                uploadedFiles.Add(new UploadedFile() { FileName = productImagePath.Replace('\\', '/') + "/" + file.FileName });
+                uploadedFiles.Add(new UploadedFile() { FileName = file.FileName });
 
                 _prodImgService.Create(new ProductImage { FileName = file.FileName, ProductId = id });
             }

@@ -9,26 +9,22 @@ import {AuthService} from './auth.service';
 
 @Injectable()
 export class FileUploadService {
-    private baseUrl = (!environment.production) ? 'http://localhost:50105/api' : 'api';
+    private baseUrl = (!environment.production) ? 'http://localhost:50105' : '';
+    private basePostUrl = (!environment.production) ? `${this.baseUrl}/api` : 'api';
 
     constructor(private http: Http, private authService: AuthService) { }
 
     upload(formData, controller, id) {
-        const url = `${this.baseUrl}/${controller}/${id}`;
+        const url = `${this.basePostUrl}/${controller}/${id}`;
         let headers = this.getHeaders(false);
-/*
+
         return this.http.post(url, formData, {headers})
             .map(x => x.json())
             .map((x: any[]) => x
           // add a new field url to be used in UI later
                 .map(item => Object
-                    .assign({}, item, { url: `${this.baseUrl}/images/${item.id}` }))
+                    .assign({}, item, { url: `${this.baseUrl}/${item.fileName}` }))
             );
-*/
-        return this.http.post(url, formData, {headers})
-            .toPromise()
-             .then(response => response.json() as any)
-            .catch(this.handleError);
     }
 
     private getHeaders(appendContentTypeHeader: boolean): Headers{

@@ -72,11 +72,7 @@ export class AuthService{
     }
 
     private getLocalToken(): string{
-        if(!this.token){
-            this.token = localStorage.getItem(this.tokenKey);
-        }
-
-        return this.token;
+        return localStorage.getItem(this.tokenKey);;
     }
 
     private handleError(error: any): Promise<any> {

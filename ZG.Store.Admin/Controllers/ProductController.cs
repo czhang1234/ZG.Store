@@ -58,27 +58,33 @@ namespace ZG.Store.Admin.Controllers
         {
             var product = _prodService.GetById(id);
 
+            var uploadedFiles = new List<UploadedFile>();
+
             for (int i = 0; i < Request.Form.Files.Count; i++)
             {
                 var file= Request.Form.Files[i];
-                var dir = _hostingEnv.ContentRootPath + $@"\wwwroot\product-images\{id}";
+                var productImagePath = $@"\product-images\{id}";
+                var wwwrootPath = $@"\wwwroot{productImagePath}";
+                var dir = _hostingEnv.ContentRootPath + wwwrootPath;
 
                 if(!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
 
-                var fileName = dir + $@"\{file.FileName}";
-                using (var fs = System.IO.File.Create(fileName))
+                var fileFullName = dir + $@"\{file.FileName}";
+                using (var fs = System.IO.File.Create(fileFullName))
                 {
                     file.CopyTo(fs);
                     fs.Flush();
                 }
 
+                uploadedFiles.Add(new UploadedFile() { FileName = productImagePath.Replace('\\', '/') + "/" + file.FileName });
+
                 _prodImgService.Create(new ProductImage { FileName = file.FileName, ProductId = id });
             }
 
-            return Ok();
+            return new ObjectResult(uploadedFiles);
         }
 
         [HttpPut("{id}")]
@@ -109,5 +115,10 @@ namespace ZG.Store.Admin.Controllers
 
             return new NoContentResult();
         }
+    }
+
+    public class UploadedFile
+    {
+        public string FileName { get; set; }
     }
 }

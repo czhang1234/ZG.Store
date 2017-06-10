@@ -18,10 +18,7 @@ export class ProductCategoriesComponent implements OnInit{
     constructor(private prodCatService: ProductCategoryService, private router: Router, 
         private authService: AuthService){}
 
-    ngOnInit() {        
-        this.authService.getUserInfo()
-            .then(resp => this.userName = (resp.Data as any).UserName);     
-
+    ngOnInit() {   
         this.prodCatService.getProductCategories().then(prodCats => {
             this.productCategories = prodCats;
         });

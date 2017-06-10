@@ -56,22 +56,6 @@ namespace ZG.Store.Admin.Controllers
             }
         }
 
-        [HttpGet]
-        [Authorize("Bearer")]
-        public string GetUserInfo()
-        {
-            var claimsIdentity = User.Identity as ClaimsIdentity;
-
-            return JsonConvert.SerializeObject(new RequestResult
-            {
-                State = RequestState.Success,
-                Data = new
-                {
-                    UserName = claimsIdentity.Name
-                }
-            });
-        }
-
         private string GenerateToken(User user, DateTime expires)
         {
             var handler = new JwtSecurityTokenHandler();

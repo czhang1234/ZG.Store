@@ -20,14 +20,15 @@
         </div>
         <!-- images -->
         <label>Images:</label>
+        <label *ngIf="deletedImage" class="alert alert-success">{{deletedImage}} has been deleted.</label>
         <div class="row" *ngIf="product.images">
             <div class="col-md-3" *ngFor="let img of product.images">
                 <div class="thumbnail" style="width: 230px; height: 290px;">
                     <div style="width: 100%; height: 230px;">
-                        <img src="{{prodImgUrlBase}}/product-images/{{product.productId}}/{{img}}" [alt]="img" style="width:100%" class="img-responsive">
+                        <img src="{{prodImgUrlBase}}/product-images/{{product.productId}}/{{img.fileName}}" [alt]="img" style="width:100%" class="img-responsive">
                     </div>
                     <div class="caption">
-                        <button class="btn btn-primary center-block" title="Delete"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button type="button" class="btn btn-primary center-block" title="Delete" (click)="deleteImage(img.productImageId); $event.stopPropagation()"><span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@
         <file-upload controller="product" [id]="product.productId" [hidden]="!product.productId" (onFileUploaded)="onFileUploaded($event)"></file-upload>
 
         <button type="submit" class="btn btn-success" [disabled]="!prodForm.form.valid">Submit</button>
-        <button type="submit" class="btn btn-default" (click)="newCategory(); prodForm.reset();">Reset</button>
+        <button type="submit" class="btn btn-default" (click)="newProduct(); prodForm.reset();">Reset</button>
     </form>
 
 </div>

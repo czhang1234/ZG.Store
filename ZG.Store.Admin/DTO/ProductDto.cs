@@ -4,6 +4,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using ZG.Store.Common;
 using System.Linq;
+using ZG.Store.Admin.DTO;
 
 namespace ZG.Store.Services.Models
 {
@@ -30,7 +31,7 @@ namespace ZG.Store.Services.Models
         public decimal? RatingScore { get; set; }
         public bool Active { get; set; }
 
-        public List<string> Images { get; set; }
+        public List<ProductImageDto> Images { get; set; }
 
         public static ProductDto Get(Product product)
         {
@@ -54,7 +55,7 @@ namespace ZG.Store.Services.Models
                 TotalReviewCount = product.TotalReviewCount,
                 RatingScore = product.RatingScore,
                 Active = product.Active,
-                Images = product.Images.Select(img => img.FileName).ToList()
+                Images = product.Images.Select(img => new ProductImageDto() { ProductImageId = img.ProductImageId, FileName = img.FileName }).ToList()
             };
         }
     }

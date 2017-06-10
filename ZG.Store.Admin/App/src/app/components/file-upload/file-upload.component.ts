@@ -1,6 +1,8 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FileUploadService } from '../../services/file-upload.service'; // we will create this next!
 
+import {ProductImage} from '../../model/product-image';
+
 import 'rxjs/add/operator/take'
 import 'rxjs/add/operator/delay'
 
@@ -12,9 +14,9 @@ import 'rxjs/add/operator/delay'
 export class FileUploadComponent {
   @Input() controller: string;
   @Input() id: string //e.g. for product page, the id will be product id
-  @Output() onFileUploaded = new EventEmitter<string[]>();
+  @Output() onFileUploaded = new EventEmitter<ProductImage[]>();
 
-  uploadedFiles = [];
+  uploadedFiles: ProductImage[];
   uploadError;
   currentStatus: number;
   uploadFieldName = 'photos';
@@ -61,7 +63,7 @@ export class FileUploadComponent {
         this.uploadedFiles = [].concat(x);
         this.currentStatus = this.STATUS_SUCCESS;
 
-        this.onFileUploaded.emit(this.uploadedFiles.map(f => f.fileName));
+        this.onFileUploaded.emit(this.uploadedFiles);
       }, err => {
         this.uploadError = err;
         this.currentStatus = this.STATUS_FAILED;

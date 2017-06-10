@@ -27,6 +27,7 @@ namespace ZG.Store.Admin.Controllers
             _hostingEnv = hostingEnv;
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}", Name = "GetProduct")]
         public IActionResult GetProductById(long id)
         {
@@ -65,9 +66,7 @@ namespace ZG.Store.Admin.Controllers
             for (int i = 0; i < Request.Form.Files.Count; i++)
             {
                 var file= Request.Form.Files[i];
-                var productImagePath = $@"\product-images\{id}";
-                var wwwrootPath = $@"\wwwroot{productImagePath}";
-                var dir = _hostingEnv.ContentRootPath + wwwrootPath;
+                var dir = GetProductImageDir(id); 
 
                 if(!Directory.Exists(dir))
                 {
@@ -81,9 +80,8 @@ namespace ZG.Store.Admin.Controllers
                     fs.Flush();
                 }
 
-                uploadedFiles.Add(new UploadedFile() { FileName = file.FileName });
-
-                _prodImgService.Create(new ProductImage { FileName = file.FileName, ProductId = id });
+                var img = _prodImgService.Create(new ProductImage { FileName = file.FileName, ProductId = id });
+                uploadedFiles.Add(new UploadedFile() {Id = img.ProductImageId, FileName = file.FileName });
             }
 
             return new ObjectResult(uploadedFiles);
@@ -117,10 +115,34 @@ namespace ZG.Store.Admin.Controllers
 
             return new NoContentResult();
         }
+
+        [HttpDelete("images/{id}")]
+        public IActionResult DeleteImage(long id)
+        {
+            var img = _prodImgService.GetById(id);
+            if(img == null)
+            {
+                return NotFound();
+            }
+
+            var dir = GetProductImageDir(img.ProductId);
+            var fileFullName = dir + $@"\{img.FileName}";
+            System.IO.File.Delete(fileFullName);
+
+            _prodImgService.Delete(id);
+
+            return new NoContentResult();
+        }
+
+        private string GetProductImageDir(long productId)
+        {
+            return _hostingEnv.ContentRootPath + $@"\wwwroot\product-images\{productId}";
+        }
     }
 
     public class UploadedFile
     {
+        public int Id { get; set; }
         public string FileName { get; set; }
     }
 }

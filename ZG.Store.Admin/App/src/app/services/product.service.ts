@@ -59,7 +59,17 @@ export class ProductService{
     }
 
     delete(id: number): Promise<void>{
-        const url = `${this.prodUrl}/${id}`;
+        const url = `${this.prodUrl}/images/${id}`;
+        let headers = this.getHeaders(true);
+
+        return this.http.delete(url, {headers}) 
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
+
+    deleteImage(id: number): Promise<void>{
+        const url = `${this.prodUrl}/images/${id}`;
         let headers = this.getHeaders(true);
 
         return this.http.delete(url, {headers}) 

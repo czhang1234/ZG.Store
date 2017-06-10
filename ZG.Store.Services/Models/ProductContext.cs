@@ -15,6 +15,11 @@ namespace ZG.Store.Services.Models
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImage> ProductImage { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductImage>().HasIndex(img => new { img.FileName}).IsUnique(true);
+        }
     }
 
     public class ProductContextFactory : IDbContextFactory<ProductContext>

@@ -10,6 +10,7 @@ import { ProductCategoryService } from '../../services/product-category.service'
 import { ProductCategory } from '../../model/product-category';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../model/product';
+import { ProductImage } from '../../model/product-image';
 
 import { environment } from '../../../environments/environment';
 
@@ -22,6 +23,7 @@ export class ProductFormComponent {
     prodCats: ProductCategory[];
     product = new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
     private prodImgUrlBase = (!environment.production) ? 'http://localhost:50105' : '';
+    deletedImage: string;
 
     constructor(private productCategoryService: ProductCategoryService, private productService: ProductService, 
         private route: ActivatedRoute, private location: Location, private authService: AuthService, private router: Router) { }
@@ -55,15 +57,32 @@ export class ProductFormComponent {
         }
     }
 
-    onFileUploaded(fileNames: string[]){
-        fileNames.forEach(f => this.product.images.push(f));
+    deleteImage(id: number): void{
+        this.productService.deleteImage(id)
+            .then(() => {
+                let img = this.product.images.find(img => img.productImageId === id)
+                this.deletedImage = img.fileName;
+
+                let index = this.product.images.indexOf(img);
+                this.product.images.splice(index, 1);
+            });
+    }
+
+    onFileUploaded(imgs: ProductImage[]){
+        imgs.forEach(img => this.product.images.push(img));
+
+        this.deletedImage = null;
     }
 
     goBack(): void {
         this.location.back();
     }
 
-    newCategory() {
+    test(): void {
+        this.deletedImage = "12345";
+    }
+
+    newProduct() {
         this.product = new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
     }
 

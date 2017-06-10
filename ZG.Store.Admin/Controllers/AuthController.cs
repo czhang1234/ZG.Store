@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using ZG.Store.Admin.DTO;
 using ZG.Store.Admin.Model;
 using ZG.Store.Common.Auth;
 using ZG.Store.Services.Services;
@@ -19,21 +20,21 @@ namespace ZG.Store.Admin.Controllers
     [Route("api/[controller]")]
     public class AuthController : Controller
     {
-        private IUserService _userService;
-        public AuthController(IUserService userService)
+        private IAdminService _adminService;
+        public AuthController(IAdminService adminService)
         {
-            _userService = userService;
+            _adminService = adminService;
         }
 
         [HttpPost]
-        public string GetAuthToken([FromBody]User user)
+        public string GetAuthToken([FromBody]AdminDto admin)
         {
-            var existingUser = _userService.Get(user.UserName, user.Password);
+            var existingUser = _adminService.Get(admin.UserName, admin.Password);
             if (existingUser != null)
             {
                 var requestAt = DateTime.UtcNow;
                 var expiresIn = requestAt + TokenAuthOption.ExpiresSpan;
-                var token = GenerateToken(new User { ID = existingUser.UserId, UserName = existingUser.UserName, Password = existingUser.Password }, expiresIn);
+                var token = GenerateToken(new AdminDto { Id = existingUser.AdminId, UserName = existingUser.UserName, Password = existingUser.Password }, expiresIn);
 
                 return JsonConvert.SerializeObject(new RequestResult
                 {
@@ -57,15 +58,15 @@ namespace ZG.Store.Admin.Controllers
             }
         }
 
-        private string GenerateToken(User user, DateTime expires)
+        private string GenerateToken(AdminDto admin, DateTime expires)
         {
             var handler = new JwtSecurityTokenHandler();
 
             var identity = new ClaimsIdentity(
-                new GenericIdentity(user.UserName, "TokenAuth"),
+                new GenericIdentity(admin.UserName, "TokenAuth"),
                 new[] {
-                    new Claim("Id", user.ID.ToString()),
-                    new Claim("UserName", user.UserName)
+                    new Claim("Id", admin.Id.ToString()),
+                    new Claim("UserName", admin.UserName)
                 }
             );
 
@@ -79,12 +80,5 @@ namespace ZG.Store.Admin.Controllers
             });
             return handler.WriteToken(securityToken);
         }
-    }
-
-    public class User
-    {
-        public Guid ID { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
     }
 }

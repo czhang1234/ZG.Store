@@ -81,7 +81,7 @@ namespace ZG.Store.Admin.Controllers
                 }
 
                 var img = _prodImgService.Create(new ProductImage { FileName = file.FileName, ProductId = id });
-                uploadedFiles.Add(new UploadedFile() {Id = img.ProductImageId, FileName = file.FileName });
+                uploadedFiles.Add(new UploadedFile() { ProductImageId = img.ProductImageId, FileName = file.FileName });
             }
 
             return new ObjectResult(uploadedFiles);
@@ -142,7 +142,7 @@ namespace ZG.Store.Admin.Controllers
 
     public class UploadedFile
     {
-        public int Id { get; set; }
+        public int ProductImageId { get; set; }
         public string FileName { get; set; }
     }
 }

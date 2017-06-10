@@ -58,6 +58,8 @@ export class ProductFormComponent {
     }
 
     deleteImage(id: number): void{
+
+        if(confirm("Are you sure you wan to delete?")){
         this.productService.deleteImage(id)
             .then(() => {
                 let img = this.product.images.find(img => img.productImageId === id)
@@ -66,6 +68,7 @@ export class ProductFormComponent {
                 let index = this.product.images.indexOf(img);
                 this.product.images.splice(index, 1);
             });
+        }
     }
 
     onFileUploaded(imgs: ProductImage[]){
@@ -88,4 +91,5 @@ export class ProductFormComponent {
 
     get diagnostic() { return JSON.stringify(this.product) }
     get diagnostic2() { return JSON.stringify(this.prodCats) }
+    get prodImgs() { return JSON.stringify(this.product.images) }
 }

@@ -9,7 +9,7 @@ import {ProductCategory} from '../model/product-category';
 
 @Injectable()
 export class ProductCategoryService{
-    private prodCatUrl = (!environment.production) ? 'http://localhost:50105/api/ProductCategory' : 'api/ProductCategory';
+    private prodCatUrl = (!environment.production) ? 'http://localhost:50105/api/ProductCategory' : '/api/ProductCategory';
 
     constructor(private http: Http, private authService: AuthService){}
 

@@ -10,8 +10,6 @@
 * problem: reload cause 404 because server could not found index.html in another dir, e.g. http://localhost:50105/productcategories
   solution: put { useHash: true } in app-routing.module.ts
 
-* changed outDir from "dist" to "../wwwroot" as "outDir": "../wwwroot" in .angular-cli.json
-
 * http://angularjs.blogspot.com/2016/11/easy-angular-authentication-with-json.html
 
 * Any application that uses JWT authentication should always be served over HTTPS to prevent malicious interception of the token.
@@ -19,3 +17,11 @@
 * TODO: need to have a secret key for auth instead of random key which cause auth to fail when server side restart
 
 * API should always return DTO, not the model
+
+* In order to generate the css bundle, you have to add imports in styles.css, e.g.
+  @import "~bootstrap/dist/css/bootstrap.min.css";
+  @import "~font-awesome/css/font-awesome.css";
+
+* changed outDir from "dist" to "../wwwroot" as "outDir": "../wwwroot" in .angular-cli.json
+
+* In order to change the <base href> to be <base href="/product-app/"> in index.html, in package.json change the "build" script to "build": "ng build --prod --base-href /product-app/". 

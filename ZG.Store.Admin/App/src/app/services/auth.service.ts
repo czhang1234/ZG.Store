@@ -12,7 +12,7 @@ import {RequestResult} from '../model/request-result';
 export class AuthService{
     private tokenKey = "token";
     private token: string;
-    private authUrl = (!environment.production) ? 'http://localhost:50105/api/Auth' : 'api/Auth';
+    private authUrl = (!environment.production) ? 'http://localhost:50105/api/Auth' : '/api/Auth';
 
 
     constructor(private http: Http){}

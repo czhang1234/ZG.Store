@@ -9,7 +9,7 @@ import {AuthService} from './auth.service';
 
 @Injectable()
 export class FileUploadService {
-    private baseUrl = (!environment.production) ? 'http://localhost:50105' : '';
+    private baseUrl = (!environment.production) ? 'http://localhost:50105' : '/';
     private basePostUrl = (!environment.production) ? `${this.baseUrl}/api` : 'api';
 
     constructor(private http: Http, private authService: AuthService) { }

@@ -9,8 +9,8 @@ import {Product} from '../model/product';
 
 @Injectable()
 export class ProductService{
-    private prodUrl = (!environment.production) ? 'http://localhost:50105/api/Product' : 'api/Product';
-    private prodsUrl = (!environment.production) ? 'http://localhost:50105/api/Products' : 'api/Products';
+    private prodUrl = (!environment.production) ? 'http://localhost:50105/api/Product' : '/api/Product';
+    private prodsUrl = (!environment.production) ? 'http://localhost:50105/api/Products' : '/api/Products';
 
     constructor(private http: Http, private authService: AuthService){}
 

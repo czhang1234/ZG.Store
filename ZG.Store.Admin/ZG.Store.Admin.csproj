@@ -37,6 +37,7 @@
     <ProjectReference Include="..\ZG.Store.Services\ZG.Store.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ReactApp\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

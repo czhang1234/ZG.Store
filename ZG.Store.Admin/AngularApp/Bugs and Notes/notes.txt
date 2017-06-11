@@ -1,0 +1,30 @@
+﻿* asp.net core web api by default don't serve static files.
+  have to add package Microsoft.AspNetCore.StaticFiles and add app.UseStaticFiles();
+
+* have to enable CORS for the angular app because angular 2+'s default working environment runs a development 
+  server off a seperate port which is effectively a seperate domain and all calls back to the main ASP.NET site 
+  for the API calls effectively are cross domain calls
+
+* use Angular CLI
+
+* problem: reload cause 404 because server could not found index.html in another dir, e.g. http://localhost:50105/productcategories
+  solution: put { useHash: true } in app-routing.module.ts
+
+* http://angularjs.blogspot.com/2016/11/easy-angular-authentication-with-json.html
+
+* Any application that uses JWT authentication should always be served over HTTPS to prevent malicious interception of the token.
+
+* TODO: need to have a secret key for auth instead of random key which cause auth to fail when server side restart
+
+* API should always return DTO, not the model
+
+* In order to generate the css bundle, you have to add imports in styles.css, e.g.
+  @import "~bootstrap/dist/css/bootstrap.min.css";
+  @import "~font-awesome/css/font-awesome.css";
+
+* changed outDir from "dist" to "../wwwroot" as "outDir": "../wwwroot" in .angular-cli.json
+
+* In order to change the <base href> to be <base href="/product-app/"> in index.html, in package.json change the "build" script to "build": "ng build --prod --base-href /product-app/". 
+
+* disable building of TypeScript files in VS 2017
+  add node <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked> to the first <PropertyGroup> element in .csproj file.

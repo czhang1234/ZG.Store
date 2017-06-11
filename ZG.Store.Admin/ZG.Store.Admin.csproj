@@ -2,13 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="AdminApp\node_modules\**" />
+    <Compile Remove="AngularApp\dist\**" />
+    <Compile Remove="AngularApp\node_modules\**" />
     <Content Remove="AdminApp\node_modules\**" />
+    <Content Remove="AngularApp\dist\**" />
+    <Content Remove="AngularApp\node_modules\**" />
     <EmbeddedResource Remove="AdminApp\node_modules\**" />
+    <EmbeddedResource Remove="AngularApp\dist\**" />
+    <EmbeddedResource Remove="AngularApp\node_modules\**" />
     <None Remove="AdminApp\node_modules\**" />
+    <None Remove="AngularApp\dist\**" />
+    <None Remove="AngularApp\node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,7 +42,6 @@
     <ProjectReference Include="..\ZG.Store.Services\ZG.Store.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AngularApp\" />
     <Folder Include="ReactApp\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

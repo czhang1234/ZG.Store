@@ -15,9 +15,9 @@ namespace ZG.Store.Services
 
     public class OrderStatusService : IOrderStatusService
     {
-        private readonly OrderContext _context;
+        private readonly StoreContext _context;
 
-        public OrderStatusService(OrderContext context)
+        public OrderStatusService(StoreContext context)
         {
             _context = context;
         }

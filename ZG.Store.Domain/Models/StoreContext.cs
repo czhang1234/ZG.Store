@@ -6,11 +6,18 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace ZG.Store.Domain.Models
 {
-    public class OrderContext : DbContext
+    public class StoreContext : DbContext
     {
-        public OrderContext(DbContextOptions<OrderContext> options)
+        public StoreContext(DbContextOptions<StoreContext> options)
             : base(options)
         { }
+        
+        public DbSet<User> Users { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -23,9 +30,14 @@ namespace ZG.Store.Domain.Models
         public DbSet<Tax> Tax { get; set; }
         public DbSet<Email> Emails { get; set; }
 
-        //This is to fix the error "Introducing FOREIGN KEY constraint 'FK_dbo.xxxxxxxx' on table 'Orders' may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints."
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ProductImage>().HasIndex(img => new { img.FileName }).IsUnique(true);
+
             modelBuilder.Entity<Country>()
                 .HasMany(c => c.OrdersBilling)
                 .WithOne(o => o.BillingCountry)
@@ -35,18 +47,18 @@ namespace ZG.Store.Domain.Models
                 .HasMany(c => c.OrdersShipping)
                 .WithOne(o => o.ShippingCountry)
                 .HasForeignKey(o => o.ShippingCountryId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
-           
+
         }
     }
 
-    public class OrderContextFactory : IDbContextFactory<OrderContext>
+    public class StoreContextFactory : IDbContextFactory<StoreContext>
     {
-        public OrderContext Create(DbContextFactoryOptions options)
+        public StoreContext Create(DbContextFactoryOptions options)
         {
-            var builder = new DbContextOptionsBuilder<OrderContext>();
+            var builder = new DbContextOptionsBuilder<StoreContext>();
             builder.UseSqlServer("Server=LAPTOP-Q3UKFVOU\\ZXSQLSERVER2;Database=ZGStore;User Id=sa;Password=zzc2009!;MultipleActiveResultSets=true");
 
-            return new OrderContext(builder.Options);
+            return new StoreContext(builder.Options);
         }
     }
 }

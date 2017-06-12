@@ -19,9 +19,9 @@ namespace ZG.Store.Services
 
     public class UserService : IUserService
     {
-        private readonly UserContext _context;
+        private readonly StoreContext _context;
 
-        public UserService(UserContext context)
+        public UserService(StoreContext context)
         {
             _context = context;
         }

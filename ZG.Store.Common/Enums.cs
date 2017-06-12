@@ -50,4 +50,11 @@ namespace ZG.Store.Common
         UPS,
         USPS_Ground
     }
+
+    public enum PostStatus
+    {
+        Published,
+        Draft,
+        PendingReview
+    }
 }

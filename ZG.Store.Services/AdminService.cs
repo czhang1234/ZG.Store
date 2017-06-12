@@ -19,9 +19,9 @@ namespace ZG.Store.Services
 
     public class AdminService : IAdminService
     {
-        private readonly UserContext _context;
+        private readonly StoreContext _context;
 
-        public AdminService(UserContext context)
+        public AdminService(StoreContext context)
         {
             _context = context;
         }

@@ -44,10 +44,8 @@ namespace ZG.Store.Admin
         {
             const string CONNECTION_STRING_NAME = "ZGStoreConnection";
          
-            services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
-            services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
-            services.AddDbContext<OrderContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
-
+            services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString(CONNECTION_STRING_NAME)));
+            
             services.AddTransient<IProductCatetoryService, ProductCatetoryService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductImageService, ProductImageService>();

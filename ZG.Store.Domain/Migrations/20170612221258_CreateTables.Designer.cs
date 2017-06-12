@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ZG.Store.Domain.Models;
+using ZG.Store.Common;
 
 namespace ZG.Store.Domain.Migrations
 {
-    [DbContext(typeof(OrderContext))]
-    [Migration("20170612191521_UpdateOrdersTables5")]
-    partial class UpdateOrdersTables5
+    [DbContext(typeof(StoreContext))]
+    [Migration("20170612221258_CreateTables")]
+    partial class CreateTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +69,74 @@ namespace ZG.Store.Domain.Migrations
                     b.HasIndex("UserId1");
 
                     b.ToTable("Address");
+                });
+
+            modelBuilder.Entity("ZG.Store.Domain.Models.Admin", b =>
+                {
+                    b.Property<Guid>("AdminId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("FName")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("LName")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("AdminId");
+
+                    b.ToTable("Admins");
+                });
+
+            modelBuilder.Entity("ZG.Store.Domain.Models.Blog", b =>
+                {
+                    b.Property<int>("BlogId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("BlogId");
+
+                    b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("ZG.Store.Domain.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<DateTime>("DateTime");
+
+                    b.Property<int>("PostId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<Guid?>("UserId1");
+
+                    b.Property<int>("Visibility");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("ZG.Store.Domain.Models.Country", b =>
@@ -303,6 +372,30 @@ namespace ZG.Store.Domain.Migrations
                     b.ToTable("OrderStatus");
                 });
 
+            modelBuilder.Entity("ZG.Store.Domain.Models.Post", b =>
+                {
+                    b.Property<int>("PostId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AllowComments");
+
+                    b.Property<int>("BlogId");
+
+                    b.Property<string>("Content");
+
+                    b.Property<int>("Status");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("Visibility");
+
+                    b.HasKey("PostId");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("Posts");
+                });
+
             modelBuilder.Entity("ZG.Store.Domain.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -350,7 +443,7 @@ namespace ZG.Store.Domain.Migrations
 
                     b.HasIndex("ProductCategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ZG.Store.Domain.Models.ProductCategory", b =>
@@ -368,7 +461,7 @@ namespace ZG.Store.Domain.Migrations
 
                     b.HasKey("ProductCategoryId");
 
-                    b.ToTable("ProductCategory");
+                    b.ToTable("ProductCategories");
                 });
 
             modelBuilder.Entity("ZG.Store.Domain.Models.ProductImage", b =>
@@ -382,9 +475,12 @@ namespace ZG.Store.Domain.Migrations
 
                     b.HasKey("ProductImageId");
 
+                    b.HasIndex("FileName")
+                        .IsUnique();
+
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImage");
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("ZG.Store.Domain.Models.Province", b =>
@@ -552,7 +648,7 @@ namespace ZG.Store.Domain.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ZG.Store.Domain.Models.Address", b =>
@@ -572,6 +668,18 @@ namespace ZG.Store.Domain.Migrations
 
                     b.HasOne("ZG.Store.Domain.Models.User", "User")
                         .WithMany("Addresses")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("ZG.Store.Domain.Models.Comment", b =>
+                {
+                    b.HasOne("ZG.Store.Domain.Models.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ZG.Store.Domain.Models.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId1");
                 });
 
@@ -633,6 +741,14 @@ namespace ZG.Store.Domain.Migrations
                     b.HasOne("ZG.Store.Domain.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ZG.Store.Domain.Models.Post", b =>
+                {
+                    b.HasOne("ZG.Store.Domain.Models.Blog", "Blog")
+                        .WithMany("Posts")
+                        .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

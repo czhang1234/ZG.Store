@@ -18,9 +18,9 @@ namespace ZG.Store.Services
 
     public class ProductImageService : IProductImageService
     {
-        private readonly ProductContext _context;
+        private readonly StoreContext _context;
 
-        public ProductImageService(ProductContext context)
+        public ProductImageService(StoreContext context)
         {
             _context = context;
         }

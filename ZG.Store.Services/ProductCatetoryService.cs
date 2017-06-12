@@ -18,9 +18,9 @@ namespace ZG.Store.Services
 
     public class ProductCatetoryService : IProductCatetoryService
     {
-        private readonly ProductContext _context;
+        private readonly StoreContext _context;
 
-        public ProductCatetoryService(ProductContext context)
+        public ProductCatetoryService(StoreContext context)
         {
             _context = context;
         }

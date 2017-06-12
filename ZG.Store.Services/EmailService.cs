@@ -27,9 +27,9 @@ namespace ZG.Store.Services
         private IEmailSettingsFactory _emailSettingsFactory;
         private EmailSettings _emailSettings;
 
-        private readonly OrderContext _context;
+        private readonly StoreContext _context;
 
-        public EmailService(OrderContext context, IEmailSettingsFactory emailSettingsFactory, IEmailSender emailSender)
+        public EmailService(StoreContext context, IEmailSettingsFactory emailSettingsFactory, IEmailSender emailSender)
         {
             _context = context;
             _emailSettingsFactory = emailSettingsFactory;

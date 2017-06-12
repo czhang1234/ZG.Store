@@ -18,9 +18,9 @@ namespace ZG.Store.Services
 
     public class ProductService : IProductService
     {
-        private readonly ProductContext _context;
+        private readonly StoreContext _context;
 
-        public ProductService(ProductContext context)
+        public ProductService(StoreContext context)
         {
             _context = context;
         }

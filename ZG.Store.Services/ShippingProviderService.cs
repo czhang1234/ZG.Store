@@ -17,9 +17,9 @@ namespace ZG.Store.Services
 
     public class ShippingProviderService : IShippingProviderService
     {
-        private readonly OrderContext _context;
+        private readonly StoreContext _context;
 
-        public ShippingProviderService(OrderContext context)
+        public ShippingProviderService(StoreContext context)
         {
             _context = context;
         }

@@ -29,9 +29,9 @@ namespace ZG.Store.Services
         private IEmailService _emailService;
         private IOrderStatusService _orderStatusService;
 
-        private readonly OrderContext _context;
+        private readonly StoreContext _context;
 
-        public OrderService(OrderContext context, IEmailService emailService, IOrderStatusService orderStatusService)
+        public OrderService(StoreContext context, IEmailService emailService, IOrderStatusService orderStatusService)
         {
             _context = context;
             _emailService = emailService;

@@ -16,10 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZG.Store.Common\ZG.Store.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\User\" />
+    <ProjectReference Include="..\ZG.Store.Domain\ZG.Store.Domain.csproj" />
   </ItemGroup>
 
 </Project>

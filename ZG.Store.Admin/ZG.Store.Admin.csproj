@@ -10,18 +10,22 @@
     <Compile Remove="AngularApp\dist\**" />
     <Compile Remove="AngularApp\node_modules\**" />
     <Compile Remove="ReactApp\dist\**" />
+    <Compile Remove="ReactApp\node_modules\**" />
     <Content Remove="AdminApp\node_modules\**" />
     <Content Remove="AngularApp\dist\**" />
     <Content Remove="AngularApp\node_modules\**" />
     <Content Remove="ReactApp\dist\**" />
+    <Content Remove="ReactApp\node_modules\**" />
     <EmbeddedResource Remove="AdminApp\node_modules\**" />
     <EmbeddedResource Remove="AngularApp\dist\**" />
     <EmbeddedResource Remove="AngularApp\node_modules\**" />
     <EmbeddedResource Remove="ReactApp\dist\**" />
+    <EmbeddedResource Remove="ReactApp\node_modules\**" />
     <None Remove="AdminApp\node_modules\**" />
     <None Remove="AngularApp\dist\**" />
     <None Remove="AngularApp\node_modules\**" />
     <None Remove="ReactApp\dist\**" />
+    <None Remove="ReactApp\node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>

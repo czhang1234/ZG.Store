@@ -5,8 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using ZG.Store.Common;
 using System.Linq;
 using ZG.Store.Admin.DTO;
+using ZG.Store.Domain.Models;
 
-namespace ZG.Store.Services.Models
+namespace ZG.Store.Admin.Models
 {
     public class ProductDto
     {

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ZG.Store.Services.Models;
-using ZG.Store.Services.Services;
+
+using ZG.Store.Services;
 using ZG.Store.Common;
 using Microsoft.AspNetCore.Authorization;
+using ZG.Store.Domain.Models;
 
 namespace ZG.Store.Admin.Controllers
 {

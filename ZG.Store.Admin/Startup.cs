@@ -8,9 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using ZG.Store.Services.Models;
+
 using Microsoft.EntityFrameworkCore;
-using ZG.Store.Services.Services;
+using ZG.Store.Services;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
 using ZG.Store.Admin.Model;
 using System.Text;
+using ZG.Store.Domain.Models;
 
 namespace ZG.Store.Admin
 {

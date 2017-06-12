@@ -25,5 +25,15 @@ namespace ZG.Store.Services.Models
         [Required]
         [MaxLength(100)]
         public string Email { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Phone { get; set; }
+        [Required]
+        public System.DateTime DateCreated { get; set; }
+        public DateTime? DateUpdated { get; set; }
+        public bool Active { get; set; }
+
+        public List<Address> Addresses { get; set; }
     }
 }

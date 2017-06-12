@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZG.Store.Common.Abstract;
 
-namespace ZG.Store.Common.Concrete
+namespace ZG.Store.Common.Email
 {
+    public interface IEmailSettingsFactory
+    {
+        EmailSettings GetEmailSettings(EmailType emailType);
+    }
+
     public class EmailSettingsFactory : IEmailSettingsFactory
     {
         private const string ExceptionMessage = "Appsetting key {0} was not found.";

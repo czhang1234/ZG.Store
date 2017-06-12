@@ -7,7 +7,7 @@ using ZG.Store.Domain.DTO;
 using ZG.Store.Domain.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ZG.Store.Common.Concrete;
+using ZG.Store.Common.Email;
 
 namespace ZG.Store.Services
 {

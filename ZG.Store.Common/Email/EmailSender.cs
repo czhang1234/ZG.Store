@@ -5,11 +5,15 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using ZG.Store.Common.Abstract;
 using ZG.Store.Common.Dto;
 
-namespace ZG.Store.Common.Concrete
+namespace ZG.Store.Common.Email
 {
+    public interface IEmailSender
+    {
+        EmailSendingResult Send(EmailSettings emailSettings, string subject, string body, bool isBodyHtml);
+    }
+
     public class EmailSender : IEmailSender
     {
         public MailAddresses MailAddresses { get; set; }

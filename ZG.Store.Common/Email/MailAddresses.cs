@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZG.Store.Common.Concrete
+namespace ZG.Store.Common.Email
 {
     public class MailAddresses
     {

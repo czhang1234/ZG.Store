@@ -89,6 +89,59 @@ namespace ZG.Store.Services.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("ZG.Store.Domain.Models.Email", b =>
+                {
+                    b.Property<int>("EmailId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body")
+                        .IsRequired();
+
+                    b.Property<string>("Cc")
+                        .HasMaxLength(250);
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<string>("ExceptionMessage")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("FromAddress")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("FromName")
+                        .HasMaxLength(50);
+
+                    b.Property<bool>("IsBodyHtml");
+
+                    b.Property<int?>("OrderId");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("ToAddress")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("ToName")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("EmailId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Emails");
+                });
+
             modelBuilder.Entity("ZG.Store.Domain.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -519,6 +572,13 @@ namespace ZG.Store.Services.Migrations
                     b.HasOne("ZG.Store.Domain.Models.User", "User")
                         .WithMany("Addresses")
                         .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("ZG.Store.Domain.Models.Email", b =>
+                {
+                    b.HasOne("ZG.Store.Domain.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("ZG.Store.Domain.Models.Order", b =>

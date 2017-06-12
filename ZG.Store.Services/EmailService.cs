@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using ZG.Store.Common;
-using ZG.Store.Common.Abstract;
-using ZG.Store.Common.Concrete;
 using ZG.Store.Common.Dto;
+using ZG.Store.Common.Email;
 using ZG.Store.Domain.Models;
 
 namespace ZG.Store.Services

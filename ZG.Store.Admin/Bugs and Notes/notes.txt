@@ -28,3 +28,12 @@
 
 * disable building of TypeScript files in VS 2017
   add node <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked> to the first <PropertyGroup> element in .csproj file.
+
+* The project doesn’t know how to run the profile IIS Express.
+  Tools -> Extensions and Updates -> make sure Microsft ASP.NET and Web Tools extension and Microsoft Azure App Service Tools extension are enabled
+
+* No executable found matching command "dotnet-ef"
+  make suer this is in the project file:
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
+  </ItemGroup>

@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using ZG.Store.Admin.Model;
 using System.Text;
 using ZG.Store.Domain.Models;
+using ZG.Store.Common.Email;
 
 namespace ZG.Store.Admin
 {
@@ -52,6 +53,12 @@ namespace ZG.Store.Admin
             services.AddTransient<IProductImageService, ProductImageService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAdminService, AdminService>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOrderStatusService, OrderStatusService>();
+            services.AddTransient<IShippingProviderService, ShippingProviderService>();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSettingsFactory, EmailSettingsFactory>();
 
             services.AddCors(options =>
             {

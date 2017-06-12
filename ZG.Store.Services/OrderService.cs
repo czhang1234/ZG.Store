@@ -18,9 +18,9 @@ namespace ZG.Store.Services
         OrderListViewModel GetOrders(bool active, int page, int pageSize);
         void Activate(int id);
         void Deactivate(int id);
-        Order GetOrderById(int id);
+        Order GetById(int id);
         OrderEditViewModel GetOrderEditViewModel(int id);
-        void Update(OrderSaveModel order);
+        CRUDStatus Update(OrderSaveModel order);
         IEnumerable<OrderStatus> GetOrderStatuses(bool isActive);
     }
 
@@ -94,33 +94,36 @@ namespace ZG.Store.Services
             ToggleActive(id, false);
         }
 
-        public Order GetOrderById(int id)
+        public Order GetById(int id)
         {
             return _context.Orders.SingleOrDefault(o => o.OrderId == id);
         }
 
         public OrderEditViewModel GetOrderEditViewModel(int id)
         {
-            var order = GetOrderById(id);
+            var order = GetById(id);
             return _context.Orders
                 .Where(o => o.OrderId == id)
                 .Select(o => new OrderEditViewModel { Id = o.OrderId, UserId = o.UserId, FullName = o.FullName, OrderNumber = o.OrderNumber, OrderStatusId = o.OrderStatusId, ShippingProviderId = o.ShippingProviderId, ShippingNumber = o.ShippingNumber, BillingAddress1 = o.BillingAddress1, BillingAddress2 = o.BillingAddress2, BillingCity = o.BillingCity, BillingState = o.BillingState.Name, BillingProvince = o.BillingProvince.Name, BillingCountry = o.BillingCountry.Name, ShippingAddress1 = o.ShippingAddress1, ShippingAddress2 = o.ShippingAddress2, ShippingCity = o.ShippingCity, ShippingState = o.ShippingState.Name, ShippingProvince = o.ShippingProvince.Name, ShippingCountry = o.ShippingCountry.Name, ShippingZipcode = o.ShippingZipcode, Comments = o.Comments, DatePlaced = o.DatePlaced, DateShipped = o.DateShipped, Total = o.Total, Shipping = o.Shipping, Tax = o.Tax, Active = o.Active })
                 .FirstOrDefault();
         }
 
-        public void Update(OrderSaveModel orderSaveModel)
+        public CRUDStatus Update(OrderSaveModel orderSaveModel)
         {
-            var order = GetOrderById(orderSaveModel.Id);
-
-            if (order != null)
+            var order = GetById(orderSaveModel.Id);
+            if (order == null)
             {
-                order.OrderStatusId = orderSaveModel.OrderStatusId;
-                order.ShippingProviderId = orderSaveModel.ShippingProviderId;
-                order.Active = orderSaveModel.Active;
-
-                _context.Orders.Update(order);
-                _context.SaveChanges();
+                return CRUDStatus.NotFound;
             }
+
+            order.OrderStatusId = orderSaveModel.OrderStatusId;
+            order.ShippingProviderId = orderSaveModel.ShippingProviderId;
+            order.Active = orderSaveModel.Active;
+
+            _context.Orders.Update(order);
+            _context.SaveChanges();
+
+            return CRUDStatus.Successful;
         }
 
         public IEnumerable<OrderStatus> GetOrderStatuses(bool isActive)
@@ -136,7 +139,7 @@ namespace ZG.Store.Services
 
         private void ToggleActive(int id, bool active)
         {
-            var order = GetOrderById(id);
+            var order = GetById(id);
             order.Active = active;
 
             _context.Orders.Update(order);

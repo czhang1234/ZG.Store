@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using ZG.Store.Domain.Models;
 using ZG.Store.Admin.Models;
+using ZG.Store.Admin.CustomActionfilters;
 
 namespace ZG.Store.Admin.Controllers
 {
@@ -28,8 +29,7 @@ namespace ZG.Store.Admin.Controllers
             _prodImgService = prodImgService;
             _hostingEnv = hostingEnv;
         }
-
-        [AllowAnonymous]
+        
         [HttpGet("{id}", Name = "GetProduct")]
         public IActionResult GetProductById(long id)
         {
@@ -46,6 +46,7 @@ namespace ZG.Store.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateModel]
         public IActionResult Create([FromBody] Product product)
         {
             if (product == null)
@@ -59,6 +60,7 @@ namespace ZG.Store.Admin.Controllers
         }
 
         [HttpPost("{id}")]
+        [ValidateModel]
         public IActionResult UploadFiles(int id)
         {
             var product = _prodService.GetById(id);
@@ -90,6 +92,7 @@ namespace ZG.Store.Admin.Controllers
         }
 
         [HttpPut("{id}")]
+        [ValidateModel]
         public IActionResult Update(long id, [FromBody] Product product)
         {
             if (product == null || product.ProductId != id)

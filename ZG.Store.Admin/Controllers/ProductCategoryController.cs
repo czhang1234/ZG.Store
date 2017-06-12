@@ -8,6 +8,7 @@ using ZG.Store.Services;
 using ZG.Store.Common;
 using Microsoft.AspNetCore.Authorization;
 using ZG.Store.Domain.Models;
+using ZG.Store.Admin.CustomActionfilters;
 
 namespace ZG.Store.Admin.Controllers
 {
@@ -42,6 +43,7 @@ namespace ZG.Store.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateModel]
         public IActionResult Create([FromBody] ProductCategory category)
         {
             if (category == null)
@@ -55,6 +57,7 @@ namespace ZG.Store.Admin.Controllers
         }
 
         [HttpPut("{id}")]
+        [ValidateModel]
         public IActionResult Update(long id, [FromBody] ProductCategory category)
         {
             if (category == null || category.ProductCategoryId != id)

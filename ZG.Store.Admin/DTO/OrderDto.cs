@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
+using ZG.Store.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace ZG.Store.Domain.Models
+namespace ZG.Store.Admin.DTO
 {
-    public class Order
+    public class OrderDto
     {
         public int OrderId { get; set; }
         public Guid? UserId { get; set; }
-        public User User { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -20,7 +21,6 @@ namespace ZG.Store.Domain.Models
         public System.DateTime OrderDate { get; set; }
 
         public int OrderStatusId { get; set; }
-        public OrderStatus OrderStatu { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -32,9 +32,9 @@ namespace ZG.Store.Domain.Models
         public string BillingAddress2 { get; set; }
         [Required]
         [MaxLength(50)]
-        public string BillingCity { get; set; }    
-        
-        
+        public string BillingCity { get; set; }
+
+
         [Required]
         [MaxLength(50)]
         public string BillingZipcode { get; set; }
@@ -45,8 +45,8 @@ namespace ZG.Store.Domain.Models
         public string ShippingAddress2 { get; set; }
         [Required]
         [MaxLength(50)]
-        public string ShippingCity { get; set; }   
-        
+        public string ShippingCity { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string ShippingZipcode { get; set; }
@@ -60,27 +60,54 @@ namespace ZG.Store.Domain.Models
         public bool Active { get; set; }
 
         public int? BillingStateId { get; set; }
-        public State BillingState { get; set; }
 
         public int? BillingProvinceId { get; set; }
-        public Province BillingProvince { get; set; }
-        
+
         public int BillingCountryId { get; set; }
-        public Country BillingCountry { get; set; }
 
         public int ShippingCountryId { get; set; }
-        public Country ShippingCountry { get; set; }
 
         [Required]
         public int ShippingProviderId { get; set; }
-        public ShippingProvider ShippingProvider { get; set; }
 
         public int? ShippingStateId { get; set; }
         public State ShippingState { get; set; }
-        
-        public int? ShippingProvinceId { get; set; }
-        public Province ShippingProvince { get; set; }
 
-        public List<OrderProduct> OrderProducts { get; set; }
+        public int? ShippingProvinceId { get; set; }
+
+        public static OrderDto Get(Order order)
+        {
+            return new OrderDto()
+            {
+                OrderId = order.OrderId,
+                UserId = order.UserId,
+                FullName = order.FullName,
+                OrderNumber = order.OrderNumber,
+                OrderDate = order.OrderDate,
+                OrderStatusId = order.OrderStatusId,
+                ShippingNumber = order.ShippingNumber,
+                BillingAddress1 = order.BillingAddress1,
+                BillingAddress2 = order.BillingAddress2,
+                BillingCity = order.BillingCity,
+                BillingZipcode = order.BillingZipcode,
+                ShippingAddress1 = order.ShippingAddress1,
+                ShippingAddress2 = order.ShippingAddress2,
+                ShippingCity = order.ShippingCity,
+                ShippingZipcode = order.ShippingZipcode,
+                Comments = order.Comments,
+                DatePlaced = order.DatePlaced,
+                Total = order.Total,
+                Shipping = order.Shipping,
+                Tax = order.Tax,
+                Active = order.Active,
+                BillingStateId = order.BillingStateId,
+                BillingProvinceId = order.BillingProvinceId,
+                BillingCountryId = order.BillingCountryId,
+                ShippingCountryId = order.ShippingCountryId,
+                ShippingProviderId = order.ShippingProviderId,
+                ShippingStateId = order.ShippingStateId,
+                ShippingProvinceId = order.ShippingProvinceId
+            };
+        }
     }
 }

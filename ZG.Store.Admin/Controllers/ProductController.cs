@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using ZG.Store.Domain.Models;
-using ZG.Store.Admin.Models;
 using ZG.Store.Admin.CustomActionfilters;
+using ZG.Store.Domain.DTO;
 
 namespace ZG.Store.Admin.Controllers
 {

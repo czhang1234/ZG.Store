@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ZG.Store.Services;
 using ZG.Store.Common;
 using Microsoft.AspNetCore.Authorization;
-using ZG.Store.Domain.Models;
 using ZG.Store.Domain.DTO;
-using ZG.Store.Admin.DTO;
 using ZG.Store.Admin.CustomActionfilters;
 
 namespace ZG.Store.Admin.Controllers

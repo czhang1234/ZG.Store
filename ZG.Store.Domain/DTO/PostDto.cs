@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using ZG.Store.Common;
+using ZG.Store.Domain.Models;
 
-namespace ZG.Store.Domain.Models
+namespace ZG.Store.Domain.DTO
 {
-    public class Post
+    public class PostDto
     {
         public int PostId { get; set; }
         public string Title { get; set; }
@@ -16,22 +17,5 @@ namespace ZG.Store.Domain.Models
         public bool AllowComments { get; set; }
 
         public int BlogId { get; set; }
-        public Blog Blog { get; set; }
-
-        public List<Comment> Comments { get; set; }
-    }
-
-    public enum PostVisibility
-    {
-        Public,
-        PasswordProtected,
-        Private
-    }
-
-    public enum PostStatus
-    {
-        Published,
-        Draft,
-        PendingReview
     }
 }

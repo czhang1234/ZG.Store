@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using ZG.Store.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace ZG.Store.Admin.DTO
+namespace ZG.Store.Domain.DTO
 {
     public class OrderDto
     {

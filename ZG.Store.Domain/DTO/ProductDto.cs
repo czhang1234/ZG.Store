@@ -4,10 +4,10 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using ZG.Store.Common;
 using System.Linq;
-using ZG.Store.Admin.DTO;
+using ZG.Store.Domain.DTO;
 using ZG.Store.Domain.Models;
 
-namespace ZG.Store.Admin.Models
+namespace ZG.Store.Domain.DTO
 {
     public class ProductDto
     {

@@ -11,7 +11,7 @@ namespace ZG.Store.Domain.DTO
     public class OrderEditViewModel
     {
         public int Id { get; set; }
-        public int? UserId { get; set; }
+        public Guid? UserId { get; set; }
         [Required]
         public string FullName { get; set; }
         [Required]

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace ZG.Store.Services.Migrations.Product
+namespace ZG.Store.Domain.Migrations.Product
 {
-    public partial class CreateProductTables : Migration
+    public partial class UpdateProductImagesTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace ZG.Store.Services.Migrations.Product
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Active = table.Column<bool>(nullable: false),
                     CategoryName = table.Column<string>(maxLength: 50, nullable: false),
-                    ParentID = table.Column<int>(nullable: true)
+                    ParentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,14 +59,48 @@ namespace ZG.Store.Services.Migrations.Product
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ProductImages",
+                columns: table => new
+                {
+                    ProductImageId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FileName = table.Column<string>(nullable: true),
+                    ProductId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductImages", x => x.ProductImageId);
+                    table.ForeignKey(
+                        name: "FK_ProductImages_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductCategoryId",
                 table: "Products",
                 column: "ProductCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductImages_FileName",
+                table: "ProductImages",
+                column: "FileName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductImages_ProductId",
+                table: "ProductImages",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ProductImages");
+
             migrationBuilder.DropTable(
                 name: "Products");
 

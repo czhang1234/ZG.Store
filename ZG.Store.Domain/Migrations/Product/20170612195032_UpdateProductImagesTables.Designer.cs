@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ZG.Store.Domain.Models;
 
-namespace ZG.Store.Services.Migrations.Product
+namespace ZG.Store.Domain.Migrations.Product
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20170606011042_RenameProductId")]
-    partial class RenameProductId
+    [Migration("20170612195032_UpdateProductImagesTables")]
+    partial class UpdateProductImagesTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,9 +96,12 @@ namespace ZG.Store.Services.Migrations.Product
 
                     b.HasKey("ProductImageId");
 
+                    b.HasIndex("FileName")
+                        .IsUnique();
+
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImage");
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("ZG.Store.Domain.Models.Product", b =>

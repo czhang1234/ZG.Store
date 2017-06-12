@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\User\" />
     <Folder Include="DTO\" />
   </ItemGroup>
 

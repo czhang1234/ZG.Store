@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ZG.Store.Services.Migrations.Product
+namespace ZG.Store.Domain.Migrations
 {
-    public partial class ModifyUserTables : Migration
+    public partial class UpdateOrdersTables5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

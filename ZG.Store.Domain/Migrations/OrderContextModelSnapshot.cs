@@ -222,9 +222,7 @@ namespace ZG.Store.Services.Migrations
 
                     b.Property<decimal>("Total");
 
-                    b.Property<int?>("UserId");
-
-                    b.Property<Guid?>("UserId1");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("OrderId");
 
@@ -244,7 +242,7 @@ namespace ZG.Store.Services.Migrations
 
                     b.HasIndex("ShippingStateId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -293,6 +291,8 @@ namespace ZG.Store.Services.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
+
+                    b.Property<int>("Code");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50);
@@ -619,7 +619,7 @@ namespace ZG.Store.Services.Migrations
 
                     b.HasOne("ZG.Store.Domain.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ZG.Store.Domain.Models.OrderProduct", b =>

@@ -14,7 +14,7 @@ namespace ZG.Store.Domain.Models
 
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductImage> ProductImage { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

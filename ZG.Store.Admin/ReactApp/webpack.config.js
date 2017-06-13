@@ -43,6 +43,10 @@ let config = {
 
             // Loaders for other file types can go here
             {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            },
+            {
                 test: /\.(sass|scss)$/,
                 loader: ExtractTextPlugin.extract({
                     loader: ['css-loader', 'sass-loader'],
@@ -86,6 +90,22 @@ let config = {
                 exclude: /node_modules/,
                 include: __dirname,
             },
+            {
+              test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+              loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+            },
+            {
+              test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+              loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+            },
+            {
+              test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+              loader: 'file-loader'
+            },
+            {
+              test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+              loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+            }
         ],
     },
     devServer: {

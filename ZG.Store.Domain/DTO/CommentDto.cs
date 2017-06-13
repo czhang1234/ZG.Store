@@ -16,5 +16,18 @@ namespace ZG.Store.Domain.DTO
         public CommentVisibility Visibility { get; set; }
 
         public int UserId { get; set; }
+
+        public static CommentDto Get(Comment comment)
+        {
+            return new CommentDto()
+            {
+                CommentId = comment.CommentId,
+                Content = comment.Content,
+                DateTime = comment.DateTime,
+                PostId = comment.PostId,
+                Visibility = comment.Visibility,
+                UserId = comment.UserId
+            };
+        }
     }
 }

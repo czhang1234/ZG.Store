@@ -14,6 +14,7 @@ namespace ZG.Store.Domain.Models
         public PostStatus Status { get; set; }
         public PostVisibility Visibility { get; set; }
         public bool AllowComments { get; set; }
+        public int Likes { get; set; }
 
         public int BlogId { get; set; }
         public Blog Blog { get; set; }

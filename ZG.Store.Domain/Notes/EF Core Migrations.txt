@@ -1,6 +1,6 @@
 ﻿
  1) open cmd, cd to ZG.Store.Services dir
  2) dotnet ef migrations add "NameTheMigration" --context "NameOfTheContextClass"
-    e.g. dotnet ef migrations add CreateProductTables --context ProductContext
+    e.g. dotnet ef migrations add CreateProductTables --context StoreContext
  3) dotnet ef database update --context "NameOfTheContextClass"
-    e.g. dotnet ef database update --context ProductContext
+    e.g. dotnet ef database update --context StoreContext

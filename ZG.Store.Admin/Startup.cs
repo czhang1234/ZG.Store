@@ -57,6 +57,9 @@ namespace ZG.Store.Admin
             services.AddTransient<IShippingProviderService, ShippingProviderService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IEmailSettingsFactory, EmailSettingsFactory>();
+            services.AddTransient<IBlogService, BlogService>();
+            services.AddTransient<IBlogPostService, BlogPostService>();
+            services.AddTransient<ICommentsService, CommentsService>();
 
             services.AddCors(options =>
             {

@@ -71,6 +71,7 @@ namespace ZG.Store.Services
             postInDb.Visibility = post.Visibility;
             postInDb.AllowComments = post.AllowComments;
             postInDb.BlogId = post.BlogId;
+            postInDb.Likes = post.Likes;
 
             _context.Posts.Update(postInDb);
             _context.SaveChanges();

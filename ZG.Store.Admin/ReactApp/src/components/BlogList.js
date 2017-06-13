@@ -1,24 +1,37 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 
-import Grid from 'react-bootstrap';
-import Row from 'react-bootstrap';
-import Col from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
-class BlogList extends React.Component{
-    renderRow(blog, i){
+class BlogList extends React.Component {
+    renderRow(blog, i) {
         return (
-            <Link to={'/blog/' + blog.id}>
-            
-            </Link>
+            <tr>
+                <td>
+                    <Link to={'/blog/' + blog.blogId}>
+                        {blog.blogId}
+                    </Link>
+                </td>
+                <td>
+                    <Link to={'/blog/' + blog.blogId}>
+                        {blog.url}
+                    </Link>
+                </td>
+            </tr>
         )
     }
 
-    render(){
+    render() {
         return (
-            <Grid>
-            {this.props.blogs.map(this.renderRow.bind(this))}
-            </Grid>
+            <Table striped bordered condensed hover>
+                <tr>
+                    <th>Id</th>
+                    <th>Url</th>
+                </tr>
+                <tbody>
+                    {this.props.blogs.map(this.renderRow.bind(this))}
+                </tbody>
+            </Table>
         )
     }
 }

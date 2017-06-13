@@ -4,19 +4,15 @@ import { Link } from 'react-router';
 import { Table } from 'react-bootstrap';
 
 class BlogList extends React.Component {
+    handleRowClick(blogId) {
+        this.props.router.push('/blog/' + blogId);
+    }
+
     renderRow(blog, i) {
         return (
-            <tr>
-                <td>
-                    <Link to={'/blog/' + blog.blogId}>
-                        {blog.blogId}
-                    </Link>
-                </td>
-                <td>
-                    <Link to={'/blog/' + blog.blogId}>
-                        {blog.url}
-                    </Link>
-                </td>
+            <tr key={i} onClick={this.handleRowClick.bind(this, blog.blogId)}>
+                <td>{blog.blogId}</td>
+                <td>{blog.url}</td>
             </tr>
         )
     }
@@ -24,11 +20,11 @@ class BlogList extends React.Component {
     render() {
         return (
             <Table striped bordered condensed hover>
-                <tr>
-                    <th>Id</th>
-                    <th>Url</th>
-                </tr>
                 <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <th>Url</th>
+                    </tr>
                     {this.props.blogs.map(this.renderRow.bind(this))}
                 </tbody>
             </Table>

@@ -1,0 +1,8 @@
+* to use arrow functions in components, you have to install the following, and add 'stage-2' to webpack.config.js
+  npm install --save-dev babel-preset-stage-2
+  npm install --save-dev babel-plugin-transform-class-properties
+
+* Uncaught ReferenceError: regeneratorRuntime is not defined
+  This is cause by using async and await
+  Has to install: npm install --save-dev babel-plugin-transform-runtime
+  And add ["transform-runtime", { "polyfill": false, "regenerator": true }] to .babelrc

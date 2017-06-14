@@ -1,5 +1,7 @@
 import React from 'react';
 
+import BlogForm from '../components/BlogForm';
+
 class BlogDetails extends React.Component {
     componentDidMount(){
         const { blogId } = this.props.params;
@@ -20,18 +22,7 @@ class BlogDetails extends React.Component {
         const blog = this.props.selectedBlog.blog;
 
         return (
-            <form ref="blogForm" onSubmit={this.handleSubmit.bind(this)} >          
-                <div>
-                    <label>Id: {blog.blogId}</label>
-                </div>
-                <div>
-                    <label htmlFor="url">Url: </label>
-                    <input type="text" defaultValue={blog.url} ref={(input) => this.urlInput = input} id="url" name="url" placeholder="Blog Url"/>
-                </div>
-                <div>                
-                    <input type="submit"/>
-                </div>
-            </form>
+            <BlogForm />
         )
     }
 }

@@ -8,6 +8,13 @@ export function fetchBlogs(){
     }
 }
 
+export function fetchBlog(id){
+    return {
+        type: actionNames.FETCH_BLOG,
+        payload: axios.get('http://localhost:50105/api/blog/' + id)
+    }
+}
+
 export function createBlog(url){
     return {
         type: actionNames.CREATE_BLOG,

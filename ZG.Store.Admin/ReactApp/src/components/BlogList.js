@@ -29,7 +29,7 @@ class BlogList extends React.Component {
                         <th>Id</th>
                         <th>Url</th>
                     </tr>
-                    {this.props.blogs.map(this.renderRow.bind(this))}
+                    {this.props.blogs.blogs.map(this.renderRow.bind(this))}
                 </tbody>
             </Table>
         )

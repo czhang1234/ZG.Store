@@ -6,7 +6,8 @@ import Main from './Main';
 
 function mapStateToProps(state){
     return {
-        blogs: state.blogs
+        blogs: state.blogs,
+        selectedBlog: state.blog,
     }
 } 
 

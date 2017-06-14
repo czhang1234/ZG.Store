@@ -13,7 +13,7 @@ using ZG.Store.Domain.DTO;
 
 namespace ZG.Store.Admin.Controllers
 {
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     [Route("api/[controller]")]
     public class BlogController : Controller
     {

@@ -4,6 +4,10 @@ import { Link } from 'react-router';
 import { Table } from 'react-bootstrap';
 
 class BlogList extends React.Component {
+    componentDidMount(){
+        this.props.fetchBlogs();
+    }
+
     handleRowClick(blogId) {
         this.props.router.push('/blog/' + blogId);
     }

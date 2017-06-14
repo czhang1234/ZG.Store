@@ -1,4 +1,12 @@
 import * as actionNames from './actionNames';
+import axios from 'axios';
+
+export function fetchBlogs(){
+    return {
+        type: actionNames.FETCH_BLOGS,
+        payload: axios.get('http://localhost:50105/api/blog')
+    }
+}
 
 export function createBlog(url){
     return {

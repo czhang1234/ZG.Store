@@ -18,15 +18,19 @@ export function fetchBlog(id){
 export function createBlog(url){
     return {
         type: actionNames.CREATE_BLOG,
-        id,
-        url
+        payload: axios.post("http://localhost:50105/api/blog", {
+            blogId: 0,
+            url: url,
+        })
     }
 }
 
 export function updateBlog(id, url){
     return{
         type: actionNames.UPDATE_BLOG,
-        id,
-        url
+        payload: axios.put("http://localhost:50105/api/blog/" + id, {
+            blogId: id,
+            url: url,
+        })
     }
 }

@@ -74,7 +74,7 @@ namespace ZG.Store.Admin.Controllers
                 return NotFound();
             }
 
-            return new NoContentResult();
+            return new ObjectResult(blogDto);
         }
 
         [HttpDelete("{id}")]

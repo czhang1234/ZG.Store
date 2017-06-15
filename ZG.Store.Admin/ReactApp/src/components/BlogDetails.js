@@ -22,7 +22,7 @@ class BlogDetails extends React.Component {
         const blog = this.props.selectedBlog.blog;
 
         return (
-            <BlogForm />
+            <BlogForm {...this.props}/>
         )
     }
 }

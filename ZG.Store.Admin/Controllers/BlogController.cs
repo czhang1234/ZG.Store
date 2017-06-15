@@ -52,6 +52,8 @@ namespace ZG.Store.Admin.Controllers
                 return BadRequest();
             }
 
+            //return BadRequest(new { Url = "Url too short" });
+
             var blog = _blogService.Create(blogDto);
 
             return CreatedAtRoute("GetBlog", new { id = blog.BlogId }, blog);

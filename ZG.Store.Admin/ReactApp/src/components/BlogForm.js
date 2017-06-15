@@ -30,9 +30,9 @@ const submit = ({url=''}) => {
         //submit form to server
         console.log("valid submission");
 
-        submitToServer(url)
+        return submitToServer(url)
         .then(data => console.log(response)) 
-        .catch(error => console.log(error));
+        .catch(error => {throw new SubmissionError(error.response.data)});
     }
 };
 

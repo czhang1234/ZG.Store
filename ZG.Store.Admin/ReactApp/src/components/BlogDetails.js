@@ -8,21 +8,35 @@ class BlogDetails extends React.Component {
         this.props.fetchBlog(blogId);
     }
 
-    handleSubmit(e){
-        e.preventDetault();
+    submit = ({ url = '' }) => {
+        console.log("submit from inside form");
+        let error = {};
+        let isError = false;
 
-        const { blogId } = this.props.params;
-        const url = this.urlInput.value;
-        
-        console.log("submitting blog: " + blogId);
-        this.props.updateBlog(parseInt(blogId), url);
-    }
+        if (url.trim() === '') {
+            error.url = 'Required';
+            isError = true;
+        }
+
+        if (url.length < 5) {
+            error.url = "Url too short";
+            isError = true;
+        }
+
+        if (isError) {
+            throw new SubmissionError(error);
+        } else {
+            //submit form to server
+            console.log("valid submission");
+
+            const {blogId} =  this.props.params;
+            this.props.updateBlog(blogId, url);
+        }
+    };
 
     render() {
-        const blog = this.props.selectedBlog.blog;
-
         return (
-            <BlogForm {...this.props}/>
+            <BlogForm onSubmit={this.submit}/>
         )
     }
 }

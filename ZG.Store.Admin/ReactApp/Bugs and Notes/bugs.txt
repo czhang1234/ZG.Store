@@ -1,0 +1,5 @@
+* click on the Posts link on a blog row always navigate to the blog details page
+  that was because I had this code:
+  handleRowClick(blogId) {
+        this.props.router.push('/blog/' + blogId);
+    }

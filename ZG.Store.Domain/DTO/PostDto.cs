@@ -12,8 +12,8 @@ namespace ZG.Store.Domain.DTO
         public string Title { get; set; }
         public string Content { get; set; }
 
-        public PostStatus Status { get; set; }
-        public PostVisibility Visibility { get; set; }
+        public string Status { get; set; }
+        public string Visibility { get; set; }
         public bool AllowComments { get; set; }
         public int Likes { get; set; }
 
@@ -27,8 +27,8 @@ namespace ZG.Store.Domain.DTO
                 BlogId = post.BlogId,
                 Title = post.Title,
                 Content = post.Content,
-                Status = post.Status,
-                Visibility = post.Visibility,
+                Status = post.Status.ToString(),
+                Visibility = post.Visibility.ToString(),
                 AllowComments = post.AllowComments,
                 Likes = post.Likes
             };

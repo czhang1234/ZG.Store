@@ -5,7 +5,8 @@ import {reducer as formReducer} from 'redux-form';
 
 import blogs from './blogs';
 import blog from './blog';
+import posts from './posts';
 
-const rootReducer = combineReducers({form: formReducer, blogs, blog, routing});
+const rootReducer = combineReducers({form: formReducer, blogs, blog, posts, routing});
 
 export default rootReducer;

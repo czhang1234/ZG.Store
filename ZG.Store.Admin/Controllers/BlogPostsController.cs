@@ -8,10 +8,11 @@ using ZG.Store.Services;
 using ZG.Store.Common;
 using Microsoft.AspNetCore.Authorization;
 using ZG.Store.Domain.Models;
+using ZG.Store.Domain.DTO;
 
 namespace ZG.Store.Admin.Controllers
 {
-    [Authorize("Bearer")]
+    //[Authorize("Bearer")]
     [Route("api/[controller]")]
     public class BlogPostsController : Controller
     {
@@ -23,9 +24,11 @@ namespace ZG.Store.Admin.Controllers
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<Post> GetAll(int id)
+        public IEnumerable<PostDto> GetAll(int id)
         {
-            return _blogPostService.GetAll(id);
+            var posts = _blogPostService.GetAll(id);
+
+            return posts.Select(p => PostDto.Get(p));
         }
     }
 }

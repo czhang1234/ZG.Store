@@ -8,4 +8,11 @@
   And add ["transform-runtime", { "polyfill": false, "regenerator": true }] to .babelrc
 
 * to make Initialize From State work for redux form:
-  has to add "enableReinitialize: true" to redux-form config object.
+  has to add "enableReinitialize: true" to redux-form config object.* 
+
+* to navigate programatically, e.g.
+   handleRowClick(blogId) {
+        this.props.router.push('/blog/' + blogId);
+    }
+
+  * this.setState is asynchronous

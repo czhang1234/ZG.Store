@@ -30,6 +30,7 @@ class BlogList extends React.Component {
                     {blog.blogId}
                     {this.state.mouseInsideRowIndex === i && <span>&nbsp;&nbsp;&nbsp;<Link to={`/blog/${blog.blogId}`}>Edit</Link>&nbsp;&nbsp;&nbsp;<Link to={`/blog/${blog.blogId}/posts`}>Posts</Link></span>}
                 </td>
+                <td>{blog.name}</td>
                 <td>{blog.url}</td>
             </tr>
         )
@@ -41,6 +42,7 @@ class BlogList extends React.Component {
                 <tbody>
                     <tr>
                         <th>Id</th>
+                        <th>Name</th>
                         <th>Url</th>
                     </tr>
                     {this.props.blogs.blogs.map(this.renderRow.bind(this))}

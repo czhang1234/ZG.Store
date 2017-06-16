@@ -19,7 +19,7 @@ function blogs(state = {blogs: [],
             let i = state.blogs.findIndex(b => b.blogId === action.payload.data.blogId);
             return {...state, 
                 blogs: [...state.blogs.slice(0, i), 
-                    {...state.blogs[i], url: action.payload.data.url}, 
+                    {...state.blogs[i], name: action.payload.data.name, url: action.payload.data.url}, 
                     ...state.blogs.slice(i +1)]};
     }
 

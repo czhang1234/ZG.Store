@@ -21,6 +21,29 @@ class PostList extends React.Component {
         this.props.postActions.fetchPosts(blogId);
     }
 
+    componentWillReceiveProps(nextProps){
+        let { blogId } = this.props.params;
+        let nextBogId = nextProps.params.blogId;
+
+        if(blogId !== nextBogId){
+            blogId = parseInt(nextBogId);
+            this.setState({blogId});
+
+            this.props.blogActions.fetchBlogs();
+            this.props.postActions.fetchPosts(blogId);
+        }
+
+        console.log("componentWillReceiveProps");
+    }
+
+    componentWillUpdate(nextProps, nextState){
+        console.log("componentWillUpdate");
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        console.log("componentDidUpdate");
+    }
+
     mouseEnter = (i) => {
         this.setState({ mouseInsideRowIndex: i });
     }
@@ -34,6 +57,8 @@ class PostList extends React.Component {
         console.log("slectedBlogId: " + selectedBlogId);
         this.setState({blogId: selectedBlogId});
         this.props.postActions.fetchPosts(selectedBlogId);
+
+        this.props.router.push(`/blog/${selectedBlogId}/posts`);
     }
 
     renderRow(post, i) {
@@ -55,8 +80,10 @@ class PostList extends React.Component {
     render() {
         return (
             <div>
+                <label>Select blog:&nbsp;</label>
                 <select ref={(select) => { this.selectBlog = select; }} value={this.state.blogId} onChange={this.onChange.bind(this)}>
-                    {this.props.blogs.blogs.map((b, i) => <option key={i} value={b.blogId}>{b.blogId}</option>)}                                                    }
+                    <option value="0">--- Select ---</option>
+                    {this.props.blogs.blogs.map((b, i) => <option key={i} value={b.blogId}>{b.name}</option>)}                                                    }
                 </select>
 
                 <Table striped bordered condensed hover>

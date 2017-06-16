@@ -18,6 +18,9 @@ let BlogForm = props => {
                 <label>Id: </label>
             </div>
             <div>
+                <Field name="name" label="Name" component={renderField} type="text" />
+            </div>
+            <div>
                 <Field name="url" label="Url" component={renderField} type="text" />
             </div>
             <button type="submit" disabled={pristine || submitting}>Update</button>

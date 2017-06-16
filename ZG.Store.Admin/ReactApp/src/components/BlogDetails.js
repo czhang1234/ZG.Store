@@ -5,21 +5,21 @@ import BlogForm from '../components/BlogForm';
 class BlogDetails extends React.Component {
     componentDidMount(){
         const { blogId } = this.props.params;
-        this.props.fetchBlog(blogId);
+        this.props.blogActions.fetchBlog(blogId);
     }
 
-    submit = ({ url = '' }) => {
+    submit = ({ name = '', url = '' }) => {
         console.log("submit from inside form");
         let error = {};
         let isError = false;
 
-        if (url.trim() === '') {
+        if (name.trim() === '') {
             error.url = 'Required';
             isError = true;
         }
 
-        if (url.length < 5) {
-            error.url = "Url too short";
+        if (url.trim() === '') {
+            error.url = 'Required';
             isError = true;
         }
 
@@ -30,7 +30,7 @@ class BlogDetails extends React.Component {
             console.log("valid submission");
 
             const {blogId} =  this.props.params;
-            this.props.updateBlog(blogId, url);
+            this.props.blogActions.updateBlog(blogId, name, url);
         }
     };
 

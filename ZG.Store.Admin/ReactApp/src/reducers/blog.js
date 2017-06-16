@@ -20,7 +20,7 @@ function blog(state = {blog: {},
 
         case actionNames.CREATE_BLOG:
             console.log("create blog: " + action.id);
-            return [...state, {id: action.id, ulr: action.url}];
+            return [...state, blog: action.payload.data];
 
         case actionNames.UPDATE_BLOG + "_PENDING":
             console.log("updating blog")

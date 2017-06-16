@@ -38,7 +38,7 @@ namespace ZG.Store.Services
 
         public Blog Create(BlogDto blogDto)
         {
-            var blog = new Blog { Url = blogDto.Url };
+            var blog = new Blog {Name = blogDto.Name, Url = blogDto.Url };
             _context.Blogs.Add(blog);
             _context.SaveChanges();
 
@@ -53,6 +53,7 @@ namespace ZG.Store.Services
                 return CRUDStatus.NotFound;
             }
 
+            blogInDb.Name = blog.Name;
             blogInDb.Url = blog.Url;
 
             _context.Blogs.Update(blogInDb);

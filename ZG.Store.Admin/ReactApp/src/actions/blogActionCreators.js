@@ -15,22 +15,24 @@ export function fetchBlog(id){
     }
 }
 
-export function createBlog(url){
+export function createBlog(name, url){
     return {
         type: actionNames.CREATE_BLOG,
         payload: axios.post("http://localhost:50105/api/blog", {
             blogId: 0,
-            url: url,
+            name,
+            url,
         })
     }
 }
 
-export function updateBlog(id, url){
+export function updateBlog(id, name, url){
     return{
         type: actionNames.UPDATE_BLOG,
         payload: axios.put("http://localhost:50105/api/blog/" + id, {
             blogId: id,
-            url: url,
+            name,
+            url,
         })
     }
 }

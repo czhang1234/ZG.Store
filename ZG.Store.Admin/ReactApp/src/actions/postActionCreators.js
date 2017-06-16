@@ -13,8 +13,8 @@ export function fetchPosts(blogId){
 
 export function fetchPost(id){
     return {
-        type: actionNames.FETCH_BLOG,
-        payload: axios.get(`${blogPostUlr}id`)
+        type: actionNames.FETCH_POST,
+        payload: axios.get(`${blogPostUlr}/${id}`)
     }
 }
 

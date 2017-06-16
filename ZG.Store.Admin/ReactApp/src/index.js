@@ -20,7 +20,7 @@ const router = (
                 <IndexRoute component={BlogList}></IndexRoute>
                 <Route path="/blog/:blogId" component={BlogDetails}/>
                 <Route path="/blog/:blogId/posts" component={PostList}/>
-                <Route path="/blog/:blogId/post/:postId" component={PostDetails}/>
+                <Route path="/post/:postId" component={PostDetails}/>
             </Route>
         </Router>
     </Provider>

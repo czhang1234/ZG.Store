@@ -34,6 +34,11 @@ namespace ZG.Store.Services
         public Post GetById(int id)
         {
             var post = _context.Posts.FirstOrDefault(p => p.PostId == id);
+            if (post == null)
+            {
+                return null;
+            }
+
             _context.Entry(post).Collection(p => p.Comments).Load();
 
             return post;

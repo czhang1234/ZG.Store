@@ -10,6 +10,7 @@ function mapStateToProps(state){
         blogs: state.blogs,
         selectedBlog: state.blog,
         posts: state.posts,
+        selectedPost: state.post,
     }
 } 
 

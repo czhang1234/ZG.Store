@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 import { Table } from 'react-bootstrap';
 
 class BlogList extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             mouseInsideRowIndex: null
         }

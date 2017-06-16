@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 import { Table } from 'react-bootstrap';
 
 class PostList extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             mouseInsideRowIndex: null,
             blogId: null
@@ -36,14 +36,6 @@ class PostList extends React.Component {
         console.log("componentWillReceiveProps");
     }
 
-    componentWillUpdate(nextProps, nextState){
-        console.log("componentWillUpdate");
-    }
-
-    componentDidUpdate(prevProps, prevState){
-        console.log("componentDidUpdate");
-    }
-
     mouseEnter = (i) => {
         this.setState({ mouseInsideRowIndex: i });
     }
@@ -52,9 +44,8 @@ class PostList extends React.Component {
         this.setState({ mouseInsideRowIndex: null });
     }
 
-    onChange = () => {
-        const selectedBlogId = this.selectBlog.value;
-        console.log("slectedBlogId: " + selectedBlogId);
+    onChange = (event) => {
+        let selectedBlogId = event.target.value;
         this.setState({blogId: selectedBlogId});
         this.props.postActions.fetchPosts(selectedBlogId);
 
@@ -81,7 +72,7 @@ class PostList extends React.Component {
         return (
             <div>
                 <label>Select blog:&nbsp;</label>
-                <select ref={(select) => { this.selectBlog = select; }} value={this.state.blogId} onChange={this.onChange.bind(this)}>
+                <select value={this.state.blogId} onChange={this.onChange.bind(this)}>
                     <option value="0">--- Select ---</option>
                     {this.props.blogs.blogs.map((b, i) => <option key={i} value={b.blogId}>{b.name}</option>)}                                                    }
                 </select>

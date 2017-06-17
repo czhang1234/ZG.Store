@@ -57,7 +57,7 @@ class PostList extends React.Component {
             <tr key={i} onMouseEnter={this.mouseEnter.bind(this, i)} onMouseLeave={this.mouseLeave.bind(this)}>
                 <td style={{ width: '125px' }}>
                     {post.postId}
-                    {this.state.mouseInsideRowIndex === i && <span>&nbsp;&nbsp;&nbsp;<Link to={`/post/${post.postId}`}>Edit</Link></span>}
+                    {this.state.mouseInsideRowIndex === i && <span>&nbsp;&nbsp;&nbsp;<Link to={`/blog/${this.state.blogId}/post/${post.postId}`}>Edit</Link></span>}
                 </td>
                 <td>{post.title}</td>
                 <td>{post.status}</td>

@@ -50,8 +50,8 @@ namespace ZG.Store.Services
             {
                 Title = postDto.Title,
                 Content = postDto.Content,
-                Status = (PostStatus)Enum.Parse(typeof(PostStatus), postDto.Status),
-                Visibility = (PostVisibility)Enum.Parse(typeof(PostVisibility), postDto.Visibility),
+                Status = postDto.Status,
+                Visibility = postDto.Visibility,
                 AllowComments = postDto.AllowComments,
                 BlogId = postDto.BlogId
             };
@@ -72,8 +72,8 @@ namespace ZG.Store.Services
 
             postInDb.Title = post.Title;
             postInDb.Content = post.Content;
-            postInDb.Status = (PostStatus)Enum.Parse(typeof(PostStatus), post.Status);
-            postInDb.Visibility = (PostVisibility)Enum.Parse(typeof(PostVisibility), post.Visibility);
+            postInDb.Status = post.Status;
+            postInDb.Visibility = post.Visibility;
             postInDb.AllowComments = post.AllowComments;
             postInDb.BlogId = post.BlogId;
             postInDb.Likes = post.Likes;

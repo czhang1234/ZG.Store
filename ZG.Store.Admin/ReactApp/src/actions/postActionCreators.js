@@ -32,17 +32,18 @@ export function createPost(blogId, title, content, visibility, allowComments){
     }
 }
 
-export function updatePost(postId, blogId, title, content, visibility, allowComments, likes){
+export function updatePost(postId, blogId, title, content, visibility, allowComments, likes, status){
     return {
         type: actionNames.UPDATE_POST,
-        payload: axios.put(`${blogPostUlr}`, {
+        payload: axios.put(`${blogPostUlr}/${postId}`, {
             postId,
             blogId,
             title,
             content,
             visibility,
             allowComments,  
-            likes       
+            likes ,
+            status      
         })
     }
 }

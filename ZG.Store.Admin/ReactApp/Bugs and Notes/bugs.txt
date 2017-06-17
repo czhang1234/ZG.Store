@@ -3,3 +3,7 @@
   handleRowClick(blogId) {
         this.props.router.push('/blog/' + blogId);
     }
+
+* objects are not valid as a React child (found: object with keys {}).
+  got this error in PostForm.js when I have  <Field name="status" component={select}>, which is from the redux-form tutorial.
+  the error is gone when I change component={select} to component="select"

@@ -20,7 +20,7 @@ function post(state = {post: {},
 
         case actionNames.CREATE_POST:
             console.log("create post: " + action.id);
-            return [...state, post: action.payload.data];
+            return {...state, post: action.payload.data};
 
         case actionNames.UPDATE_POST + "_PENDING":
             console.log("updating post")

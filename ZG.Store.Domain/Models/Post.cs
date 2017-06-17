@@ -24,14 +24,14 @@ namespace ZG.Store.Domain.Models
 
     public enum PostVisibility
     {
-        Public,
+        Public = 1,
         PasswordProtected,
         Private
     }
 
     public enum PostStatus
     {
-        Published,
+        Published = 1,
         Draft,
         PendingReview
     }

@@ -5,10 +5,22 @@ import PostForm from './PostForm';
 
 class PostDetails extends React.Component {
     componentDidMount(){
-        const {postId} = this.props.params;
-        this.props.postActions.fetchPost(postId);
+        let {postId} = this.props.params;
+        postId = parseInt(postId);
+
+        if(postId > 0){
+            this.props.postActions.fetchPost(postId);
+        }
     }
-    submit = ({ blogId, title = '', content = '', visibility = '', allowComments, likes = '', status = ''}) => {
+
+    componentWillReceiveProps(nextProps){
+        if((!nextProps.selectedPost.creatingPost && nextProps.selectedPost.createdPost) ||
+           (!nextProps.selectedPost.updatingPost && nextProps.selectedPost.updatedPost)){
+                this.props.router.push(`/blog/${this.props.params.blogId}/posts`);
+        }
+    }
+
+    submit = ({ blogId = this.props.params.blogId, title = '', content = '', visibility = 1, allowComments = '', likes = 0, status = 1}) => {
         console.log("submit from inside form");
         let error = {};
         let isError = false;
@@ -23,11 +35,6 @@ class PostDetails extends React.Component {
             isError = true;
         }
 
-        if (likes.toString().trim() === '') {
-            error.likes = 'Required';
-            isError = true;
-        }
-
         if (isError) {
             throw new SubmissionError(error);
         } else {
@@ -36,7 +43,12 @@ class PostDetails extends React.Component {
 
             let {postId} =  this.props.params;
             postId = parseInt(postId);
-            this.props.postActions.updatePost(postId, blogId, title, content, visibility, allowComments === "" ? false : true, likes, status);
+
+            if(postId > 0){
+                this.props.postActions.updatePost(postId, blogId, title, content, visibility, allowComments === "" ? false : true, likes, status);
+            }else{
+                this.props.postActions.createPost(blogId, title, content, visibility, (allowComments === 'undefined' || allowComments === "") ? false : true, likes, status);
+            }
         }
     };
    

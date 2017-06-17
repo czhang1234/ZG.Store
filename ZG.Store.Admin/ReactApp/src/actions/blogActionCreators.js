@@ -36,3 +36,9 @@ export function updateBlog(id, name, url){
         })
     }
 }
+
+export function resetSelectedBlog(){
+    return {
+        type: actionNames.RESET_SELECTED_BLOG,
+    }
+}

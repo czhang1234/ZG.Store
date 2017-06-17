@@ -2,7 +2,7 @@ import * as actionNames from './actionNames';
 
 import axios from 'axios';
 
-const blogPostUlr = "http://localhost:50105/api/blogpost/";
+const blogPostUlr = "http://localhost:50105/api/blogpost";
 
 export function fetchPosts(blogId){
     return {
@@ -18,7 +18,7 @@ export function fetchPost(id){
     }
 }
 
-export function createPost(blogId, title, content, visibility, allowComments){
+export function createPost(blogId, title, content, visibility, allowComments, likes, status){
     return {
         type: actionNames.CREATE_POST,
         payload: axios.post(`${blogPostUlr}`, {
@@ -27,7 +27,8 @@ export function createPost(blogId, title, content, visibility, allowComments){
             content,
             visibility,
             allowComments,  
-            likes: 0          
+            likes,
+            status             
         })
     }
 }
@@ -42,8 +43,14 @@ export function updatePost(postId, blogId, title, content, visibility, allowComm
             content,
             visibility,
             allowComments,  
-            likes ,
+            likes,
             status      
         })
+    }
+}
+
+export function resetSelectedPost(){
+    return {
+        type: actionNames.RESET_SELECTED_POST,
     }
 }

@@ -4,9 +4,20 @@ import { SubmissionError } from 'redux-form';
 import BlogForm from '../components/BlogForm';
 
 class BlogDetails extends React.Component {
-    componentDidMount(){
-        const { blogId } = this.props.params;
-        this.props.blogActions.fetchBlog(blogId);
+    componentDidMount() {
+        let { blogId } = this.props.params;
+        blogId = parseInt(blogId);
+
+        if (blogId > 0) {
+            this.props.blogActions.fetchBlog(blogId);
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        if((!nextProps.selectedBlog.creatingBlog && nextProps.selectedBlog.createdBlog) ||
+           (!nextProps.selectedBlog.updatingBlog && nextProps.selectedBlog.updatedBlog)){
+            this.props.router.push('/');
+        }
     }
 
     submit = ({ name = '', url = '' }) => {
@@ -30,14 +41,18 @@ class BlogDetails extends React.Component {
             //submit form to server
             console.log("valid submission");
 
-            const {blogId} =  this.props.params;
-            this.props.blogActions.updateBlog(blogId, name, url);
+            const { blogId } = this.props.params;
+            if (blogId > 0) {
+                this.props.blogActions.updateBlog(blogId, name, url);
+            } else {
+                this.props.blogActions.createBlog(name, url);
+            }
         }
     };
 
     render() {
         return (
-            <BlogForm onSubmit={this.submit}/>
+            <BlogForm onSubmit={this.submit} />
         )
     }
 }

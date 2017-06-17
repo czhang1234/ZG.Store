@@ -17,6 +17,7 @@ class PostList extends React.Component {
         blogId = parseInt(blogId);
         this.setState({blogId});
 
+        this.props.postActions.resetSelectedPost();
         this.props.blogActions.fetchBlogs();
         this.props.postActions.fetchPosts(blogId);
     }
@@ -71,6 +72,9 @@ class PostList extends React.Component {
     render() {
         return (
             <div>
+                <div>
+                    <Link to={`/blog/${this.state.blogId}/post/0`}>Create Post</Link>
+                </div>
                 <label>Select blog:&nbsp;</label>
                 <select value={this.state.blogId} onChange={this.onChange.bind(this)}>
                     <option value="0">--- Select ---</option>

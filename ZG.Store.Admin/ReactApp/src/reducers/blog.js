@@ -1,12 +1,17 @@
 import * as actionNames from '../actions/actionNames';
 
-function blog(state = {blog: {}, 
+const initialState = {blog: {}, 
         fetchingBlog: false,
         fetchedBlog: false,
         fetchBlogError: null,
+        creatingBlog: false,
+        createdBlog: false,
+        createBlogError: null,
         updatingBlog: false,
         updatedBlog: false,
-        updateBlogError: null}, action){
+        updateBlogError: null};
+
+function blog(state = initialState, action){
     switch(action.type){
         case actionNames.FETCH_BLOG + "_PENDING":
             console.log("fetching blog")
@@ -18,9 +23,15 @@ function blog(state = {blog: {},
             console.log("fetch blog rejected")
             return {...state, fetchingBlog: false, error: action.payload};
 
-        case actionNames.CREATE_BLOG:
-            console.log("create blog: " + action.id);
-            return {...state, blog: action.payload.data};
+        case actionNames.CREATE_BLOG + "_PENDING":
+            console.log("creating blog")
+            return {...state, creatingBlog: true};
+        case actionNames.CREATE_BLOG + "_FULFILLED":
+            console.log("created blog")
+            return {...state, creatingBlog: false, createdBlog: true, blog: action.payload.data};
+        case actionNames.CREATE_BLOG + "_REJECTED":
+            console.log("create blog rejected")
+            return {...state, creatingBlog: false, error: action.payload};
 
         case actionNames.UPDATE_BLOG + "_PENDING":
             console.log("updating blog")
@@ -31,6 +42,10 @@ function blog(state = {blog: {},
         case actionNames.UPDATE_BLOG + "_REJECTED":
             console.log("update blogs rejected")
             return {...state, updatingBlogs: false, updateBlogError: action.payload};
+
+        case actionNames.RESET_SELECTED_BLOG:
+            console.log("reset selected blog");
+            return initialState;
     }
 
     return state;

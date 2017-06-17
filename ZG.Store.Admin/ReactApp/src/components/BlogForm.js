@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 const renderField = ({ type, label, input, meta: { touched, error } }) => (
         <div className="">
-            <label>{label}</label>
+            {type === "hidden" ? <label hidden>{label}:</label> : <label>{label}:</label>}
             <input {...input} type={type} />
             {touched && error && <span className="">{error}</span>}
         </div>
@@ -15,7 +15,7 @@ let BlogForm = props => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label>Id: </label>
+                <Field name="blogId" label="Blog Id" component={renderField} type="hidden" />
             </div>
             <div>
                 <Field name="name" label="Name" component={renderField} type="text" />
@@ -23,7 +23,7 @@ let BlogForm = props => {
             <div>
                 <Field name="url" label="Url" component={renderField} type="text" />
             </div>
-            <button type="submit" disabled={pristine || submitting}>Update</button>
+            <button type="submit" disabled={pristine || submitting}>Create/Update</button>
             <button type="button" disabled={pristine || submitting} onClick={reset}>Undo Changes</button>
         </form>
     )

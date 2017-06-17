@@ -21,11 +21,9 @@ let PostForm = props => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label>Id: {props.params.postId}</label>
                 <Field name="postId" label="Post Id" component={renderInputField} type="hidden" />
             </div>
             <div>
-                <label>Blog Id: {props.params.blogId}</label>
                 <Field name="blogId" label="Blog Id" component={renderInputField} type="hidden" />
             </div>
             <div>
@@ -56,7 +54,7 @@ let PostForm = props => {
                     </Field>
                 </div>
             </div>
-            <button type="submit" disabled={pristine || submitting}>Update</button>
+            <button type="submit" disabled={pristine || submitting}>Create/Update</button>
             <button type="button" disabled={pristine || submitting} onClick={reset}>Undo Changes</button>
         </form>
     )

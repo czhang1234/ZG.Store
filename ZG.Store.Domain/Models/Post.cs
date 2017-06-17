@@ -31,8 +31,8 @@ namespace ZG.Store.Domain.Models
 
     public enum PostStatus
     {
-        Published = 1,
-        Draft,
-        PendingReview
+        Draft = 1,
+        PendingReview,
+        Published
     }
 }

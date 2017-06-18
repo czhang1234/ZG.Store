@@ -12,8 +12,6 @@ import {ProductCategory} from '../../model/product-category';
 })
 export class ProductCategoriesComponent implements OnInit{
     productCategories: ProductCategory[];
-    loggedIn = false;
-    userName: string;
 
     constructor(private prodCatService: ProductCategoryService, private router: Router, 
         private authService: AuthService){}

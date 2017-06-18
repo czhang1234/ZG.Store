@@ -17,7 +17,6 @@ import { ProductCategory } from '../../model/product-category';
 export class ProductCategoryFormComponent {
     prodCats: ProductCategory[];
     prodCat = new ProductCategory("", true, 0, null);
-    loggedIn = false;
 
     constructor(private productCategoryService: ProductCategoryService, private route: ActivatedRoute,
         private location: Location, private authService: AuthService, private router: Router) { }

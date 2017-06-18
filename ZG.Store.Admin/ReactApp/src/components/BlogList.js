@@ -17,7 +17,7 @@ class BlogList extends React.Component {
     }
 
     mouseEnter = (i) => {
-        this.setState({ mouseInsideRowIndex: i });
+        this.setState({ mouseInsideRowIndex: i }); //once called this.setState, react will re-render the UI (only the part that need to change)
     }
 
     mouseLeave = () => {
@@ -48,7 +48,7 @@ class BlogList extends React.Component {
                             <th>Name</th>
                             <th>Url</th>
                         </tr>
-                        {this.props.blogs.blogs.map(this.renderRow.bind(this))}
+                        {this.props.blogs.blogs.map(this.renderRow.bind(this))} {/* composition pattern */}
                     </tbody>
                 </Table>
             </div>

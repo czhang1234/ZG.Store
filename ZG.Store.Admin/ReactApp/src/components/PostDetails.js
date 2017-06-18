@@ -55,7 +55,7 @@ class PostDetails extends React.Component {
 
     render() {
         return (
-            <PostForm onSubmit={this.submit} params={this.props.params}/>
+            <PostForm onSubmit={this.submit} params={this.props.params}/> //pass params to PostForm's props 
         )
     }
 }

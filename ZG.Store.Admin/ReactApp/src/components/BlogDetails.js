@@ -16,11 +16,12 @@ class BlogDetails extends React.Component {
     componentWillReceiveProps(nextProps){
         if((!nextProps.selectedBlog.creatingBlog && nextProps.selectedBlog.createdBlog) ||
            (!nextProps.selectedBlog.updatingBlog && nextProps.selectedBlog.updatedBlog)){
-            this.props.router.push('/');
+            this.props.router.push('/'); //programmatically change route. Once the blog is created or updated, go back to bloglist page
         }
     }
 
     submit = ({ name = '', url = '' }) => {
+        //form validation
         console.log("submit from inside form");
         let error = {};
         let isError = false;

@@ -1,18 +1,16 @@
 import * as actionNames from '../actions/actionNames';
 
+//once the state is changed by reducer, react will re-render the UI (only the part that need to change)
 function posts(state = {posts: [], 
         fetchingPosts: false,
         fetchedPosts: false,
         fetchPostsError: null}, action){
     switch(action.type){
         case actionNames.FETCH_POSTS + "_PENDING":
-            console.log("fetching posts")
             return {...state, fetchingPosts: true};
         case actionNames.FETCH_POSTS + "_FULFILLED":
-            console.log("fetched posts")
             return {...state, fetchingPosts: false, fetchedPosts: true, posts: action.payload.data};
         case actionNames.FETCH_POSTS + "_REJECTED":
-            console.log("fetch posts rejected")
             return {...state, fetchingPosts: false, error: action.payload};
 
         case actionNames.CREATE_POST + "_FULFILLED":        

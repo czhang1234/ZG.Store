@@ -22,6 +22,7 @@ class PostList extends React.Component {
         this.props.postActions.fetchPosts(blogId);
     }
 
+    //https://facebook.github.io/react/docs/react-component.html#componentwillreceiveprops
     componentWillReceiveProps(nextProps){
         let { blogId } = this.props.params;
         let nextBogId = nextProps.params.blogId;
@@ -33,12 +34,10 @@ class PostList extends React.Component {
             this.props.blogActions.fetchBlogs();
             this.props.postActions.fetchPosts(blogId);
         }
-
-        console.log("componentWillReceiveProps");
     }
 
     mouseEnter = (i) => {
-        this.setState({ mouseInsideRowIndex: i });
+        this.setState({ mouseInsideRowIndex: i }); //react will re-render UI when this.setState is called
     }
 
     mouseLeave = () => {
@@ -50,10 +49,11 @@ class PostList extends React.Component {
         this.setState({blogId: selectedBlogId});
         this.props.postActions.fetchPosts(selectedBlogId);
 
-        this.props.router.push(`/blog/${selectedBlogId}/posts`);
+        this.props.router.push(`/blog/${selectedBlogId}/posts`); //change the url because the blogId is changed in the select element 
     }
 
     renderRow(post, i) {
+        //has to have the key={i} because this is called by array.map and react need the key to track changes
         return (
             <tr key={i} onMouseEnter={this.mouseEnter.bind(this, i)} onMouseLeave={this.mouseLeave.bind(this)}>
                 <td style={{ width: '125px' }}>
@@ -86,7 +86,7 @@ class PostList extends React.Component {
                         <tr>
                             <th>Id</th><th>Title</th><th>Status</th><th>Visibility</th><th>Allow Comments</th><th>Likes</th>
                         </tr>
-                        {this.props.posts.posts.map(this.renderRow.bind(this))}
+                        {this.props.posts.posts.map(this.renderRow.bind(this))} {/*composition pattern */}
                     </tbody>
                 </Table>
             </div>

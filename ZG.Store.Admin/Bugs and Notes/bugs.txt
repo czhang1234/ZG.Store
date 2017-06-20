@@ -10,3 +10,7 @@
   cause: there’s the template reference variable #userName on the input and there’s also a variable called userName on my component
 
 * button element in <form> has to have the type set to button <button type="button">, otherwise it cause a submit and route may change
+
+* hidden attribute won't work on button with bootstrap class btn, etc.
+
+* Bootstrap code that collapsing the navigation bar not work with navbar-fixed-top

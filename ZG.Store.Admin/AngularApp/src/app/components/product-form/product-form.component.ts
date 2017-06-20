@@ -21,9 +21,10 @@ import { environment } from '../../../environments/environment';
 })
 export class ProductFormComponent {
     prodCats: ProductCategory[];
-    product = new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
+    product = new Product(1, 'p1', 'description', 1, false, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
     private prodImgUrlBase = (!environment.production) ? 'http://localhost:50105' : '';
     deletedImage: string;
+    selectedImgId: number;
 
     constructor(private productCategoryService: ProductCategoryService, private productService: ProductService, 
         private route: ActivatedRoute, private location: Location, private authService: AuthService, private router: Router) { }
@@ -89,7 +90,11 @@ export class ProductFormComponent {
         this.product = new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
     }
 
-    get diagnostic() { return JSON.stringify(this.product) }
+    selectImage(imgId: number): void{
+        this.selectedImgId = imgId;
+    }
+
+    get diagnosticProduct() { return JSON.stringify(this.product) }
     get diagnostic2() { return JSON.stringify(this.prodCats) }
     get prodImgs() { return JSON.stringify(this.product.images) }
 }

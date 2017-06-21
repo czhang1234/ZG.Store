@@ -11,6 +11,7 @@ import {Product} from '../model/product';
 export class ProductService{
     private prodUrl = (!environment.production) ? 'http://localhost:50105/api/Product' : '/api/Product';
     private prodsUrl = (!environment.production) ? 'http://localhost:50105/api/Products' : '/api/Products';
+    private prodSearchUrl = (!environment.production) ? 'http://localhost:50105/api/ProductSearch' : '/api/ProductSearch';
 
     constructor(private http: Http, private authService: AuthService){}
 
@@ -38,6 +39,16 @@ export class ProductService{
             .then(response => response.json() as Product)
             .catch(this.handleError);
     }
+
+    search(terms: string): Promise<Product[]>{
+        let headers = this.getHeaders(true);
+        const url = `${this.prodSearchUrl}`;
+
+        return this.http.post(url, JSON.stringify({terms}), {headers})
+            .toPromise()
+            .then(response => response.json() as Product[])
+            .catch(this.handleError);
+    };
 
     create(prod: Product): Promise<Product>{
         let headers = this.getHeaders(true);

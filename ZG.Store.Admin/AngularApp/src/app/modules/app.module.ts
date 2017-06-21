@@ -19,6 +19,8 @@ import {LoginComponent} from '../components/login/login.component';
 import { ProductsComponent } from '../components/products/products.component';
 import { ProductFormComponent } from '../components/product-form/product-form.component';
 import {FileUploadComponent} from '../components/file-upload/file-upload.component';
+import {ProductSearchComponent} from '../components/search-products/search-products.component';
+import {ProductSearchResultsComponent} from '../components/product-search-results/product-search-results.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import {FileUploadComponent} from '../components/file-upload/file-upload.compone
     ProductsComponent,
     ProductFormComponent,
     FileUploadComponent,
+    ProductSearchComponent,
+    ProductSearchResultsComponent,
   ],
   providers: [
     ProductCategoryService, 

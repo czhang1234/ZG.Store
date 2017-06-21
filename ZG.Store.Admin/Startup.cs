@@ -22,6 +22,8 @@ using ZG.Store.Admin.Model;
 using System.Text;
 using ZG.Store.Domain.Models;
 using ZG.Store.Common.Email;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace ZG.Store.Admin
 {
@@ -60,6 +62,10 @@ namespace ZG.Store.Admin
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IBlogPostService, BlogPostService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<IProductSearchService, ProductSearchService>();
+
+            var connection = new SqlConnection(Configuration.GetConnectionString(CONNECTION_STRING_NAME));
+            services.AddSingleton<IDbConnection>(connection);
 
             services.AddCors(options =>
             {

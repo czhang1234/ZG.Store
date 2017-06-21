@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
-import {AuthService} from '../../services/auth.service';
 import { ProductCategoryService } from '../../services/product-category.service';
 import { ProductCategory } from '../../model/product-category';
 
@@ -19,7 +18,7 @@ export class ProductCategoryFormComponent {
     prodCat = new ProductCategory("", true, 0, null);
 
     constructor(private productCategoryService: ProductCategoryService, private route: ActivatedRoute,
-        private location: Location, private authService: AuthService, private router: Router) { }
+        private location: Location, private router: Router) { }
 
     ngOnInit() {
         this.route.params.switchMap((params: Params) => this.productCategoryService.getProductCategory(+params['id']))

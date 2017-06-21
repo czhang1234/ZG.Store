@@ -56,7 +56,7 @@ namespace ZG.Store.Domain.DTO
                 TotalReviewCount = product.TotalReviewCount,
                 RatingScore = product.RatingScore,
                 Active = product.Active,
-                Images = product.Images.Select(img => new ProductImageDto() { ProductImageId = img.ProductImageId, FileName = img.FileName }).ToList()
+                Images = product.Images?.Select(img => new ProductImageDto() { ProductImageId = img.ProductImageId, FileName = img.FileName }).ToList()
             };
         }
     }

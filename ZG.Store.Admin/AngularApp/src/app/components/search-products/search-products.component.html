@@ -1,0 +1,6 @@
+<form class="navbar-form navbar-left">
+    <div class="form-group">
+        <input type="text" class="form-control" (keyup)="onKeyUp($event, searchTerms.value)" #searchTerms placeholder="Search Product">
+    </div>
+    <button type="button" class="btn btn-default" (click)="search(searchTerms.value)">Search</button>
+</form>

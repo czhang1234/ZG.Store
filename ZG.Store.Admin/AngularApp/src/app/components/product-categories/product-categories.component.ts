@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
-import {AuthService} from '../../services/auth.service';
 import {ProductCategoryService} from '../../services/product-category.service';
 import {ProductCategory} from '../../model/product-category';
 
@@ -13,8 +12,7 @@ import {ProductCategory} from '../../model/product-category';
 export class ProductCategoriesComponent implements OnInit{
     productCategories: ProductCategory[];
 
-    constructor(private prodCatService: ProductCategoryService, private router: Router, 
-        private authService: AuthService){}
+    constructor(private prodCatService: ProductCategoryService, private router: Router){}
 
     ngOnInit() {   
         this.prodCatService.getProductCategories().then(prodCats => {

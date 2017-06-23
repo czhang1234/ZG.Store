@@ -70,7 +70,8 @@ namespace ZG.Store.Admin
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
+                     //builder => builder.AllowAnyOrigin()
+                     builder => builder.WithOrigins(new string[] { "http://localhost:49869", "http://localhost:4200" })
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

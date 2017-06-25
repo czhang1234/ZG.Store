@@ -37,3 +37,19 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
   </ItemGroup>
+
+* With Angular-cli the builded filename is e.g. main.[hash].bundle.js when use ng build -prod, like this main.0125edf35c8b257a8c50.bundle.js
+  So you can not simply inject the SPA using the following. You need "build": "ng build --prod --base-href /product-app/ --output-hashing none" (browser then might use the cached old version), refer to this: https://stackoverflow.com/questions/39718803/custom-generated-filename-with-angular-cli
+  <app-root></app-root>
+  <script>
+    var domain = "http://localhost:4200/";
+    ['inline.bundle.js', 'polyfills.bundle.js', 'scripts.bundle.js', 'styles.bundle.js',
+    'vendor.bundle.js', 'main.bundle.js'].forEach(function(src){
+        var script = document.createElement('script');
+        script.src = domain + src;
+        script.async = false;
+
+        document.head.appendChild(script);
+    });
+  </script>
+

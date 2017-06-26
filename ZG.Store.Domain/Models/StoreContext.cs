@@ -56,7 +56,7 @@ namespace ZG.Store.Domain.Models
         public StoreContext Create(DbContextFactoryOptions options)
         {
             var builder = new DbContextOptionsBuilder<StoreContext>();
-            builder.UseSqlServer("Server=LAPTOP-Q3UKFVOU\\ZXSQLSERVER2;Database=ZGStore;User Id=sa;Password=zzc2009!;MultipleActiveResultSets=true");
+            builder.UseSqlServer("Server=tcp:zgstore.database.windows.net,1433;Initial Catalog=ZGStore;Persist Security Info=False;User ID=czhang;Password=Zzc2009!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
             return new StoreContext(builder.Options);
         }

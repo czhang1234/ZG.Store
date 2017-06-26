@@ -17,13 +17,13 @@ namespace ZG.Store.Domain.Models
         public int Quantity { get; set; }
         public decimal PricePerUnit { get; set; }
         public decimal TotalPrice { get; set; }
-        public Nullable<decimal> Discount { get; set; }
+        public decimal? Discount { get; set; }
         public decimal Shipping { get; set; }
         [MaxLength(50)]
         public string DownloadKey { get; set; }
         [MaxLength(400)]
         public string DownloadURL { get; set; }
-        public System.DateTime OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         public bool Active { get; set; }        
     }
 }

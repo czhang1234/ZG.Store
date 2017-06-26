@@ -11,7 +11,7 @@ let config = {
 
     },
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, '../wwwroot/blog-app'),
         filename: '[name].bundle.js',
     },
     resolve: {

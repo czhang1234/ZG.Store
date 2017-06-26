@@ -37,12 +37,12 @@ namespace ZG.Store.Admin.Controllers
 
             return new ObjectResult(orderDto);
         }
-
+        
         [HttpPut]
         [ValidateModel]
-        public IActionResult Update(int id, [FromBody]OrderSaveModel order)
+        public IActionResult Update(int id, [FromBody]OrderDto order)
         {
-            if(order == null || order.Id != id)
+            if(order == null || order.OrderId != id)
             {
                 return BadRequest();
             }

@@ -1,4 +1,5 @@
 require('./assets/stylesheets/styles.scss');
+require('file-loader?name=[name].[ext]!../index.html');
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
 import React from 'react';
@@ -16,11 +17,11 @@ import store, {history} from './store';
 const router = (
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" component={App}>
+            <Route path="/blog-app" component={App}>
                 <IndexRoute component={BlogList}></IndexRoute>
-                <Route path="/blog/:blogId" component={BlogDetails}/>
-                <Route path="/blog/:blogId/posts" component={PostList}/>
-                <Route path="/blog/:blogId/post/:postId" component={PostDetails}/>
+                <Route path="/blog-app/blog/:blogId" component={BlogDetails}/>
+                <Route path="/blog-app/blog/:blogId/posts" component={PostList}/>
+                <Route path="/blog-app/blog/:blogId/post/:postId" component={PostDetails}/>
             </Route>
         </Router>
     </Provider>

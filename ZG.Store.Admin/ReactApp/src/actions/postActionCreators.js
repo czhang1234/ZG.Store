@@ -2,12 +2,13 @@ import * as actionNames from './actionNames';
 
 import axios from 'axios';
 
-const blogPostUlr = "http://localhost:50105/api/blogpost";
+const blogPostUlr = (process.env.NODE_ENV === 'production') ? '/api/blogpost' : "http://localhost:50105/api/blogpost";
+const blogPostsUlr = (process.env.NODE_ENV === 'production') ? '/api/blogposts' : "http://localhost:50105/api/blogposts";
 
 export function fetchPosts(blogId){
     return {
         type: actionNames.FETCH_POSTS,
-        payload: axios.get(`http://localhost:50105/api/blogposts/${blogId}`)
+        payload: axios.get(`${blogPostsUlr}/${blogId}`)
     }
 }
 

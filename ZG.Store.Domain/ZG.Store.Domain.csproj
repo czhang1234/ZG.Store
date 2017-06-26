@@ -18,4 +18,9 @@
     <ProjectReference Include="..\ZG.Store.Common\ZG.Store.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

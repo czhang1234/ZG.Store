@@ -20,7 +20,7 @@ namespace ZG.Store.Services
         void Deactivate(int id);
         Order GetById(int id);
         OrderEditViewModel GetOrderEditViewModel(int id);
-        CRUDStatus Update(OrderSaveModel order);
+        CRUDStatus Update(OrderDto order);
         IEnumerable<OrderStatus> GetOrderStatuses(bool isActive);
     }
 
@@ -108,17 +108,42 @@ namespace ZG.Store.Services
                 .FirstOrDefault();
         }
 
-        public CRUDStatus Update(OrderSaveModel orderSaveModel)
+        public CRUDStatus Update(OrderDto orderDto)
         {
-            var order = GetById(orderSaveModel.Id);
+            var order = GetById(orderDto.OrderId);
             if (order == null)
             {
                 return CRUDStatus.NotFound;
             }
 
-            order.OrderStatusId = orderSaveModel.OrderStatusId;
-            order.ShippingProviderId = orderSaveModel.ShippingProviderId;
-            order.Active = orderSaveModel.Active;
+            order.UserId = orderDto.UserId;
+            order.FullName = orderDto.FullName;
+            order.OrderNumber = orderDto.OrderNumber;
+            order.OrderDate = orderDto.OrderDate;
+            order.OrderStatusId = orderDto.OrderStatusId;
+            order.ShippingNumber = orderDto.ShippingNumber;
+            order.BillingAddress1 = orderDto.BillingAddress1;
+            order.BillingAddress2 = orderDto.BillingAddress2;
+            order.BillingCity = orderDto.BillingCity;
+            order.BillingZipcode = orderDto.BillingZipcode;
+            order.ShippingAddress1 = orderDto.ShippingAddress1;
+            order.ShippingAddress2 = orderDto.ShippingAddress2;
+            order.ShippingCity = orderDto.ShippingCity;
+            order.ShippingZipcode = orderDto.ShippingZipcode;
+            order.Comments = orderDto.Comments;
+            order.DatePlaced = orderDto.DatePlaced;
+            order.Total = orderDto.Total;
+            order.Shipping = orderDto.Shipping;
+            order.Tax = orderDto.Tax;
+            order.Active = orderDto.Active;
+            order.BillingStateId = orderDto.BillingStateId;
+            order.BillingProvinceId = orderDto.BillingProvinceId;
+            order.BillingCountryId = orderDto.BillingCountryId;
+            order.ShippingCountryId = orderDto.ShippingCountryId;
+            order.ShippingProviderId = orderDto.ShippingProviderId;
+            order.ShippingStateId = orderDto.ShippingStateId;
+            order.ShippingProvinceId = orderDto.ShippingProvinceId;
+            order.OrderProducts = orderDto.OrderProducts;
 
             _context.Orders.Update(order);
             _context.SaveChanges();

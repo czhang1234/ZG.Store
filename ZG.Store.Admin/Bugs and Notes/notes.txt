@@ -1,4 +1,8 @@
-﻿* asp.net core web api by default don't serve static files.
+﻿* SQL connection string
+  localhost: "Server=LAPTOP-Q3UKFVOU\\ZXSQLSERVER2;Database=ZGStore;User Id=sa;Password=zzc2009!;MultipleActiveResultSets=true"
+  azure sql server: Server=tcp:zgstore.database.windows.net,1433;Initial Catalog=ZGStore;Persist Security Info=False;User ID=czhang;Password=Zzc2009!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+* asp.net core web api by default don't serve static files.
   have to add package Microsoft.AspNetCore.StaticFiles and add app.UseStaticFiles();
 
 * have to enable CORS for the angular app because angular 2+'s default working environment runs a development 
@@ -52,4 +56,22 @@
         document.head.appendChild(script);
     });
   </script>
+
+* To enable full text search in Azure SQL Server
+  CREATE FULLTEXT CATALOG [Products-Full-Text-Catalog]WITH ACCENT_SENSITIVITY = ON
+  CREATE FULLTEXT INDEX ON dbo.Products (Name, Description) KEY INDEX PK_Products ON [Products-Full-Text-Catalog];  
+
+* Webpack.config how to just copy the index.html to the dist folder
+  https://stackoverflow.com/questions/32155154/webpack-config-how-to-just-copy-the-index-html-to-the-dist-folder
+
+* ReactApp: to include imgs into the dist, e.g.
+  body{
+    height: 100vh;
+    background-color: $brand-purple;
+    color: $brand-green;
+    font-size: $font-size;
+    font-weight: 900;
+    font-family: $merriweather;
+    background: url('/blog-app/images/20150620_095446.jpg')
+}
 

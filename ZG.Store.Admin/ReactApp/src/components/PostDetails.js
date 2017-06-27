@@ -16,7 +16,7 @@ class PostDetails extends React.Component {
     componentWillReceiveProps(nextProps){
         if((!nextProps.selectedPost.creatingPost && nextProps.selectedPost.createdPost) ||
            (!nextProps.selectedPost.updatingPost && nextProps.selectedPost.updatedPost)){
-                this.props.router.push(`/blog-app/blog/${this.props.params.blogId}/posts`);
+                this.props.router.push(`/blog/${this.props.params.blogId}/posts`);
         }
     }
 

@@ -11,8 +11,13 @@
 
 * use Angular CLI
 
-* problem: reload cause 404 because server could not found index.html in another dir, e.g. http://localhost:50105/productcategories
+* angular problem: reload cause 404 because server could not found index.html in another dir, e.g. http://localhost:50105/productcategories
   solution: put { useHash: true } in app-routing.module.ts
+
+* same React problem: reload a url other than / won't work. Here is a good explaination:
+  https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually
+  and
+  https://github.com/jintoppy/react-training/blob/master/basic/node_modules/react-router/docs/guides/Histories.md#browserhistory
 
 * http://angularjs.blogspot.com/2016/11/easy-angular-authentication-with-json.html
 

@@ -29,7 +29,7 @@ class BlogList extends React.Component {
             <tr key={i} onMouseEnter={this.mouseEnter.bind(this, i)} onMouseLeave={this.mouseLeave.bind(this)}>
                 <td style={{ width: '125px' }}>
                     {blog.blogId}
-                    {this.state.mouseInsideRowIndex === i && <span>&nbsp;&nbsp;&nbsp;<Link to={`/blog-app/blog/${blog.blogId}`}>Edit</Link>&nbsp;&nbsp;&nbsp;<Link to={`/blog-app/blog/${blog.blogId}/posts`}>Posts</Link></span>}
+                    {this.state.mouseInsideRowIndex === i && <span>&nbsp;&nbsp;&nbsp;<Link to={`/blog/${blog.blogId}`}>Edit</Link>&nbsp;&nbsp;&nbsp;<Link to={`/blog/${blog.blogId}/posts`}>Posts</Link></span>}
                 </td>
                 <td>{blog.name}</td>
                 <td>{blog.url}</td>
@@ -40,7 +40,7 @@ class BlogList extends React.Component {
     render() {
         return (
             <div>
-                <Link to="/blog-app/blog/0">Create Blog</Link>
+                <Link to="/blog/0">Create Blog</Link>
                 <Table striped bordered condensed hover>
                     <tbody>
                         <tr>

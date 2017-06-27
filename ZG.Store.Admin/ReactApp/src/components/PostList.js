@@ -49,7 +49,7 @@ class PostList extends React.Component {
         this.setState({blogId: selectedBlogId});
         this.props.postActions.fetchPosts(selectedBlogId);
 
-        this.props.router.push(`/blog-app/blog/${selectedBlogId}/posts`); //change the url because the blogId is changed in the select element 
+        this.props.router.push(`/blog/${selectedBlogId}/posts`); //change the url because the blogId is changed in the select element 
     }
 
     renderRow(post, i) {
@@ -58,7 +58,7 @@ class PostList extends React.Component {
             <tr key={i} onMouseEnter={this.mouseEnter.bind(this, i)} onMouseLeave={this.mouseLeave.bind(this)}>
                 <td style={{ width: '125px' }}>
                     {post.postId}
-                    {this.state.mouseInsideRowIndex === i && <span>&nbsp;&nbsp;&nbsp;<Link to={`/blog-app/blog/${this.state.blogId}/post/${post.postId}`}>Edit</Link></span>}
+                    {this.state.mouseInsideRowIndex === i && <span>&nbsp;&nbsp;&nbsp;<Link to={`/blog/${this.state.blogId}/post/${post.postId}`}>Edit</Link></span>}
                 </td>
                 <td>{post.title}</td>
                 <td>{post.status}</td>
@@ -73,7 +73,7 @@ class PostList extends React.Component {
         return (
             <div>
                 <div>
-                    <Link to={`/blog-app/blog/${this.state.blogId}/post/0`}>Create Post</Link>
+                    <Link to={`/blog/${this.state.blogId}/post/0`}>Create Post</Link>
                 </div>
                 <label>Select blog:&nbsp;</label>
                 <select value={this.state.blogId} onChange={this.onChange.bind(this)}>

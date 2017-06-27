@@ -1,5 +1,5 @@
 import {createStore, applyMiddleware, compose} from 'redux';
-import {browserHistory} from 'react-router';
+import {hashHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 
 import { createLogger } from 'redux-logger';
@@ -16,6 +16,6 @@ const middleware = applyMiddleware(promise(), thunk, createLogger());
 const store = createStore(rootReducer, middleware);
 export default store;
 
-export const history = syncHistoryWithStore(browserHistory, store);
+export const history = syncHistoryWithStore(hashHistory, store);
 //syncHistoryWithStore will put and sync browserHistory in store
 

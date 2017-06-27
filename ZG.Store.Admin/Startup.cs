@@ -71,7 +71,7 @@ namespace ZG.Store.Admin
             {
                 options.AddPolicy("CorsPolicy",
                      //builder => builder.AllowAnyOrigin()
-                     builder => builder.WithOrigins(new string[] { "http://localhost:49869", "http://localhost:4200" })
+                     builder => builder.WithOrigins(new string[] { "http://localhost:49869", "http://localhost:4200", "http://localhost:8080" })
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

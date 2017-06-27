@@ -48,7 +48,7 @@ class BlogList extends React.Component {
                             <th>Name</th>
                             <th>Url</th>
                         </tr>
-                        {this.props.blogs.blogs.map(this.renderRow.bind(this))} {/* composition pattern */}
+                        {this.props.blogs.blogs.map(this.renderRow.bind(this))}
                     </tbody>
                 </Table>
             </div>

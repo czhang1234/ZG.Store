@@ -3,9 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <PreBuildEvent>REM cd C:\MyProjects\ZG.Store\ZG.Store.Admin/AngularApp
-REM call npm install
-REM call npm run build</PreBuildEvent>
+    <PreBuildEvent>cd $(MSBuildProjectDirectory)/AngularApp
+call npm install
+call npm run build
+
+cd $(MSBuildProjectDirectory)/ReactApp
+call npm install
+call npm run production
+
+</PreBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>

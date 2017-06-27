@@ -18,6 +18,7 @@
   https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually
   and
   https://github.com/jintoppy/react-training/blob/master/basic/node_modules/react-router/docs/guides/Histories.md#browserhistory
+  I just used hashHistory instead of browserHistory, but browserHistory is recommended
 
 * http://angularjs.blogspot.com/2016/11/easy-angular-authentication-with-json.html
 

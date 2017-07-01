@@ -26,7 +26,8 @@ namespace ZG.Store.Admin.Controllers
         [HttpGet("{id}")]
         public OrderListViewModel GetAll(int id)
         {
-            return _orderService.GetOrders(true, id, 20);
+            const int ORDERS_PER_PAGE = 2;
+            return _orderService.GetOrders(true, id, ORDERS_PER_PAGE);
         }
     }
 }

@@ -20,3 +20,8 @@
         </tr>
     </tbody>
 </table>
+
+<ul class="pager" *ngIf="orderListViewModel">
+  <li *ngIf="prevPageUrl !== ''"><a [href]="prevPageUrl">Previous</a></li>
+  <li *ngIf="nextPageUrl !== ''"><a [href]="nextPageUrl" >Next</a></li>
+</ul>

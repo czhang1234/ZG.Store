@@ -19,7 +19,7 @@ namespace ZG.Store.Common.Auth
 
         public static SigningCredentials SigningCredentials { get; } = new SigningCredentials(Key, SecurityAlgorithms.HmacSha256Signature);
 
-        public static TimeSpan ExpiresSpan { get; } = TimeSpan.FromMinutes(1);
+        public static TimeSpan ExpiresSpan { get; } = TimeSpan.FromMinutes(15);
         public static string TokenType { get; } = "Bearer";
     }
 }

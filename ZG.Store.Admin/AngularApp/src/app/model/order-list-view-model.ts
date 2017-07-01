@@ -1,5 +1,5 @@
-import {OrderList} from './order-list';
+import {OrderBriefInfo} from './order-brief-info';
 
 export class OrderListViewModel{
-    constructor(private orderList: OrderList, private totalOrders: number){}
+    constructor(private orderList: OrderBriefInfo[], private totalOrders: number){}
 }

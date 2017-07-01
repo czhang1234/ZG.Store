@@ -4,20 +4,19 @@
     <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Active</th>
+            <th>User Id</th>
+            <th>Order Number</th>
+            <th>Order Date</th>
+            <th>Status</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="orderListViewModel">
         <tr *ngFor="let order of orderListViewModel.orders" (click)="goToDetails(order.orderId)">
-            <td>{{order.orderId}}</td>
+            <td>{{order.id}}</td>
             <td>{{order.userId}}</td>
             <td>{{order.orderNumber}}</td>
-            <td>{{order.orderDate}}</td>
-            <td>{{order.statusId}}</td>
+            <td>{{order.datePlaced}}</td>
+            <td>{{order.orderStatus}}</td>
         </tr>
     </tbody>
-
-    {{orderListViewModel.totalOrders}}
 </table>

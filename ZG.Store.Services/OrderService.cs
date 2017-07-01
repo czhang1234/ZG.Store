@@ -58,7 +58,7 @@ namespace ZG.Store.Services
 
             int totalOrders = orders.Count();
 
-            orders = _context.Orders.OrderBy(o => o.OrderId).Skip((page - 1) * pageSize).Take(pageSize);
+            orders = _context.Orders.OrderByDescending(o => o.DatePlaced).Skip((page - 1) * pageSize).Take(pageSize);
 
             return new OrderListViewModel
             {

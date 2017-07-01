@@ -24,7 +24,6 @@ namespace ZG.Store.Admin.Controllers
         }
 
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public OrderListViewModel GetAll(int id)
         {
             return _orderService.GetOrders(true, id, 20);

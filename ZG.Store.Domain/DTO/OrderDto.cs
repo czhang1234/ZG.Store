@@ -71,7 +71,6 @@ namespace ZG.Store.Domain.DTO
         public int ShippingProviderId { get; set; }
 
         public int? ShippingStateId { get; set; }
-        public State ShippingState { get; set; }
 
         public int? ShippingProvinceId { get; set; }
 

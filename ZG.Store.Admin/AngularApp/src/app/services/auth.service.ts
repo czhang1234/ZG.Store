@@ -7,13 +7,13 @@ import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/toPromise';
 
 import {RequestResult} from '../model/request-result';
+import {ApiBaseUrls} from '../constants/api-base-urls';
 
 @Injectable()
 export class AuthService{
     private tokenKey = "token";
     private token: string;
-    private authUrl = (!environment.production) ? 'http://localhost:50105/api/Auth' : '/api/Auth';
-
+    private authUrl = new ApiBaseUrls().authUrl;
 
     constructor(private http: Http){}
 

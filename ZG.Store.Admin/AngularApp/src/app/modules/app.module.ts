@@ -11,6 +11,7 @@ import {AuthService} from '../services/auth.service';
 import {AuthGuard} from '../services/auth-guard.service';
 import {LoginStatusService} from '../services/login-status.service';
 import { FileUploadService } from '../services/file-upload.service';
+import {OrderService} from '../services/order.service';
 
 import { AppComponent } from '../components/app/app.component';
 import { ProductCategoriesComponent } from '../components/product-categories/product-categories.component';
@@ -21,7 +22,7 @@ import { ProductFormComponent } from '../components/product-form/product-form.co
 import {FileUploadComponent} from '../components/file-upload/file-upload.component';
 import {ProductSearchComponent} from '../components/search-products/search-products.component';
 import {ProductSearchResultsComponent} from '../components/product-search-results/product-search-results.component';
-
+import {OrdersComponent} from '../components/orders/orders.component';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import {ProductSearchResultsComponent} from '../components/product-search-result
     FileUploadComponent,
     ProductSearchComponent,
     ProductSearchResultsComponent,
+    OrdersComponent,
   ],
   providers: [
     ProductCategoryService, 
@@ -49,6 +51,7 @@ import {ProductSearchResultsComponent} from '../components/product-search-result
     AuthGuard,
     LoginStatusService,
     FileUploadService,
+    OrderService,
   ],
   bootstrap: [ AppComponent ]
 })

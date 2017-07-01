@@ -6,12 +6,14 @@ import 'rxjs/add/operator/toPromise';
 
 import {AuthService} from './auth.service';
 import {Product} from '../model/product';
+import {ApiBaseUrls} from '../constants/api-base-urls';
 
 @Injectable()
 export class ProductService{
-    private prodUrl = (!environment.production) ? 'http://localhost:50105/api/Product' : '/api/Product';
-    private prodsUrl = (!environment.production) ? 'http://localhost:50105/api/Products' : '/api/Products';
-    private prodSearchUrl = (!environment.production) ? 'http://localhost:50105/api/ProductSearch' : '/api/ProductSearch';
+    private apiBaseUrls = new ApiBaseUrls();
+    private prodUrl = this.apiBaseUrls.prodUrl;
+    private prodsUrl = this.apiBaseUrls.prodsUrl;
+    private prodSearchUrl = this.apiBaseUrls.prodSearchUrl;
 
     constructor(private http: Http, private authService: AuthService){}
 

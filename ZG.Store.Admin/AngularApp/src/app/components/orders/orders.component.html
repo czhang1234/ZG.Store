@@ -1,0 +1,23 @@
+<h2>Orders</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orderListViewModel.orders" (click)="goToDetails(order.orderId)">
+            <td>{{order.orderId}}</td>
+            <td>{{order.userId}}</td>
+            <td>{{order.orderNumber}}</td>
+            <td>{{order.orderDate}}</td>
+            <td>{{order.statusId}}</td>
+        </tr>
+    </tbody>
+
+    {{orderListViewModel.totalOrders}}
+</table>

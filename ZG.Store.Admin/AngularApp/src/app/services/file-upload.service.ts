@@ -6,11 +6,13 @@ import 'rxjs/add/operator/toPromise';
 
 import { environment } from '../../environments/environment';
 import {AuthService} from './auth.service';
+import {ApiBaseUrls} from '../constants/api-base-urls';
 
 @Injectable()
 export class FileUploadService {
-    private baseUrl = (!environment.production) ? 'http://localhost:50105' : '/';
-    private basePostUrl = (!environment.production) ? `${this.baseUrl}/api` : '/api';
+    private apiBaseUrls = new ApiBaseUrls();
+    private baseUrl = this.apiBaseUrls.baseUrl;
+    private basePostUrl = this.apiBaseUrls.basePostUrl;
 
     constructor(private http: Http, private authService: AuthService) { }
 

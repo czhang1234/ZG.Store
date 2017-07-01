@@ -74,7 +74,7 @@ namespace ZG.Store.Domain.DTO
 
         public int? ShippingProvinceId { get; set; }
 
-        public List<OrderProduct> OrderProducts { get; set; }
+        public List<OrderProductDto> OrderProducts { get; set; }
 
         public static OrderDto Get(Order order)
         {
@@ -108,7 +108,7 @@ namespace ZG.Store.Domain.DTO
                 ShippingProviderId = order.ShippingProviderId,
                 ShippingStateId = order.ShippingStateId,
                 ShippingProvinceId = order.ShippingProvinceId,
-                OrderProducts = order.OrderProducts
+                OrderProducts = order.OrderProducts.Select(op => OrderProductDto.ToOrderProductDto(op)).ToList()
             };
         }
     }

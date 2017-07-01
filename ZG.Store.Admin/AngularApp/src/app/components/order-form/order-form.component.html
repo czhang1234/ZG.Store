@@ -1,0 +1,12 @@
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class="form-group">
+        <label class="center-block">Order Id: </label>
+        <label class="form-control" formControlName="orderId"></label>
+    </div>
+
+    <div style="margin-bottom: 1em">
+        <button type="submit" [disabled]="orderForm.prinstine" class="btn tbn-success">Save</button>&nbsp;
+        <button type="reset" (click)="reset()" [disabled]="orderForm.prinstine" class="btn tbn-danger">Reset</button>&nbsp;
+    </div>
+</form>

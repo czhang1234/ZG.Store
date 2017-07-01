@@ -9,6 +9,7 @@ import { ProductsComponent } from '../components/products/products.component';
 import { ProductFormComponent } from '../components/product-form/product-form.component';
 import { ProductSearchResultsComponent } from '../components/product-search-results/product-search-results.component';
 import {OrdersComponent} from '../components/orders/orders.component';
+import {OrderFormComponent} from '../components/order-form/order-form.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/productcategories', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'products/:terms', component: ProductSearchResultsComponent, canActivate: [AuthGuard] },
     { path: 'productdetails/:id', component: ProductFormComponent, canActivate: [AuthGuard] },
     { path: 'orders/:id', component: OrdersComponent, canActivate: [AuthGuard] },
+    { path: 'orderdetails/:id', component: OrderFormComponent, canActivate: [AuthGuard] },
     
 ];
 

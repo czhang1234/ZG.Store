@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpModule} from '@angular/http';
@@ -23,11 +24,13 @@ import {FileUploadComponent} from '../components/file-upload/file-upload.compone
 import {ProductSearchComponent} from '../components/search-products/search-products.component';
 import {ProductSearchResultsComponent} from '../components/product-search-results/product-search-results.component';
 import {OrdersComponent} from '../components/orders/orders.component';
+import {OrderFormComponent} from '../components/order-form/order-form.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     AppRoutingModule,
     HttpModule,
@@ -43,6 +46,7 @@ import {OrdersComponent} from '../components/orders/orders.component';
     ProductSearchComponent,
     ProductSearchResultsComponent,
     OrdersComponent,
+    OrderFormComponent,
   ],
   providers: [
     ProductCategoryService, 

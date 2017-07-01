@@ -18,6 +18,8 @@ export class OrdersComponent implements OnInit {
     totalPages: number;
     prevPageUrl: string;
     nextPageUrl: string;
+    isLoading: false;
+    errorMsg: string;
 
     constructor(private orderService: OrderService, private router: Router, private route: ActivatedRoute) { }
 
@@ -32,7 +34,8 @@ export class OrdersComponent implements OnInit {
                 this.totalPages = Math.ceil(orderListViewModel.totalOrders / this.ordersPerPage);
                 this.nextPageUrl = this.getNextPageUrl();
                 this.prevPageUrl = this.getPrevPageUrl();
-            });
+            },
+            error => this.errorMsg = <any>error);
     }
 
     getPrevPageUrl(): string {
@@ -51,7 +54,7 @@ export class OrdersComponent implements OnInit {
     }
 
     goToDetails(id: number): void {
-        this.router.navigate(['/orderDetails', id]);
+        this.router.navigate(['/orderdetails', id]);
     }
 
     get diagnostic() { return JSON.stringify(this.orderListViewModel) }

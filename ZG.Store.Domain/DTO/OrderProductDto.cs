@@ -24,5 +24,43 @@ namespace ZG.Store.Domain.DTO
         public string DownloadURL { get; set; }
         public DateTime OrderDate { get; set; }
         public bool Active { get; set; }
+
+        public static OrderProduct ToOrderProduct(OrderProductDto orderProdDto)
+        {
+            return new OrderProduct
+            {
+                OrderProductId = orderProdDto.OrderProductId,
+                OrderId = orderProdDto.OrderId,
+                ProductId = orderProdDto.ProductId,
+                Quantity = orderProdDto.Quantity,
+                PricePerUnit = orderProdDto.PricePerUnit,
+                TotalPrice = orderProdDto.TotalPrice,
+                Discount = orderProdDto.Discount,
+                Shipping = orderProdDto.Shipping,
+                DownloadKey = orderProdDto.DownloadKey,
+                DownloadURL = orderProdDto.DownloadURL,
+                OrderDate = orderProdDto.OrderDate,
+                Active = orderProdDto.Active
+            };
+        }
+
+        public static OrderProductDto ToOrderProductDto(OrderProduct orderProduct)
+        {
+            return new OrderProductDto
+            {
+                OrderProductId = orderProduct.OrderProductId,
+                OrderId = orderProduct.OrderId,
+                ProductId = orderProduct.ProductId,
+                Quantity = orderProduct.Quantity,
+                PricePerUnit = orderProduct.PricePerUnit,
+                TotalPrice = orderProduct.TotalPrice,
+                Discount = orderProduct.Discount,
+                Shipping = orderProduct.Shipping,
+                DownloadKey = orderProduct.DownloadKey,
+                DownloadURL = orderProduct.DownloadURL,
+                OrderDate = orderProduct.OrderDate,
+                Active = orderProduct.Active
+            };
+        }
     }
 }

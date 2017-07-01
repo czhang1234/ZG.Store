@@ -1,43 +1,81 @@
-import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { Headers, Http, Response } from '@angular/http';
+import { environment } from '../../environments/environment';
 
-import {ApiBaseUrls} from '../constants/api-base-urls';
+import { ApiBaseUrls } from '../constants/api-base-urls';
 
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import {of} from 'rxjs/observable/of';
 
-import {AuthService} from './auth.service';
-import {OrderListViewModel} from '../model/order-list-view-model';
+import { AuthService } from './auth.service';
+import { OrderListViewModel } from '../model/order-list-view-model';
+import {Order} from '../model/order';
 
 @Injectable()
-export class OrderService{
+export class OrderService {
     private apiBaseUrls = new ApiBaseUrls();
     private orderUrl = this.apiBaseUrls.orderUrl;
     private ordersUrl = this.apiBaseUrls.ordersUrl;
 
-    constructor(private authService: AuthService, private http: Http){}
+    constructor(private authService: AuthService, private http: Http) { }
 
-    getOrders(pageNumber: number): Promise<OrderListViewModel>{
+    getOrders(pageNumber: number): Observable<OrderListViewModel> {
         const headers = this.getHeaders(false);
         let url = `${this.ordersUrl}/${pageNumber}`;
-        return this.http.get(url, {headers})
-            .toPromise()
-            .then(response => response.json() as OrderListViewModel)
+        return this.http.get(url, { headers })
+            .map(this.extractData)
             .catch(this.handleError);
     }
 
-    private getHeaders(appendContentTypeHeader: boolean): Headers{
+    getOrder(id: number): Observable<Order>{
+        const url = `${this.orderUrl}/${id}`;
+        if(id === 0){
+            return of(null);
+        }
+
+        const headers = this.getHeaders(false);
+        return this.http.get(url, {headers})
+                    .map(this.extractData)
+                    .catch(this.handleError);
+    }
+
+    update(order: Order): Observable<void>{
+        const url = `${this.orderUrl}/${order.orderId}`;
+        const headers = this.getHeaders(true);
+
+        return this.http.put(url, JSON.stringify(order), {headers})
+                    .map(this.extractData)
+                    .catch(this.handleError);
+    }
+
+    extractData(response: Response){
+        let body = response.json();
+        return body as OrderListViewModel || {};
+    }
+
+    private getHeaders(appendContentTypeHeader: boolean): Headers {
         let headers = this.authService.initAuthHeaders();
 
-        if(appendContentTypeHeader){
+        if (appendContentTypeHeader) {
             headers.append('Content-Type', 'application/json')
         }
 
         return headers;
     }
 
-    private handleError(error: any){
-        console.error('an error occured:', error);// for demo purposes only
-        return Promise.reject(error.message || error);
+    private handleError(error: Response | any) {
+        // In a real world app, you might use a remote logging infrastructure
+        let errMsg: string;
+        if (error instanceof Response) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return Observable.throw(errMsg);
     }
 }

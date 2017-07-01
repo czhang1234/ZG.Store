@@ -96,7 +96,7 @@ namespace ZG.Store.Services
 
         public Order GetById(int id)
         {
-            return _context.Orders.SingleOrDefault(o => o.OrderId == id);
+            return _context.Orders.Where(o => o.OrderId == id).Include("OrderProducts").FirstOrDefault();
         }
 
         public OrderEditViewModel GetOrderEditViewModel(int id)
@@ -143,7 +143,7 @@ namespace ZG.Store.Services
             order.ShippingProviderId = orderDto.ShippingProviderId;
             order.ShippingStateId = orderDto.ShippingStateId;
             order.ShippingProvinceId = orderDto.ShippingProvinceId;
-            order.OrderProducts = orderDto.OrderProducts;
+            order.OrderProducts = orderDto.OrderProducts.Select(opDto => OrderProductDto.ToOrderProduct(opDto)).ToList();
 
             _context.Orders.Update(order);
             _context.SaveChanges();

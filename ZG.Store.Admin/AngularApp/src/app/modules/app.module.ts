@@ -5,6 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpModule} from '@angular/http';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import {ProductCategoryService} from '../services/product-category.service';
 import {ProductService} from '../services/product.service';
@@ -39,6 +40,7 @@ import {OrderFormComponent} from '../components/order-form/order-form.component'
     RouterModule,
     AppRoutingModule,
     HttpModule,
+    MyDatePickerModule,
   ],
   declarations: [
     AppComponent,

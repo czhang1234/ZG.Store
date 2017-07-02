@@ -63,6 +63,8 @@ namespace ZG.Store.Admin
             services.AddTransient<IBlogPostService, BlogPostService>();
             services.AddTransient<ICommentsService, CommentsService>();
             services.AddTransient<IProductSearchService, ProductSearchService>();
+            services.AddTransient<ICountryService, CountryService>();
+            services.AddTransient<IStateService, StateService>();
 
             var connection = new SqlConnection(Configuration.GetConnectionString(CONNECTION_STRING_NAME));
             services.AddSingleton<IDbConnection>(connection);

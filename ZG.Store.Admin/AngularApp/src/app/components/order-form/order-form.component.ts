@@ -3,9 +3,15 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {FormBuilder, FormGroup, FormArray} from '@angular/forms';
 
 import {OrderService} from '../../services/order.service';
+import {OrderStatusService} from '../../services/order-status.service';
+import {CountryService} from '../../services/country.service';
+import {StateService} from '../../services/state.service';
 
 import {Order} from '../../model/order';
 import {OrderProduct} from '../../model/order-product';
+import {OrderStatus} from '../../model/order-status';
+import {Country} from '../../model/country';
+import {State} from '../../model/state';
 
 @Component({
     selector: 'order-form',
@@ -15,12 +21,36 @@ import {OrderProduct} from '../../model/order-product';
 export class OrderFormComponent implements OnInit{
     errorMsg: string;
     order: Order;
+    orderStatusList: OrderStatus[];
+    countries: Country[];
+    states: State[];
     orderForm: FormGroup;
 
     constructor(private orderService: OrderService, private formBuilder: FormBuilder, 
-        private route: ActivatedRoute){ }
+        private route: ActivatedRoute, private orderStatusService: OrderStatusService,
+        private countryService: CountryService, private stateService: StateService){ }
 
     ngOnInit(){
+        this.countryService.getCountries()
+            .subscribe(
+                countries => this.countries = countries,
+                error => this.errorMsg = <any>error
+            );
+
+        this.stateService.getStates()
+            .subscribe(
+                states => this.states = states,
+                error => this.errorMsg = <any>error
+            );
+
+        this.orderStatusService.getOrderStatus()
+            .subscribe(
+                orderStatus => {
+                    this.orderStatusList = orderStatus;
+                },
+                error => this.errorMsg = <any>error
+            );
+
         this.route.params.switchMap((params: Params) => this.orderService.getOrder(+params['id']))
             .subscribe(
                 order => {

@@ -14,4 +14,8 @@ export class ApiBaseUrls{
 
     public orderUrl = (!environment.production) ? 'http://localhost:50105/api/Order' : '/api/Order';
     public ordersUrl = (!environment.production) ? 'http://localhost:50105/api/Orders' : '/api/Orders';
+
+     public orderStatusUrl = (!environment.production) ? 'http://localhost:50105/api/OrderStatus' : '/api/OrderStatus';
+     public countryUrl = (!environment.production) ? 'http://localhost:50105/api/Country' : '/api/Country';
+     public stateUrl = (!environment.production) ? 'http://localhost:50105/api/State' : '/api/State';
 }

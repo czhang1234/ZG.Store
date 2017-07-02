@@ -1,40 +1,36 @@
+<P>{{orderForm.value | json}}</P>
 
 <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" novalidate *ngIf="order">
     <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
+        <div class="col-sm-3">
             <label class="center-block">Order Id: {{orderForm.get('orderId').value}}</label>
         </div>
+        <div class="col-sm-3">
+            <label class="center-block">user Id: {{orderForm.get('userId').value}} </label>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label class="center-block">user Id: {{orderForm.get('userId').value}} </label>
-            </div>
+        <div class="col-sm-3">
+            <label class="center-block">Order Number: {{orderForm.get('orderNumber').value}}</label>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label class="center-block">Order Number: {{orderForm.get('orderNumber').value}}</label>
-            </div>
+        <div class="col-sm-3">
+            <label class="center-block">Order Date: {{orderForm.get('orderDate').value | date: "MM/dd/yyyy 'at' h:mma"}}</label>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <label class="center-block">Order Date: {{orderForm.get('orderDate').value | date: "MM/dd/yyyy 'at' h:mma"}}</label>
-            </div>
-        </div>
-    </div>   
+    </div>
     
-    <div class="form-group">
-        <label class="center-block">Status:
-        <input class="form-control" formControlName="orderStatusId">
-      </label>
+    <div class="row">
+        <label class="col-sm-1" for="orderStatus">Status:</label>
+        <div class="col-sm-5">
+            <select class="form-control" formControlName="orderStatusId" id="orderStatus">
+                <option *ngFor="let orderStatus of orderStatusList" [value]="orderStatus.id">{{orderStatus.name}}</option>
+            </select>   
+        </div>   
     </div>
     <div class="row">
         <div class="col-md-6">
             <h3>Billing Info</h3>
             <div class="form-group">
-                <label class="center-block">Billing Address 1:
+                <label class="center-block">Billing Address 1: 
                     <input class="form-control" formControlName="billingAddress1">
-                </label>
+                </label>                
             </div>
             <div class="form-group">
                 <label class="center-block">Billing Address 2:
@@ -53,7 +49,9 @@
             </div>
             <div class="form-group">
                 <label class="center-block">Billing State:
-                    <input class="form-control" formControlName="billingStateId">
+                    <select class="form-control" formControlName="billingStateId">
+                        <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
+                    </select>
                 </label>
             </div>
             <div class="form-group">
@@ -62,8 +60,10 @@
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Billing Country Id:
-                    <input class="form-control" formControlName="billingCountryId">
+                <label class="center-block">Billing Country:
+                    <select class="form-control" formControlName="billingCountryId">
+                        <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                    </select>
                 </label>
             </div>
         </div>
@@ -77,7 +77,7 @@
 
             <div class="form-group">
                 <label class="center-block">Date Shipped:
-                    <input class="form-control" formControlName="dateShipped">
+                    <input type="date" class="form-control" formControlName="dateShipped">
                 </label>
             </div>
             <div class="form-group">
@@ -97,7 +97,9 @@
             </div>
             <div class="form-group">
                 <label class="center-block">Shipping State:
-                    <input class="form-control" formControlName="shippingStateId">
+                     <select class="form-control" formControlName="shippingStateId">
+                        <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
+                    </select>
                 </label>
             </div>
             <div class="form-group">
@@ -111,8 +113,10 @@
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Shipping Country Id:
-                    <input class="form-control" formControlName="shippingCountryId">
+                <label class="center-block">Shipping Country:
+                    <select class="form-control" formControlName="shippingCountryId">
+                        <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                    </select>
                 </label>
             </div>
             <div class="form-group">
@@ -121,12 +125,6 @@
                 </label>
             </div>
         </div>
-    </div>
-
-    <div class="form-group">
-        <label class="center-block">comments:
-        <input class="form-control" formControlName="comments">
-      </label>
     </div>
     <div class="form-group">
         <label class="center-block">Total:
@@ -146,6 +144,12 @@
     <div class="form-group">
         <label class="center-block">Active:
         <input class="form-control" formControlName="active">
+      </label>
+    </div>
+
+    <div class="form-group">
+        <label class="center-block">comments:
+        <textarea class="form-control" formControlName="comments"></textarea>
       </label>
     </div>
 

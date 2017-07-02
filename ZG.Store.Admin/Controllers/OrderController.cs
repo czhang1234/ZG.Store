@@ -38,7 +38,7 @@ namespace ZG.Store.Admin.Controllers
             return new ObjectResult(orderDto);
         }
         
-        [HttpPut]
+        [HttpPut("{id}")]
         [ValidateModel]
         public IActionResult Update(int id, [FromBody]OrderDto order)
         {

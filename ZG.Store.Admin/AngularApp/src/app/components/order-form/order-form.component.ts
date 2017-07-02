@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray , Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import { OrderService } from '../../services/order.service';
 import { OrderStatusService } from '../../services/order-status.service';
@@ -17,7 +17,7 @@ import { State } from '../../model/state';
 import { Province } from '../../model/province';
 import { ShippingProvider } from '../../model/shipping-provider';
 
-import { IMyDpOptions } from 'mydatepicker';
+import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 
 @Component({
     selector: 'order-form',
@@ -33,6 +33,8 @@ export class OrderFormComponent implements OnInit {
     provinces: Province[];
     shippingProviders: ShippingProvider[];
     orderForm: FormGroup;
+    showSuccessMsg = false;
+    loading = false;
 
     private myDatePickerOptions: IMyDpOptions = {
         // other options...
@@ -45,6 +47,8 @@ export class OrderFormComponent implements OnInit {
         private provinceService: ProvinceService, private shippingProviderService: ShippingProviderService) { }
 
     ngOnInit() {
+        this.loading = true;
+
         this.shippingProviderService.getShippingProvisers()
             .subscribe(
             shippingProviders => this.shippingProviders = shippingProviders,
@@ -82,13 +86,15 @@ export class OrderFormComponent implements OnInit {
             order => {
                 this.order = order;
                 this.createForm(this.order);
+                this.loading = false;
             },
-            error => this.errorMsg = <any>error
-            );
+            error => {
+                this.errorMsg = <any>error;
+                this.loading = false;
+            });
     }
 
     getFormModel(order: Order): any {
-        //return this.getOrderObject(order, this.getFormArrayForOrderProducts(order.orderProducts));
         const dateShipped = new Date(order.dateShipped);
         return {
             orderId: order.orderId,
@@ -141,22 +147,66 @@ export class OrderFormComponent implements OnInit {
 
     onSubmit() {
         this.order = this.prepareSaveOrder();
-        this.orderService.update(this.order).subscribe(/* error handling */);
+        this.orderService.update(this.order)
+            .subscribe(
+            response => {
+                this.showSuccessMsg = true;
+                setTimeout(() => this.showSuccessMsg = false, 4000);
+            },
+            error => this.errorMsg = <any>error
+            );
 
-        this.reset();
+        this.reset(this.order);
     }
 
-    reset() {
-        this.orderForm.reset(this.getFormModel(this.order));
+    reset(order: Order) {
+        const dateShipped = new Date(order.dateShipped);
+        this.orderForm.reset({
+            orderId: order.orderId,
+            userId: order.userId,
+            fullName: order.fullName,
+            orderNumber: order.orderNumber,
+            orderDate: order.orderDate,
+            orderStatusId: order.orderStatusId,
+            shippingNumber: order.shippingNumber,
+            billingAddress1: order.billingAddress1,
+            billingAddress2: order.billingAddress2,
+            billingCity: order.billingCity,
+            billingZipcode: order.billingZipcode,
+            shippingAddress1: order.shippingAddress1,
+            shippingAddress2: order.shippingAddress2,
+            shippingCity: order.shippingCity,
+            shippingZipcode: order.shippingZipcode,
+            dateShipped: {
+                date: {
+                    year: dateShipped.getFullYear(),
+                    month: dateShipped.getMonth() + 1,
+                    day: dateShipped.getDate()
+                }
+            },
+            comments: order.comments,
+            total: order.total,
+            shipping: order.shipping,
+            tax: order.tax,
+            active: order.active,
+            billingStateId: order.billingStateId,
+            billingProvinceId: order.billingProvinceId,
+            billingCountryId: order.billingCountryId,
+            shippingCountryId: order.shippingCountryId,
+            shippingProviderId: order.shippingProviderId,
+            shippingStateId: order.shippingStateId,
+            shippingProvinceId: order.shippingProvinceId,
+            orderProducts: order.orderProducts,
+        });
     }
 
     prepareSaveOrder(): Order {
-        const formModel = this.orderForm.value;
+        const formModelValues = this.orderForm.value;
 
-        const orderProductsDeepCopy: OrderProduct[] = formModel.orderProducts
+        const orderProductsDeepCopy: OrderProduct[] = formModelValues.orderProducts
             .map((op: OrderProduct) => Object.assign({}, op));
 
-        const orderToBeSaved: Order = this.getOrderObject(this.order, orderProductsDeepCopy);
+        const orderToBeSaved: Order = this.getOrderObject(formModelValues, orderProductsDeepCopy);
 
         return orderToBeSaved;
     }
@@ -187,7 +237,9 @@ export class OrderFormComponent implements OnInit {
         return this.orderForm.get('orderProducts') as FormArray;
     }
 
-    getOrderObject(order: Order, orderProducts: any) {
+    getOrderObject(order: any, orderProducts: any) {
+        const shippedDate = order.dateShipped.date;
+        const dateShippedString = new Date(shippedDate.year, shippedDate.month, shippedDate.day).toDateString();
         return {
             orderId: order.orderId,
             userId: order.userId,
@@ -204,7 +256,7 @@ export class OrderFormComponent implements OnInit {
             shippingAddress2: order.shippingAddress2,
             shippingCity: order.shippingCity,
             shippingZipcode: order.shippingZipcode,
-            dateShipped: order.dateShipped,
+            dateShipped: dateShippedString,
             comments: order.comments,
             total: order.total,
             shipping: order.shipping,

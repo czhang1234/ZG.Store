@@ -142,7 +142,8 @@ namespace ZG.Store.Services
             order.ShippingProviderId = orderDto.ShippingProviderId;
             order.ShippingStateId = orderDto.ShippingStateId;
             order.ShippingProvinceId = orderDto.ShippingProvinceId;
-            order.OrderProducts = orderDto.OrderProducts.Select(opDto => OrderProductDto.ToOrderProduct(opDto)).ToList();
+            order.DateShipped = orderDto.DateShipped;
+            //order.OrderProducts = orderDto.OrderProducts.Select(opDto => OrderProductDto.ToOrderProduct(opDto)).ToList();
 
             _context.Orders.Update(order);
             _context.SaveChanges();

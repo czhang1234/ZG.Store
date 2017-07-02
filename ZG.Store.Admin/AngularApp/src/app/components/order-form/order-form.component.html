@@ -1,5 +1,5 @@
-
 <h3>Order Details</h3>
+<div class="loadersmall" *ngIf="loading"></div>
 <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" novalidate *ngIf="order">
     <div class="row">
         <div class="col-sm-3">
@@ -139,7 +139,7 @@
 
             <div class="form-group">
                 <label class="center-block">Date Shipped:
-                    <my-date-picker name="dateShipped" [options]="myDatePickerOptions" formControlName="dateShipped"></my-date-picker>
+                    <my-date-picker name="dateShipped" [options]="myDatePickerOptions" formControlName="dateShipped" ></my-date-picker>
                 </label>
             </div>
             <div class="form-group">
@@ -201,6 +201,12 @@
 
     <div style="margin-bottom: 1em">
         <button type="submit" [disabled]="orderForm.pristine" class="btn btn-success">Save</button>&nbsp;
-        <button type="reset" (click)="reset()" [disabled]="orderForm.pristine" class="btn btn-danger">Reset</button>&nbsp;
+        <button type="reset" (click)="reset(order)" [disabled]="orderForm.pristine" class="btn btn-danger">Reset</button>&nbsp;
+    </div>
+    <div class="alert alert-success" *ngIf="showSuccessMsg">
+        <strong>Order details have been saved successfully!</strong>
+    </div>
+    <div class="alert alert-danger" *ngIf="errorMsg">
+        <strong>{{errorMsg}}</strong>
     </div>
 </form>

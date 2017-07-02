@@ -15,14 +15,44 @@
             <label class="center-block">Order Date: {{orderForm.get('orderDate').value | date: "MM/dd/yyyy 'at' h:mma"}}</label>
         </div>
     </div>
-    
     <div class="row">
-        <label class="col-sm-1" for="orderStatus">Status:</label>
-        <div class="col-sm-5">
-            <select class="form-control" formControlName="orderStatusId" id="orderStatus">
-                <option *ngFor="let orderStatus of orderStatusList" [value]="orderStatus.id">{{orderStatus.name}}</option>
-            </select>   
-        </div>   
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="center-block" for="orderStatus">Status:
+                    <select class="form-control" formControlName="orderStatusId" id="orderStatus">
+                        <option *ngFor="let orderStatus of orderStatusList" [value]="orderStatus.id">{{orderStatus.name}}</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="center-block">Shipping:
+                    <input class="form-control" formControlName="shipping" type="number">
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="center-block">Tax:
+                    <input class="form-control" formControlName="tax" type="number">
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="center-block">Total:
+                    <input class="form-control" formControlName="total" type="number">
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="center-block">Active:
+                    <input formControlName="active" type="checkbox">
+                </label>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -30,7 +60,7 @@
             <div class="form-group">
                 <label class="center-block">Address 1: 
                     <input class="form-control" formControlName="billingAddress1">
-                </label>                
+                </label>
             </div>
             <div class="form-group">
                 <label class="center-block">Address 2:
@@ -131,26 +161,6 @@
                 </label>
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="center-block">Total:
-        <input class="form-control" formControlName="total">
-      </label>
-    </div>
-    <div class="form-group">
-        <label class="center-block">Shipping:
-        <input class="form-control" formControlName="shipping">
-      </label>
-    </div>
-    <div class="form-group">
-        <label class="center-block">Tax:
-        <input class="form-control" formControlName="tax">
-      </label>
-    </div>
-    <div class="form-group">
-        <label class="center-block">Active:
-        <input class="form-control" formControlName="active">
-      </label>
     </div>
 
     <div class="form-group">

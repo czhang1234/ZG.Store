@@ -8,9 +8,10 @@ using ZG.Store.Domain.Models;
 namespace ZG.Store.Domain.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20170702015219_RemoveDatePlaced")]
+    partial class RemoveDatePlaced
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

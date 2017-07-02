@@ -44,8 +44,8 @@ namespace ZG.Store.Domain.DTO
         public string ShippingZipcode { get; set; }
         public string Comments { get; set; }
         [Required]
-        public DateTime DatePlaced { get; set; }
-        public String DatePlacedString { get { return DatePlaced.ToString(Constants.MMMMddyyyyhhmmtt); } }
+        public DateTime OrderDate { get; set; }
+        public String OrderDateString { get { return OrderDate.ToString(Constants.MMMMddyyyyhhmmtt); } }
         public DateTime? DateShipped { get; set; }
         public String DateShippedString { get { return DateShipped.HasValue ? DateShipped.Value.ToString(Constants.MMMMddyyyyhhmmtt) : ""; } }
         [Required]

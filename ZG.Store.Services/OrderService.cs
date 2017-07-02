@@ -58,7 +58,7 @@ namespace ZG.Store.Services
 
             int totalOrders = orders.Count();
 
-            orders = _context.Orders.OrderByDescending(o => o.DatePlaced).Skip((page - 1) * pageSize).Take(pageSize);
+            orders = _context.Orders.OrderByDescending(o => o.OrderDate).Skip((page - 1) * pageSize).Take(pageSize);
 
             return new OrderListViewModel
             {
@@ -73,7 +73,7 @@ namespace ZG.Store.Services
                     ShippingProvider = o.ShippingProvider.Name,
                     ShippingCountry = o.ShippingCountry.Name,
                     Comments = o.Comments,
-                    DatePlaced = o.DatePlaced,
+                    OrderDate = o.OrderDate,
                     DateShipped = o.DateShipped,
                     Total = o.Total,
                     Shipping = o.Shipping,
@@ -104,7 +104,7 @@ namespace ZG.Store.Services
             var order = GetById(id);
             return _context.Orders
                 .Where(o => o.OrderId == id)
-                .Select(o => new OrderEditViewModel { Id = o.OrderId, UserId = o.UserId, FullName = o.FullName, OrderNumber = o.OrderNumber, OrderStatusId = o.OrderStatusId, ShippingProviderId = o.ShippingProviderId, ShippingNumber = o.ShippingNumber, BillingAddress1 = o.BillingAddress1, BillingAddress2 = o.BillingAddress2, BillingCity = o.BillingCity, BillingState = o.BillingState.Name, BillingProvince = o.BillingProvince.Name, BillingCountry = o.BillingCountry.Name, ShippingAddress1 = o.ShippingAddress1, ShippingAddress2 = o.ShippingAddress2, ShippingCity = o.ShippingCity, ShippingState = o.ShippingState.Name, ShippingProvince = o.ShippingProvince.Name, ShippingCountry = o.ShippingCountry.Name, ShippingZipcode = o.ShippingZipcode, Comments = o.Comments, DatePlaced = o.DatePlaced, DateShipped = o.DateShipped, Total = o.Total, Shipping = o.Shipping, Tax = o.Tax, Active = o.Active })
+                .Select(o => new OrderEditViewModel { Id = o.OrderId, UserId = o.UserId, FullName = o.FullName, OrderNumber = o.OrderNumber, OrderStatusId = o.OrderStatusId, ShippingProviderId = o.ShippingProviderId, ShippingNumber = o.ShippingNumber, BillingAddress1 = o.BillingAddress1, BillingAddress2 = o.BillingAddress2, BillingCity = o.BillingCity, BillingState = o.BillingState.Name, BillingProvince = o.BillingProvince.Name, BillingCountry = o.BillingCountry.Name, ShippingAddress1 = o.ShippingAddress1, ShippingAddress2 = o.ShippingAddress2, ShippingCity = o.ShippingCity, ShippingState = o.ShippingState.Name, ShippingProvince = o.ShippingProvince.Name, ShippingCountry = o.ShippingCountry.Name, ShippingZipcode = o.ShippingZipcode, Comments = o.Comments, OrderDate = o.OrderDate, DateShipped = o.DateShipped, Total = o.Total, Shipping = o.Shipping, Tax = o.Tax, Active = o.Active })
                 .FirstOrDefault();
         }
 
@@ -131,7 +131,6 @@ namespace ZG.Store.Services
             order.ShippingCity = orderDto.ShippingCity;
             order.ShippingZipcode = orderDto.ShippingZipcode;
             order.Comments = orderDto.Comments;
-            order.DatePlaced = orderDto.DatePlaced;
             order.Total = orderDto.Total;
             order.Shipping = orderDto.Shipping;
             order.Tax = orderDto.Tax;
@@ -196,7 +195,6 @@ namespace ZG.Store.Services
                 ShippingCountryId = checkoutDetails.ShippingDetails.ShippingAddress.CountryId,
                 ShippingZipcode = checkoutDetails.ShippingDetails.ShippingAddress.Zip,
                 Comments = "",
-                DatePlaced = DateTime.Now,
                 Total = cart.ComputeOrderTotal(),
                 Shipping = 2.5m, //TODO: fix this
                 Tax = 3.0m,  //TODO: fix this

@@ -52,7 +52,6 @@ namespace ZG.Store.Domain.DTO
         public string ShippingZipcode { get; set; }
         [MaxLength(400)]
         public string Comments { get; set; }
-        public DateTime DatePlaced { get; set; }
         public DateTime? DateShipped { get; set; }
         public decimal Total { get; set; }
         public decimal Shipping { get; set; }
@@ -96,7 +95,6 @@ namespace ZG.Store.Domain.DTO
                 ShippingCity = order.ShippingCity,
                 ShippingZipcode = order.ShippingZipcode,
                 Comments = order.Comments,
-                DatePlaced = order.DatePlaced,
                 Total = order.Total,
                 Shipping = order.Shipping,
                 Tax = order.Tax,

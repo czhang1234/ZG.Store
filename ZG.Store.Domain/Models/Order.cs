@@ -52,7 +52,6 @@ namespace ZG.Store.Domain.Models
         public string ShippingZipcode { get; set; }
         [MaxLength(400)]
         public string Comments { get; set; }
-        public DateTime DatePlaced { get; set; }
         public DateTime? DateShipped { get; set; }
         public decimal Total { get; set; }
         public decimal Shipping { get; set; }

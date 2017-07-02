@@ -17,8 +17,8 @@ namespace ZG.Store.Domain.DTO
         public string ShippingProvider { get; set; }
         public string ShippingCountry { get; set; }
         public string Comments { get; set; }
-        public DateTime DatePlaced { get; set; }
-        public string DatePlacedString { get { return DatePlaced.ToString(Constants.MMMMddyyyyhhmmtt); } }
+        public DateTime OrderDate { get; set; }
+        public string OrderDateString { get { return OrderDate.ToString(Constants.MMMMddyyyyhhmmtt); } }
         public DateTime? DateShipped { get; set; }
         public string DateShippedString 
         {

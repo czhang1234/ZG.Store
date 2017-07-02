@@ -81,3 +81,6 @@
     background: url('/blog-app/images/20150620_095446.jpg')
 }
 
+* You can include children navigation properties like this:
+  _context.Orders.Where(o => o.OrderId == id).Include("OrderProducts").Include("OrderProducts.Product").FirstOrDefault();
+

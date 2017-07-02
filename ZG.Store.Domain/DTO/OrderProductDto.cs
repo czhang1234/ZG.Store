@@ -12,6 +12,7 @@ namespace ZG.Store.Domain.DTO
         public int OrderId { get; set; }
 
         public int ProductId { get; set; }
+        public string ProductName { get; set; }
 
         public int Quantity { get; set; }
         public decimal PricePerUnit { get; set; }
@@ -51,6 +52,7 @@ namespace ZG.Store.Domain.DTO
                 OrderProductId = orderProduct.OrderProductId,
                 OrderId = orderProduct.OrderId,
                 ProductId = orderProduct.ProductId,
+                ProductName = orderProduct.Product.Name,
                 Quantity = orderProduct.Quantity,
                 PricePerUnit = orderProduct.PricePerUnit,
                 TotalPrice = orderProduct.TotalPrice,

@@ -96,7 +96,7 @@ namespace ZG.Store.Services
 
         public Order GetById(int id)
         {
-            return _context.Orders.Where(o => o.OrderId == id).Include("OrderProducts").FirstOrDefault();
+            return _context.Orders.Where(o => o.OrderId == id).Include("OrderProducts").Include("OrderProducts.Product").FirstOrDefault();
         }
 
         public OrderEditViewModel GetOrderEditViewModel(int id)

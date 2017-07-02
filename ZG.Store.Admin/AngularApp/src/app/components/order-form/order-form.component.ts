@@ -132,6 +132,10 @@ export class OrderFormComponent implements OnInit{
         return <string>this.orderForm.get('shippingCountryId').value.toString();
     }
 
+    get orderProducts(): FormArray{
+        return this.orderForm.get('orderProducts') as FormArray;
+    }
+
     getOrderObject(order: Order, orderProducts: any){
         return {
             orderId: order.orderId,

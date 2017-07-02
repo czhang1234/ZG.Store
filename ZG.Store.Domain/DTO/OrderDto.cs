@@ -106,6 +106,7 @@ namespace ZG.Store.Domain.DTO
                 ShippingProviderId = order.ShippingProviderId,
                 ShippingStateId = order.ShippingStateId,
                 ShippingProvinceId = order.ShippingProvinceId,
+                DateShipped = order.DateShipped,
                 OrderProducts = order.OrderProducts.Select(op => OrderProductDto.ToOrderProductDto(op)).ToList()
             };
         }

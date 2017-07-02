@@ -28,39 +28,41 @@
         <div class="col-md-6">
             <h3>Billing Info</h3>
             <div class="form-group">
-                <label class="center-block">Billing Address 1: 
+                <label class="center-block">Address 1: 
                     <input class="form-control" formControlName="billingAddress1">
                 </label>                
             </div>
             <div class="form-group">
-                <label class="center-block">Billing Address 2:
+                <label class="center-block">Address 2:
                     <input class="form-control" formControlName="billingAddress2">
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Billing City:
+                <label class="center-block">City:
                     <input class="form-control" formControlName="billingCity">
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Billing Zipcode:
+                <label class="center-block">Zipcode:
                     <input class="form-control" formControlName="billingZipcode">
                 </label>
             </div>
-            <div class="form-group">
-                <label class="center-block">Billing State:
+            <div class="form-group" *ngIf="billingCountryId === UsCountryId">
+                <label class="center-block">State:
                     <select class="form-control" formControlName="billingStateId">
                         <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
                     </select>
                 </label>
             </div>
-            <div class="form-group">
-                <label class="center-block">Billing Province:
-                    <input class="form-control" formControlName="billingProvinceId">
+            <div class="form-group" *ngIf="billingCountryId === CaCountryId">
+                <label class="center-block">Province:
+                    <select class="form-control" formControlName="billingProvinceId">
+                        <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
+                    </select>
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Billing Country:
+                <label class="center-block">Country:
                     <select class="form-control" formControlName="billingCountryId">
                         <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
                     </select>
@@ -81,47 +83,51 @@
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Shipping Address 1:
+                <label class="center-block">Address 1:
                     <input class="form-control" formControlName="shippingAddress1">
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Shipping Address 2:
+                <label class="center-block">Address 2:
                     <input class="form-control" formControlName="shippingAddress2">
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Shipping City:
+                <label class="center-block">City:
                     <input class="form-control" formControlName="shippingCity">
                 </label>
             </div>
-            <div class="form-group">
-                <label class="center-block">Shipping State:
+            <div class="form-group" *ngIf="shippingCountryId === UsCountryId">
+                <label class="center-block">State:
                      <select class="form-control" formControlName="shippingStateId">
                         <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
                     </select>
                 </label>
             </div>
-            <div class="form-group">
-                <label class="center-block">Shipping Province:
-                    <input class="form-control" formControlName="shippingProvinceId">
+            <div class="form-group" *ngIf="shippingCountryId === CaCountryId">
+                <label class="center-block">Province:
+                    <select class="form-control" formControlName="shippingProvinceId">
+                        <option *ngFor="let province of provinces" [value]="province.id">{{province.name}}</option>
+                    </select>
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Shipping Zipcode:
+                <label class="center-block">Zipcode:
                     <input class="form-control" formControlName="shippingZipcode">
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Shipping Country:
+                <label class="center-block">Country:
                     <select class="form-control" formControlName="shippingCountryId">
                         <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
                     </select>
                 </label>
             </div>
             <div class="form-group">
-                <label class="center-block">Shipping Provider Id:
-                    <input class="form-control" formControlName="shippingProviderId">
+                <label class="center-block">Shipping Provider:
+                    <select class="form-control" formControlName="shippingProviderId">
+                        <option *ngFor="let sp of shippingProviders" [value]="sp.id">{{sp.name}}</option>
+                    </select>
                 </label>
             </div>
         </div>
@@ -148,7 +154,7 @@
     </div>
 
     <div class="form-group">
-        <label class="center-block">comments:
+        <label class="center-block">Comments:
         <textarea class="form-control" formControlName="comments"></textarea>
       </label>
     </div>

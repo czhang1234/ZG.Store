@@ -16,6 +16,8 @@ import {OrderService} from '../services/order.service';
 import {OrderStatusService} from '../services/order-status.service';
 import {CountryService} from '../services/country.service';
 import {StateService} from '../services/state.service';
+import {ProvinceService} from '../services/province.service';
+import {ShippingProviderService} from '../services/shipping-provider.service';
 
 import { AppComponent } from '../components/app/app.component';
 import { ProductCategoriesComponent } from '../components/product-categories/product-categories.component';
@@ -62,6 +64,8 @@ import {OrderFormComponent} from '../components/order-form/order-form.component'
     OrderStatusService,
     CountryService,
     StateService,
+    ProvinceService,
+    ShippingProviderService,
   ],
   bootstrap: [ AppComponent ]
 })

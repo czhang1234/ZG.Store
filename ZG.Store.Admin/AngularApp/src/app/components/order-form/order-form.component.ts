@@ -6,12 +6,16 @@ import {OrderService} from '../../services/order.service';
 import {OrderStatusService} from '../../services/order-status.service';
 import {CountryService} from '../../services/country.service';
 import {StateService} from '../../services/state.service';
+import {ProvinceService} from '../../services/province.service';
+import {ShippingProviderService} from '../../services/shipping-provider.service';
 
 import {Order} from '../../model/order';
 import {OrderProduct} from '../../model/order-product';
 import {OrderStatus} from '../../model/order-status';
 import {Country} from '../../model/country';
 import {State} from '../../model/state';
+import {Province} from '../../model/province';
+import {ShippingProvider} from '../../model/shipping-provider';
 
 @Component({
     selector: 'order-form',
@@ -24,13 +28,28 @@ export class OrderFormComponent implements OnInit{
     orderStatusList: OrderStatus[];
     countries: Country[];
     states: State[];
+    provinces: Province[];
+    shippingProviders: ShippingProvider[];
     orderForm: FormGroup;
 
     constructor(private orderService: OrderService, private formBuilder: FormBuilder, 
         private route: ActivatedRoute, private orderStatusService: OrderStatusService,
-        private countryService: CountryService, private stateService: StateService){ }
+        private countryService: CountryService, private stateService: StateService,
+        private provinceService: ProvinceService, private shippingProviderService: ShippingProviderService){ }
 
     ngOnInit(){
+        this.shippingProviderService.getShippingProvisers()
+            .subscribe(
+                shippingProviders => this.shippingProviders = shippingProviders,
+                error => this.errorMsg = <any>error
+            );
+
+        this.provinceService.getProvinces()
+            .subscribe(
+                provinces => this.provinces = provinces,
+                error => this.errorMsg = <any>error
+            );
+
         this.countryService.getCountries()
             .subscribe(
                 countries => this.countries = countries,
@@ -95,6 +114,22 @@ export class OrderFormComponent implements OnInit{
         const orderToBeSaved: Order = this.getOrderObject(this.order, orderProductsDeepCopy);
 
         return orderToBeSaved;
+    }
+
+    get UsCountryId(): string{
+        return this.countries.find(c => c.name === "United States").id.toString();
+    }
+
+    get CaCountryId(): string{
+        return this.countries.find(c => c.name === "Canada").id.toString();
+    }
+
+    get billingCountryId(): string{
+        return <string>this.orderForm.get('billingCountryId').value.toString();;
+    }
+
+    get shippingCountryId(): string{
+        return <string>this.orderForm.get('shippingCountryId').value.toString();
     }
 
     getOrderObject(order: Order, orderProducts: any){

@@ -13,6 +13,7 @@ namespace ZG.Store.Services
         ShippingProvider GetShippingProviderById(int id);
         void Upsert(List<ShippingProviderEditViewModel> shippingProviders);
         List<IdName> GetShippingProviderIdNames(bool active);
+        List<IdName> GetIdName(bool isActive);
     }
 
     public class ShippingProviderService : IShippingProviderService
@@ -45,6 +46,11 @@ namespace ZG.Store.Services
         {
             return _context.ShippingProviders.Where(s => s.Active == active)
                                        .Select(s => new IdName { Id = s.ShippingProviderId, Name = s.Name }).ToList();
+        }
+
+        public List<IdName> GetIdName(bool isActive)
+        {
+            return _context.ShippingProviders.Where(s => s.Active == isActive).Select(s => new IdName { Id = s.ShippingProviderId, Name = s.Name }).ToList();
         }
 
         private void Upsert(ShippingProviderEditViewModel shippingProvider)

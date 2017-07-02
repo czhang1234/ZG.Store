@@ -65,6 +65,7 @@ namespace ZG.Store.Admin
             services.AddTransient<IProductSearchService, ProductSearchService>();
             services.AddTransient<ICountryService, CountryService>();
             services.AddTransient<IStateService, StateService>();
+            services.AddTransient<IProvinceService, ProvinceService>();
 
             var connection = new SqlConnection(Configuration.GetConnectionString(CONNECTION_STRING_NAME));
             services.AddSingleton<IDbConnection>(connection);

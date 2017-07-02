@@ -12,7 +12,7 @@ import { OrderProduct } from '../../model/order-product';
     styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-    private orderListViewModel: OrderListViewModel;
+    orderListViewModel: OrderListViewModel;
     ordersPerPage = 2;
     currentPage: number;
     totalPages: number;

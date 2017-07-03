@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <PreBuildEvent>REM cd C:\MyProjects\ZG.Store\ZG.Store.Admin/AngularApp
-REM call npm install
-REM call npm run build
+    <PreBuildEvent>cd C:\MyProjects\ZG.Store\ZG.Store.Admin/AngularApp
+call npm install
+call npm run build
 
-REM cd C:\MyProjects\ZG.Store\ZG.Store.Admin/ReactApp
-REM call npm install
-REM call npm run production
+cd C:\MyProjects\ZG.Store\ZG.Store.Admin/ReactApp
+call npm install
+call npm run production
 
 </PreBuildEvent>
   </PropertyGroup>
@@ -40,6 +40,11 @@ REM call npm run production
   <ItemGroup>
     <Content Remove="wwwroot/New Text Document.txt" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\ZGStoreAdmin - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\ZGStoreAdmin20170702074355 - Web Deploy.pubxml" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
@@ -59,6 +64,7 @@ REM call npm run production
     <ProjectReference Include="..\ZG.Store.Services\ZG.Store.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="ReactApp\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

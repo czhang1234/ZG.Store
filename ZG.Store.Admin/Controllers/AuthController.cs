@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using ZG.Store.Domain.DTO;
 using ZG.Store.Admin.Model;
 using ZG.Store.Common.Auth;
-using ZG.Store.Domain.DTO;
 using ZG.Store.Services;
 
 namespace ZG.Store.Admin.Controllers

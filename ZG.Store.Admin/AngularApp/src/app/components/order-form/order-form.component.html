@@ -230,7 +230,7 @@
     </div>
 
     <div style="margin-bottom: 1em">
-        <button type="submit" [disabled]="orderForm.pristine" class="btn btn-success">Save</button>&nbsp;
+        <button type="submit" [disabled]="orderForm.pristine || orderForm.status !== 'VALID'" class="btn btn-success">Save</button>&nbsp;
         <button type="reset" (click)="reset(order)" [disabled]="orderForm.pristine" class="btn btn-danger">Reset</button>&nbsp;
     </div>
     <div class="alert alert-success" *ngIf="showSuccessMsg">

@@ -103,15 +103,15 @@ export class OrderFormComponent implements OnInit {
             orderNumber: order.orderNumber,
             orderDate: order.orderDate,
             orderStatusId: order.orderStatusId,
-            shippingNumber: order.shippingNumber,
+            shippingNumber: [order.shippingNumber, [Validators.required, Validators.maxLength(50)]],
             billingAddress1: [order.billingAddress1, [Validators.required, Validators.maxLength(50)]],
             billingAddress2: [order.billingAddress2, [Validators.maxLength(50)]],
-            billingCity: order.billingCity,
-            billingZipcode: order.billingZipcode,
-            shippingAddress1: order.shippingAddress1,
-            shippingAddress2: order.shippingAddress2,
-            shippingCity: order.shippingCity,
-            shippingZipcode: order.shippingZipcode,
+            billingCity: [order.billingCity, [Validators.required, Validators.maxLength(50)]],
+            billingZipcode: [order.billingZipcode, [Validators.required, Validators.pattern("^\\d{5}(-\\d{4})?$")]],
+            shippingAddress1: [order.shippingAddress1, [Validators.required, Validators.maxLength(50)]],
+            shippingAddress2: [order.shippingAddress2, [Validators.maxLength(50)]],
+            shippingCity: [order.shippingCity, [Validators.required, Validators.maxLength(50)]],
+            shippingZipcode: [order.shippingZipcode, [Validators.required, Validators.pattern("^\\d{5}(-\\d{4})?$")]],
             dateShipped: {
                 date: {
                     year: dateShipped.getFullYear(),
@@ -119,7 +119,7 @@ export class OrderFormComponent implements OnInit {
                     day: dateShipped.getDate()
                 }
             },
-            comments: order.comments,
+            comments: [order.comments, [Validators.maxLength(400)]],
             total: order.total,
             shipping: order.shipping,
             tax: order.tax,
@@ -166,6 +166,13 @@ export class OrderFormComponent implements OnInit {
     'billingAddress1': '',
     'billingAddress2': '',
     'billingCity': '',
+    'billingZipcode': '',
+    'shippingAddress1': '',
+    'shippingAddress2': '',
+    'shippingCity': '',
+    'shippingZipcode': '',
+    'shippingNumber': '',
+    'comments': '',
   };
  
   validationMessages = {
@@ -177,8 +184,34 @@ export class OrderFormComponent implements OnInit {
       'maxlength': 'Billing address2 cannot be more than 50 characters long.'
     },
     'billingCity': {
-      'required':      'Billing city is required.',
-      'maxlength':     'Billing city cannot be more than 50 characters long.',
+      'required': 'Billing city is required.',
+      'maxlength': 'Billing city cannot be more than 50 characters long.',
+    },
+    'billingZipcode': {
+      'required': 'Billing zipcode is required.',
+      'pattern': 'Invalid zipcode.'
+    },
+    'shippingAddress1': {
+      'required':      'Shipping address1 is required.',
+      'maxlength':     'Shipping address1 cannot be more than 50 characters long.',
+    },
+    'shippingAddress2': {
+      'maxlength': 'Shipping address2 cannot be more than 50 characters long.'
+    },
+    'shippingCity': {
+      'required': 'Shipping city is required.',
+      'maxlength': 'Shipping city cannot be more than 50 characters long.',
+    },
+    'shippingZipcode': {
+      'required': 'Shipping zipcode is required.',
+      'pattern': 'Invalid zipcode.'
+    },
+    'shippingNumber': {
+      'required': 'Shipping number is required.',
+      'maxlength': 'Shipping number cannot be more than 50 characters long.',
+    },
+    'comments': {
+      'maxlength': 'Comments cannot be more than 400 characters long.'
     },
   };
 

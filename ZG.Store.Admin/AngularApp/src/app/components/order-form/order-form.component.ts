@@ -137,7 +137,50 @@ export class OrderFormComponent implements OnInit {
 
     createForm(order: Order) {
         this.orderForm = this.formBuilder.group(this.getFormModel(order));
+
+        this.orderForm.valueChanges
+            .subscribe(data => this.onValueChanged(data));
+ 
+        this.onValueChanged(); // (re)set validation messages now
     }
+
+    onValueChanged(data?: any) {
+    if (!this.orderForm) { return; }
+    const form = this.orderForm;
+ 
+    for (const field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+ 
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+ 
+  formErrors = {
+    'billingAddress1': '',
+    'billingAddress2': '',
+    'billingCity': '',
+  };
+ 
+  validationMessages = {
+    'billingAddress1': {
+      'required':      'Billing address1 is required.',
+      'maxlength':     'Billing address1 cannot be more than 50 characters long.',
+    },
+    'billingAddress2': {
+      'maxlength': 'Billing address2 cannot be more than 50 characters long.'
+    },
+    'billingCity': {
+      'required':      'Billing city is required.',
+      'maxlength':     'Billing city cannot be more than 50 characters long.',
+    },
+  };
 
     getFormArrayForOrderProducts(orderProducts: OrderProduct[]) {
         const opFormGroups = orderProducts.map(op => this.formBuilder.group(op));

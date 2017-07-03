@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -25,7 +26,10 @@ export class ProductFormComponent {
     deletedImage: string;
     selectedImgId: number;
 
-    constructor(private productCategoryService: ProductCategoryService, private productService: ProductService, 
+    prodForm: NgForm;
+    @ViewChild('prodForm') currentForm: NgForm;
+
+    constructor(private productCategoryService: ProductCategoryService, private productService: ProductService,
         private route: ActivatedRoute, private location: Location, private router: Router) { }
 
     ngOnInit() {
@@ -39,6 +43,71 @@ export class ProductFormComponent {
                 this.prodCats = prodCats;
             });
     }
+
+    ngAfterViewChecked() {
+        this.formChanged();
+    }
+
+    formChanged() {
+        if (this.currentForm === this.prodForm) { return; }
+        this.prodForm = this.currentForm;
+        if (this.prodForm) {
+            this.prodForm.valueChanges
+                .subscribe(data => this.onValueChanged(data));
+        }
+    }
+
+    onValueChanged(data?: any) {
+        if (!this.prodForm) { return; }
+        const form = this.prodForm.form;
+
+        for (const field in this.formErrors) {
+            // clear previous error message (if any)
+            this.formErrors[field] = '';
+            const control = form.get(field);
+
+            if (control && control.dirty && !control.valid) {
+                const messages = this.validationMessages[field];
+                for (const key in control.errors) {
+                    this.formErrors[field] += messages[key] + ' ';
+                }
+            }
+        }
+    }
+
+    formErrors = {
+        'name': '',
+        'description': '',
+        'salePrice': '',
+        'weight': '',
+        'shippingWeight': '',
+        'height': '',
+        'shippingHeight': '',
+        'length': '',
+        'shippingLength': '',
+        'width': '',
+        'shippingWidth': '',
+        'productLink': '',
+        'totalReviewCount': '',
+        'ratingScore': '',
+    };
+
+    validationMessages = {
+        'name': {'required': 'Name is required.'},
+        'description': {'description': 'Description is required.'},
+        'salePrice': {'required': 'SalePrice is required.'},
+        'weight': {'required': 'Weight is required.'},
+        'shippingWeight': {'required': 'ShippingWeight is required.'},
+        'height': {'required': 'Height is required.'},
+        'shippingHeight': {'required': 'ShippingHeight is required.'},
+        'length': {'required': 'Length is required.'},
+        'shippingLength': {'required': 'ShippingLength is required.'},
+        'width': {'required': 'Width is required.'},
+        'shippingWidth': {'required': 'ShippingWidth is required.'},
+        'productLink': {'required': 'ProductLink is required.'},
+        'totalReviewCount': {'required': 'TotalReviewCount is required.'},
+        'ratingScore': {'required': 'RatingScore is required.'},
+    };
 
     save(): void {
         this.product.name = this.product.name.trim();
@@ -57,21 +126,21 @@ export class ProductFormComponent {
         }
     }
 
-    deleteImage(id: number): void{
+    deleteImage(id: number): void {
 
-        if(confirm("Are you sure you wan to delete?")){
-        this.productService.deleteImage(id)
-            .then(() => {
-                let img = this.product.images.find(img => img.productImageId === id)
-                this.deletedImage = img.fileName;
+        if (confirm("Are you sure you wan to delete?")) {
+            this.productService.deleteImage(id)
+                .then(() => {
+                    let img = this.product.images.find(img => img.productImageId === id)
+                    this.deletedImage = img.fileName;
 
-                let index = this.product.images.indexOf(img);
-                this.product.images.splice(index, 1);
-            });
+                    let index = this.product.images.indexOf(img);
+                    this.product.images.splice(index, 1);
+                });
         }
     }
 
-    onFileUploaded(imgs: ProductImage[]){
+    onFileUploaded(imgs: ProductImage[]) {
         imgs.forEach(img => this.product.images.push(img));
 
         this.deletedImage = null;
@@ -89,7 +158,7 @@ export class ProductFormComponent {
         this.product = new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
     }
 
-    selectImage(imgId: number): void{
+    selectImage(imgId: number): void {
         this.selectedImgId = imgId;
     }
 

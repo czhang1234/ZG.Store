@@ -30,7 +30,7 @@
             </div>
 
             <div class="form-group">
-                <label for="salePrice">SalePrice:</label>
+                <label for="salePrice">Sale Price:</label>
                 <input type="text" id="salePrice" name="salePrice" class="form-control" required [(ngModel)]="product.salePrice" />
                 <div *ngIf="formErrors.salePrice" class="alert alert-danger">
                     {{ formErrors.salePrice }}
@@ -49,8 +49,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="shippingWeight">ShippingWeight:</label>
-                        <input type="text" id="shippingWeight" name="shippingWeight" class="form-control" required [(ngModel)]="product.shippingWeight" />
+                        <label for="shippingWeight">Shipping Weight:</label>
+                        <input type="text" id="shippingWeight" name="shippingWeight" class="form-control" required [(ngModel)]="product.shippingWeight"
+                        />
                         <div *ngIf="formErrors.shippingWeight" class="alert alert-danger">
                             {{ formErrors.shippingWeight }}
                         </div>
@@ -70,8 +71,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="shippingHeight">ShippingHeight:</label>
-                        <input type="text" id="shippingHeight" name="shippingHeight" class="form-control" required [(ngModel)]="product.shippingHeight"/>
+                        <label for="shippingHeight">Shipping Height:</label>
+                        <input type="text" id="shippingHeight" name="shippingHeight" class="form-control" required [(ngModel)]="product.shippingHeight"
+                        />
                         <div *ngIf="formErrors.shippingHeight" class="alert alert-danger">
                             {{ formErrors.shippingHeight }}
                         </div>
@@ -91,8 +93,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="shippingLength">ShippingLength:</label>
-                        <input type="text" id="shippingLength" name="shippingLength" class="form-control" required [(ngModel)]="product.shippingLength"/>
+                        <label for="shippingLength">Shipping Length:</label>
+                        <input type="text" id="shippingLength" name="shippingLength" class="form-control" required [(ngModel)]="product.shippingLength"
+                        />
                         <div *ngIf="formErrors.shippingLength" class="alert alert-danger">
                             {{ formErrors.shippingLength }}
                         </div>
@@ -112,8 +115,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="shippingWidth">ShippingWidth:</label>
-                        <input type="text" id="shippingWidth" name="shippingWidth" class="form-control" required [(ngModel)]="product.shippingWidth"/>
+                        <label for="shippingWidth">Shipping Width:</label>
+                        <input type="text" id="shippingWidth" name="shippingWidth" class="form-control" required [(ngModel)]="product.shippingWidth"
+                        />
                         <div *ngIf="formErrors.shippingWidth" class="alert alert-danger">
                             {{ formErrors.shippingWidth }}
                         </div>
@@ -122,33 +126,40 @@
             </div>
 
             <div class="form-group">
-                <label for="productLink">ProductLink:</label>
+                <label for="productLink">Product Link:</label>
                 <input type="text" id="productLink" name="productLink" class="form-control" required [(ngModel)]="product.productLink" />
                 <div *ngIf="formErrors.productLink" class="alert alert-danger">
-                     {{ formErrors.productLink }}
+                    {{ formErrors.productLink }}
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="isReviewEnabled">IsReviewEnabled:</label>
+                <label for="isReviewEnabled">Is Review Enabled:</label>
                 <input type="checkbox" id="isReviewEnabled" name="isReviewEnabled" [(ngModel)]="product.isReviewEnabled" />
             </div>
             <div class="form-group">
-                <label for="totalReviewCount">TotalReviewCount:</label>
-                <input type="text" id="totalReviewCount" name="totalReviewCount" class="form-control" required [(ngModel)]="product.totalReviewCount"/>
+                <label for="totalReviewCount">Total Review Count:</label>
+                <input type="text" id="totalReviewCount" name="totalReviewCount" class="form-control" required [(ngModel)]="product.totalReviewCount"
+                />
                 <div *ngIf="formErrors.totalReviewCount" class="alert alert-danger">
-                     {{ formErrors.totalReviewCount }}
+                    {{ formErrors.totalReviewCount }}
                 </div>
             </div>
             <div class="form-group">
-                <label for="ratingScore">RatingScore:</label>
+                <label for="ratingScore">Rating Score:</label>
                 <input type="text" id="ratingScore" name="ratingScore" class="form-control" required [(ngModel)]="product.ratingScore" />
                 <div *ngIf="formErrors.ratingScore" class="alert alert-danger">
-                     {{ formErrors.ratingScore }}
+                    {{ formErrors.ratingScore }}
                 </div>
             </div>
             <button type="submit" class="btn btn-success" [disabled]="!prodForm.form.valid">Submit</button>
             <button type="submit" class="btn btn-default" (click)="newProduct(); prodForm.reset();">Reset</button>
+            <div class="alert alert-success" *ngIf="showSuccessMsg">
+                <strong>Product details have been saved successfully!</strong>
+            </div>
+            <div class="alert alert-danger" *ngIf="errorMsg">
+                <strong>{{errorMsg}}</strong>
+            </div>
         </form>
     </div>
     <div class="col-md-6">

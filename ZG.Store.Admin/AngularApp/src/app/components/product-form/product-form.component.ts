@@ -26,6 +26,9 @@ export class ProductFormComponent {
     deletedImage: string;
     selectedImgId: number;
 
+    errorMsg: string;
+    showSuccessMsg = false;
+
     prodForm: NgForm;
     @ViewChild('prodForm') currentForm: NgForm;
 
@@ -118,17 +121,23 @@ export class ProductFormComponent {
 
         if (this.product.productId) {
             this.productService.update(this.product)
-                .then(() => this.goBack());
+                .then(() => {
+                    this.showSuccessMsg = true;
+                    setTimeout(() => this.showSuccessMsg = false, 4000);
+                });
         }
         else {
             this.productService.create(this.product)
-                .then(() => this.goBack());
+                .then(() => {
+                    this.showSuccessMsg = true;
+                    setTimeout(() => this.showSuccessMsg = false, 4000);
+                });
         }
     }
 
     deleteImage(id: number): void {
 
-        if (confirm("Are you sure you wan to delete?")) {
+        if (confirm("Are you sure you want to delete?")) {
             this.productService.deleteImage(id)
                 .then(() => {
                     let img = this.product.images.find(img => img.productImageId === id)

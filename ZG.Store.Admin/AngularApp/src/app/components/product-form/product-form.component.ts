@@ -21,13 +21,14 @@ import { environment } from '../../../environments/environment';
 })
 export class ProductFormComponent {
     prodCats: ProductCategory[];
-    product = new Product(1, 'p1', 'description', 1, false, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
+    product: Product;
     private prodImgUrlBase = (!environment.production) ? 'http://localhost:50105' : '';
     deletedImage: string;
     selectedImgId: number;
 
     errorMsg: string;
     showSuccessMsg = false;
+    loading = false;
 
     prodForm: NgForm;
     @ViewChild('prodForm') currentForm: NgForm;
@@ -36,9 +37,12 @@ export class ProductFormComponent {
         private route: ActivatedRoute, private location: Location, private router: Router) { }
 
     ngOnInit() {
+        this.loading = true;
+
         this.route.params.switchMap((params: Params) => this.productService.getProduct(+params['id']))
             .subscribe(prod => {
                 this.product = prod;
+                this.loading = false;
             });
 
         this.productCategoryService.getProductCategories()
@@ -161,10 +165,6 @@ export class ProductFormComponent {
 
     test(): void {
         this.deletedImage = "12345";
-    }
-
-    newProduct() {
-        this.product = new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []);
     }
 
     selectImage(imgId: number): void {

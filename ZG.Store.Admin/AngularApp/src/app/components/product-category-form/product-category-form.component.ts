@@ -15,15 +15,18 @@ import { ProductCategory } from '../../model/product-category';
 })
 export class ProductCategoryFormComponent {
     prodCats: ProductCategory[];
-    prodCat = new ProductCategory("", true, 0, null);
+    prodCat: ProductCategory;
+    loading = false;
 
     constructor(private productCategoryService: ProductCategoryService, private route: ActivatedRoute,
         private location: Location, private router: Router) { }
 
     ngOnInit() {
+        this.loading = true;
         this.route.params.switchMap((params: Params) => this.productCategoryService.getProductCategory(+params['id']))
             .subscribe(prodCat => {
                 this.prodCat = prodCat;
+                this.loading = false;
             });
 
         this.productCategoryService.getProductCategories()

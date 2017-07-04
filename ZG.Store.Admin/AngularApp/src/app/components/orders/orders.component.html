@@ -16,7 +16,7 @@
             <td>{{order.id}}</td>
             <td>{{order.userId}}</td>
             <td>{{order.orderNumber}}</td>
-            <td>{{order.orderDate}}</td>
+            <td>{{order.orderDate | date: "MM/dd/yyyy"}}</td>
             <td>{{order.orderStatus}}</td>
         </tr>
     </tbody>

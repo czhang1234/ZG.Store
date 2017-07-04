@@ -1,7 +1,7 @@
 <h2>Create/Update Product Category</h2>
-
+<div class="loadersmall" *ngIf="loading"></div>
 <div class="">
-    <form #prodCatForm="ngForm" (ngSubmit)="save()">
+    <form #prodCatForm="ngForm" (ngSubmit)="save()" *ngIf="prodCat">
   
         <div class="form-group">
             <label for="name">Category Name:</label>
@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             <label for="parent">Parent Category:</label>
-            <select class="form-control" id="parent" name="parent" [(ngModel)]="prodCat.parentId">
+            <select class="form-control" id="parent" name="parent" [(ngModel)]="prodCat.parentId" required>
                 <option *ngFor="let cat of prodCats" [value]="cat.productCategoryId">{{cat.categoryName}}</option>
             </select>
         </div>

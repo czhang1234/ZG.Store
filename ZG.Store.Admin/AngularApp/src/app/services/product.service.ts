@@ -31,7 +31,7 @@ export class ProductService{
         const url = `${this.prodUrl}/${id}`;
 
         if(id === 0){
-            return Promise.resolve(new Product(1, 'p1', 'description', 1, true, 1, 1, 1, 1, 1, 1, 1, 1, false, []));
+            return Promise.resolve(new Product(null, '', '', null, false, null, null, null, null, null, null, null, null, false, []));
         }
 
         let headers = this.getHeaders(false);
